@@ -118,7 +118,7 @@ const Balance = (prop) => {
   };
   const ChangeStateMode = () => {
     var _n = stateMode;
-    if (_event == "League") {
+    if (_event == "VIP") {
       _n += 1;
       if (_n > 1) {
         _n = 0;

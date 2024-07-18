@@ -193,7 +193,7 @@ const Dashboard = (prop) => {
       defslide = 1;
     }
     if (_event.toLowerCase() == "vip") {
-      defslide = 2;
+      defslide = 1;
     }
     if (_event.toLowerCase() == "league") {
       defslide = 1;
@@ -308,29 +308,27 @@ const Dashboard = (prop) => {
             >
               <>
                 <Banner
-                  title={getMil(leaguerules?.totalRewards) + " میلیون تومان"}
-                  text="برای لیگ روزانه"
-                  link=".league"
-                  icon="league"
-                  level="big"
-                  number="1"
-                  amin="inline animated swing "
-                  iconamin="swing"
+                  title={getMil(viprules?.totalRewards) + " میلیون تومان"}
+                  text={"پاداش میز VIP"}
+                  link=".vip"
+                  icon="vip"
+                  amin="inline animated fast flipInY"
+                  iconamin="pulse"
+                  number=" "
                   showtime={
                     <ShowTimeLeft
-                      startDay={leaguerules?.startDay}
-                      endDay={leaguerules?.endDay}
+                      startDay={viprules?.startDay}
+                      endDay={viprules?.endDay}
                       startHour="0000"
                       endHour="2359"
                     />
                   }
                   {...prop}
                 />
+                {_event.toLowerCase() == "vip" && activeSlide == 2 && (
+                  <ConfettiArea recycle={false} numberOfPieces="50" />
+                )}
               </>
-
-              {_event.toLowerCase() == "league" && activeSlide == 3 && (
-                <ConfettiArea recycle={false} numberOfPieces="50" />
-              )}
             </div>
 
             <div

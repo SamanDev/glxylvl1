@@ -38,6 +38,14 @@ export const useUser = () => {
 
     return _siteInfo;
   }
+  function ActiveAcc() {
+    var _siteInfo = loginToken;
+    try {
+      _siteInfo.userActivate = true;
+    } catch (error) {}
+
+    return _siteInfo;
+  }
   useEffect(() => {
     window.addEventListener("message", function (event) {
       if (event.data == "userget") {
@@ -58,6 +66,9 @@ export const useUser = () => {
       setLoginToken(sordData(dataGet));
 
       setLoginTokenUpdate(sordData(dataGet));
+    });
+    eventBus.on("eventsDataActive", (dataGet) => {
+      setLoginToken(ActiveAcc());
     });
   }, []);
 

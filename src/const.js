@@ -522,14 +522,15 @@ export const GetMenu = (siteInfo, loginToken) => {
       },
 
       {
-        label: "لیگ روزانه",
-        title: "لیگ روزانه",
+        label: "VIP Table",
+        title: "VIP Table",
+        idname: "vip",
+
+        bonus: "Level " + viprules?.minLevel,
+        icon: "fab fa-viacoin yellow",
+        icongalaxy: "vip",
         aria: "giftsarea animated bounceIn delay-02s",
-        idname: "league",
-        bonus: "Level " + leaguerules?.minLevel,
-        icon: "fas fa-medal yellow",
-        icongalaxy: "league",
-        component: "league",
+        component: "vip",
       },
       {
         label: "کمیسیون معرفی دوستان",
@@ -1080,10 +1081,9 @@ export const getEvent = (siteInfo) => {
     return "Levels";
     return "GPass";
   } else if (nowDay <= viprules.endDay) {
-    return "Levels";
     return "VIP";
   } else {
-    return "League";
+    return "Levels";
   }
 };
 export const haveRoot = (userTags) => {

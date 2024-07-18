@@ -142,7 +142,7 @@ function genLink(user) {
   var rules = JSON.parse(localStorage.getItem("siteInfoAdmin"));
   if (!rules?.siteUrl1) {
     rules = {
-      siteUrl1: "https://www.gpkr0010.com",
+      siteUrl1: "https://www.glxyapp.com",
       siteUrl2: "https://www.gpkr15x.com",
       siteUrl3: "https://www.gpkr15x.com",
       siteUrl4: "https://www.trpkr.com",
@@ -197,6 +197,7 @@ function Admin(prop) {
   const getRate = localStorage.getItem("getRate")
     ? localStorage.getItem("getRate")
     : 50000;
+  var siteInfo = JSON.parse(localStorage.getItem("siteInfo"));
   const [selectedList, setSelected] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -409,6 +410,20 @@ function Admin(prop) {
       name: "point",
       selector: (row) => row.dailyPoint,
       format: (row) => <>{row.dailyPoint}</>,
+      sortable: true,
+    },
+    {
+      name: "giftpoint",
+      selector: (row) => row.giftPlaySecond,
+      format: (row) => (
+        <>
+          {(row.giftPlaySecond * 100) / siteInfo.secondForGift > 100
+            ? 100
+            : parseFloat(
+                (row.giftPlaySecond * 100) / siteInfo.secondForGift
+              ).toFixed(2)}
+        </>
+      ),
       sortable: true,
     },
     {

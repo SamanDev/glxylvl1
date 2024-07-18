@@ -11,7 +11,7 @@ import {
   Radio,
 } from "semantic-ui-react";
 import { Alert } from "../../utils/alerts";
-import { levelDataInfo } from "../../const";
+import { levelDataInfo, doCurrency } from "../../const";
 import CurrencyInput from "react-currency-input-field";
 import { adminPostService } from "../../services/admin";
 import $ from "jquery";
@@ -26,7 +26,7 @@ var __bnus = [
   },
 ];
 var _deflevels = [30, 25, 20, 15, 10, 5];
-var _deflevelsAmount = [2.0, 0.5, 0.5, 0.5, 0.5, 0.2,0.2];
+var _deflevelsAmount = [2.0, 0.5, 0.5, 0.5, 0.5, 0.2, 0.2];
 function generateRandomInteger(min, max) {
   return Math.floor(min + Math.random() * (max - min + 1));
 }
@@ -84,7 +84,11 @@ function Admin(prop) {
       { id: "selectedList", val: prop.selectedList },
     ],
   });
+  function genLinkurl(link, image) {
+    var rules = link.split("login/");
 
+    return image.replace("https://www.galaxypoker.vip/", rules[0]);
+  }
   const setUsers = (data) => {
     data.players.map((player, i) => {
       setTimeout(() => {
@@ -103,9 +107,23 @@ function Admin(prop) {
           status: data.status,
           label: data.label,
           text: data.text,
+          detail:
+            "هدیه ی " +
+            doCurrency(_amount) +
+            " تومانی برای شما ثبت شد.@@@" +
+            player.link +
+            "@@@" +
+            genLinkurl(
+              player.link,
+              "https://www.galaxypoker.vip/assets/images/icons/gifts.png"
+            ) +
+            "@@@هدیه ی " +
+            doCurrency(_amount) +
+            " تومانی ",
         };
+        console.log(newData);
         addGift(newData);
-      }, 500 * i);
+      }, 5000 * i);
     });
   };
   const addGift = async (data) => {
@@ -168,24 +186,24 @@ function Admin(prop) {
   }
   function getLevelGift(level) {
     var amount = _deflevelsAmount[0];
-    var _l =  parseFloat((parseInt(level)-30)/10);
+    var _l = parseFloat((parseInt(level) - 30) / 10);
     if (level < 30) {
       amount = _deflevelsAmount[1];
-      _l =  parseFloat((parseInt(level)-10)/20);
+      _l = parseFloat((parseInt(level) - 10) / 20);
     }
-   
+
     if (level < 10) {
       amount = _deflevelsAmount[5];
-      _l =  parseFloat((parseInt(level)-5)/10);
+      _l = parseFloat((parseInt(level) - 5) / 10);
     }
     if (level < 4) {
       amount = _deflevelsAmount[6];
-      _l =  parseFloat((parseInt(level)-2)/10);
+      _l = parseFloat((parseInt(level) - 2) / 10);
     }
-    
-   console.log(_l)
-    
-    amount = parseFloat((amount+_l)).toFixed(2) * 1000000;
+
+    console.log(_l);
+
+    amount = parseFloat(amount + _l).toFixed(2) * 1000000;
     return amount;
   }
 

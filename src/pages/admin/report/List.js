@@ -102,13 +102,16 @@ function Admin(prop) {
 
   const [filterText, setFilterText] = React.useState("");
   const [filterOk, setFilterOk] = React.useState(false);
-  const filteredItems = data.sort((a, b) => (a.id < b.id ? 1 : -1))
-  .filter(
-    (item) =>
-      item.status != "Canceled" &&
-      (item.gateway != "AdminSystem" || dataSearch=="AdminSystem" || userSearch !="") &&
-      (item.gateway || item.mode == "TotalIncome")
-  );;
+  const filteredItems = data
+    .sort((a, b) => (a.id < b.id ? 1 : -1))
+    .filter(
+      (item) =>
+        (dataSearch || item.status != "Canceled") &&
+        (item.gateway != "AdminSystem" ||
+          dataSearch == "AdminSystem" ||
+          userSearch != "") &&
+        (item.gateway || item.mode == "TotalIncome")
+    );
   const [firstOpen, setFirstOpen] = React.useState(false);
   const [resetPaginationToggle, setResetPaginationToggle] =
     React.useState(false);
@@ -413,7 +416,7 @@ function Admin(prop) {
             : row.amount2
           : row.endBalance >= row.startBalance
           ? row.amount
-          : row.amount ,
+          : row.amount,
       format: (row) => (
         <>
           {row.amount2 ? (
@@ -609,15 +612,19 @@ function Admin(prop) {
       />
 
       <Segment inverted>
-    {prop.footer &&<>{prop.footer.split("@").map((item, key) => {
-          return (
-            <div key={key}>
-              {item}
-              <br />
-            </div>
-          );
-        })}</>}
-      
+        {prop.footer && (
+          <>
+            {prop.footer.split("@").map((item, key) => {
+              return (
+                <div key={key}>
+                  {item}
+                  <br />
+                </div>
+              );
+            })}
+          </>
+        )}
+
         {footerTxt.split("@").map((item, key) => {
           return (
             <div key={key}>
