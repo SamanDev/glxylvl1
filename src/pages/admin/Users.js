@@ -225,12 +225,7 @@ function Admin(prop) {
       format: (row) => <>{row.level}</>,
       sortable: true,
     },
-    {
-      name: "Glevel",
-      selector: (row) => row.glevel,
-      format: (row) => <>{row.glevel}</>,
-      sortable: true,
-    },
+
     {
       name: "username",
       selector: (row) => row.username,
@@ -272,12 +267,7 @@ function Admin(prop) {
       format: (row) => <>{row.vipPlaySecond}</>,
       sortable: true,
     },
-    {
-      name: "gpass",
-      selector: (row) => row.glevelSecond,
-      format: (row) => <>{row.glevelSecond}</>,
-      sortable: true,
-    },
+
     {
       name: "lastLogin",
       selector: (row) => row.lastLogin,
@@ -429,21 +419,19 @@ function Admin(prop) {
     {
       name: "vip",
       selector: (row) => row.vipPlaySecond,
-      format: (row) => <>{row.vipPlaySecond}</>,
+      format: (row) => (
+        <>
+          {" "}
+          {(row.vipPlaySecond * 100) / siteInfo.secondForGift > 100
+            ? 100
+            : parseFloat(
+                (row.vipPlaySecond * 100) / siteInfo.secondForGift
+              ).toFixed(2)}
+        </>
+      ),
       sortable: true,
     },
-    {
-      name: "Glevel",
-      selector: (row) => row.glevel,
-      format: (row) => <>{row.glevel}</>,
-      sortable: true,
-    },
-    {
-      name: "gpass",
-      selector: (row) => row.glevelSecond,
-      format: (row) => <>{row.glevelSecond}</>,
-      sortable: true,
-    },
+
     {
       name: "lastLogin",
       selector: (row) => row.lastLogin,
@@ -543,7 +531,7 @@ function Admin(prop) {
     filteredItems = filteredItems.filter(
       (item) =>
         item.level >= parseInt(_val.replace("level", "").replace(" up", "")) &&
-        item.level < parseInt(_val.replace("level", "").replace(" up", "")) + 5
+        item.level < parseInt(_val.replace("level", "").replace(" up", "")) + 10
     );
   }
   useEffect(() => {
@@ -560,6 +548,9 @@ function Admin(prop) {
       }
       if (_val == "point") {
         setDataSortedID(8);
+      }
+      if (_val == "vip") {
+        setDataSortedID(11);
       }
     }
   }, [dataSearch]);

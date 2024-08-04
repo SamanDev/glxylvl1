@@ -65,34 +65,28 @@ function SegmentExamplePlaceholderInline(prop) {
             </h1>
           </Header>
         </div>
-
       </div>
       <div className="container-sm">
-      
-        
         <Segment inverted padded="very" className="fadeoutend">
-          
-              <div className="farsi">
-                <h2 className="farsi">
-                سایت در حال به روز رسانی می‌باشد.
-                </h2>
-                <p className="lh-base">
-                تا دقایق دیگر مثل همیشه با خدمات پایدار در خدمتتان خواهیم بود.
-                </p>
-                <h3 className="farsi">
-                از شکیبای شما متشکریم.
-                </h3>
-              </div>
-              
-              <br /> <br />
-           
+          <div className="farsi">
+            <h2 className="farsi">سایت در حال به روز رسانی می‌باشد.</h2>
+
+            <p className="lh-base">
+              به دلیل حملات سایبری روی سایت٫ اتصال تعداد کثیری از بازیکنان با
+              اختلال مواجه است. با حداکثر سرعت در حال بررسی و رفع مشکل هستیم.
+            </p>
+            <p className="lh-base">
+              تا دقایق دیگر مثل همیشه با خدمات پایدار در خدمتتان خواهیم بود.
+            </p>
+            <h3 className="farsi">از شکیبای شما متشکریم.</h3>
+          </div>
+          <br /> <br />
         </Segment>
         <br />
         <br />
         <br />
         <br />
         <br />
-    
       </div>
     </>
   );

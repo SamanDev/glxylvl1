@@ -19,6 +19,7 @@ import Setting from "./JsonSetting";
 import Requests from "./Requests";
 import Notification from "./Notification";
 import Invitation from "./Invitation.jsx";
+import AddNewBot from "./AddNewBot.jsx";
 
 import { adminGetService } from "../../services/admin";
 import { haveAdmin, haveModerator, haveOperator, haveRoot } from "../../const";
@@ -142,11 +143,25 @@ function Admin(prop) {
             />
           </Tab.Pane>
         ),
-        
       });
     }
     if (haveRoot(loginToken.roles)) {
       panes.push(
+        {
+          menuItem: "AddNewBot",
+          pane: (
+            <Tab.Pane key="AddNewBot">
+              <AddNewBot
+                addTabData={addTabData}
+                addMainTabData={addMainTabData}
+                setGetwaysData={setGetwaysData}
+                addGatewayTabData={addGatewayTabData}
+                removeTabData={removeTabData}
+                {...prop}
+              />
+            </Tab.Pane>
+          ),
+        },
         {
           menuItem: "Invitation",
           pane: (
@@ -162,7 +177,7 @@ function Admin(prop) {
             </Tab.Pane>
           ),
         },
-       
+
         {
           menuItem: "Settings",
           pane: (
@@ -264,16 +279,15 @@ function Admin(prop) {
                 search="refer"
                 searchValue={"bots"}
               />
-               <Bots
-            addTabData={addTabData}
-            setGetwaysData={setGetwaysData}
-            removeTabData={removeTabData}
-            search="refer"
-            searchValue={mode}
-          />
+              <Bots
+                addTabData={addTabData}
+                setGetwaysData={setGetwaysData}
+                removeTabData={removeTabData}
+                search="refer"
+                searchValue={mode}
+              />
             </>
           )}
-         
         </Tab.Pane>
       ),
     });
@@ -362,9 +376,8 @@ function Admin(prop) {
 
   return (
     <Segment inverted>
-    
       <Tab
-      menu={{ color:"black", inverted: true, pointing: true }}
+        menu={{ color: "black", inverted: true, pointing: true }}
         panes={tabData}
         activeIndex={activeIndex}
         renderActiveOnly={false}
