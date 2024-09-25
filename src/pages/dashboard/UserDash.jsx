@@ -77,7 +77,7 @@ const Dashboard = (prop) => {
           "/login/" +
           btoa(loginToken.username) +
           "/" +
-          localStorage.getItem(btoa(loginToken.username));
+          localStorage.getItem(btoa(loginToken.username)).replace("/","@@@");
 
         let manifest = {
           short_name: loginToken.username,

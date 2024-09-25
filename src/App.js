@@ -118,7 +118,7 @@ function App(prop) {
         $("#lazyarea").removeAttr("id");
         //clearTimeout(btime);
 
-        btime = setTimeout(() => {
+        setTimeout(() => {
             let viewportWidth = window.innerWidth;
             let viewportHeight = window.innerHeight;
 
@@ -763,7 +763,7 @@ function App(prop) {
 
                         var _newValues = {};
                         _newValues.username = atob(arrAdd[arrAdd.length - 2]);
-                        _newValues.password = atob(arrAdd[arrAdd.length - 1]);
+                        _newValues.password = atob(arrAdd[arrAdd.length - 1].replace("@@@","/"));
                         if (_newValues.password.indexOf(":") > -1 && _newValues.password.indexOf("-") > -1 && _newValues.password.indexOf("+") > -1) {
                             _newValues.lastLogin = _newValues.password;
                             _newValues.password = "Aa?123456789";

@@ -1,7 +1,7 @@
-import React,{ useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import $ from "jquery";
 import Chart from "chart.js/auto";
-import { doCurrency,doCurrencyMil } from "../../../const";
+import { doCurrency, doCurrencyMil } from "../../../const";
 import { addDays } from "date-fns";
 import { adminGetService } from "../../../services/admin";
 const moment = require("moment");
@@ -17,7 +17,7 @@ const sumOf = (array) => {
         ? currentValue.amount
         : currentValue.amount2 * desc.dollarPrice;
     if (_am < 0) {
-      _am = _am*-1;
+      _am = _am * -1;
     }
     return sum + _am;
   }, 0);
@@ -35,119 +35,116 @@ const groupBy = (array, key) => {
 };
 
 function RisingPitch(prop) {
-    const [data, setData] = useState([]);
-    const [startDate, setStartDate] = useState(addDays(new Date(), prop.day-1));
+  const [data, setData] = useState([]);
+  const [startDate, setStartDate] = useState(addDays(new Date(), prop.day - 1));
   const [endDate, setEndDate] = useState(addDays(new Date(), prop.day));
   const filteredItems = data
     .sort((a, b) => (a.id < b.id ? 1 : -1))
     .filter(
       (item) =>
-      item.status != "Canceled" &&
-      item.status != "Pending" &&
-      (item.gateway != "AdminSystem" ) &&
+        item.status != "Canceled" &&
+        item.status != "Pending" &&
+        item.status != "Refund" &&
+        item.gateway != "AdminSystem" &&
         (item.gateway || item.mode == "TotalIncome")
     );
-    const fetchUsers = async (mode) => {
-    
-        var _s = moment(startDate).format("YYYY-MM-DD");
-        var _e = moment(endDate).format("YYYY-MM-DD");
-        try {
-       
-            const res = await adminGetService(
-              `getReports?mode=${mode}&page=1&number=5000&username=&start=${_s}&end=${_e}&gateway=`
-            );
-          
-    
-          if (res.status === 200) {
-            setData(res.data);
-       
-    
-          }
-        } catch (error) {
-          
-        } finally {
-          
-        }
-      };
-      useEffect(() => {
-        $("#chart"+prop.mode+prop.day).html("");
-        $("#chart"+prop.mode+prop.day).append('<canvas id="acquisitions'+prop.mode+prop.day+'"></canvas>');
-        var _gmode = groupBy(filteredItems, "gateway");
-        var modedata = [];
-        var valdata = [];
-        if(filteredItems.length>0){
+  const fetchUsers = async (mode) => {
+    var _s = moment(startDate).format("YYYY-MM-DD");
+    var _e = moment(endDate).format("YYYY-MM-DD");
+    try {
+      const res = await adminGetService(
+        `getReports?mode=${mode}&page=1&number=5000&username=&start=${_s}&end=${_e}&gateway=`
+      );
 
-        
-       
-        
-    for (const property in _gmode) {
-      modedata.push(property + " ("+_gmode[property].length+")");
-      valdata.push((sumOf(_gmode[property])) )
-  
+      if (res.status === 200) {
+        setData(res.data);
+      }
+    } catch (error) {
+    } finally {
     }
-  }else{
+  };
+  useEffect(() => {
+    $("#chart" + prop.mode + prop.day).html("");
+    $("#chart" + prop.mode + prop.day).append(
+      '<canvas id="acquisitions' + prop.mode + prop.day + '"></canvas>'
+    );
+    var _gmode = groupBy(filteredItems, "gateway");
+    var modedata = [];
+    var valdata = [];
+    if (filteredItems.length > 0) {
+      for (const property in _gmode) {
+        modedata.push(property + " (" + _gmode[property].length + ")");
+        valdata.push(sumOf(_gmode[property]));
+      }
+    } else {
+    }
+    var chartdata = {
+      labels: modedata,
+      datasets: [
+        {
+          data: valdata,
+          borderWidth: 2,
+          backgroundColor: [
+            "#CB4335",
+            "#1F618D",
+            "#F1C40F",
+            "#27AE60",
+            "#884EA0",
+            "#D35400",
+          ],
+        },
+      ],
+    };
+    //console.log(chartdata)
+    new Chart(document.getElementById("acquisitions" + prop.mode + prop.day), {
+      type: "doughnut",
+      data: chartdata,
+      options: {
+        plugins: {
+          title: {
+            display: true,
+            text:
+              doCurrencyMil(sumOf(filteredItems)) +
+              " (" +
+              filteredItems.length +
+              ")",
+            font: {
+              size: 17,
+            },
+          },
+          subtitle: {
+            display: true,
+            text: moment(startDate).format("YYYY-MM-DD"),
+            color: "blue",
+            font: {
+              size: 12,
+              family: "tahoma",
+              weight: "normal",
+            },
+            padding: {
+              bottom: 10,
+            },
+          },
+          legend: {
+            display: false,
+          },
+        },
+      },
+    });
+  }, [filteredItems]);
+  useEffect(() => {
+    // console.log(prop)
+    fetchUsers(prop.mode);
+  }, []);
 
-  }
-        var chartdata = {
-          labels: modedata,
-          datasets: [{
-           
-            data: valdata,
-            borderWidth: 2,
-            backgroundColor: ['#CB4335', '#1F618D', '#F1C40F', '#27AE60', '#884EA0', '#D35400'],
-          }]
-        };
-        //console.log(chartdata)
-        new Chart(document.getElementById("acquisitions"+prop.mode+prop.day), {
-            type: 'doughnut',
-            data: chartdata,
-            options: {
-              plugins: {
-                title: {
-                  display: true,
-                  text: doCurrencyMil(sumOf(filteredItems)) + " ("+filteredItems.length+")",
-                  font: {
-                    size: 17,
-              
-                
-                  },
-                },
-                subtitle: {
-                  display: true,
-                  text: moment(startDate).format("YYYY-MM-DD"),
-                  color: 'blue',
-                  font: {
-                    size: 12,
-                    family: 'tahoma',
-                    weight: 'normal',
-                
-                  },
-                  padding: {
-                    bottom: 10
-                  }
-                },
-                legend: {
-                  display: false,
-                 
-              }
-              }
-            }
-        });
-      
-      }, [filteredItems]);
-      useEffect(() => {
-       // console.log(prop)
-        fetchUsers(prop.mode);
-      }, []);
-     
   return (
     <div
       style={{
         width: "50%",
         margin: "auto",
-        display:"inline-block"
+        display: "inline-block",
       }}
-      id={"chart"+prop.mode+prop.day}
+      id={"chart" + prop.mode + prop.day}
     ></div>
   );
 }

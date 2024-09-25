@@ -141,7 +141,7 @@ function Admin(prop) {
       const res = await adminGetService(`getRunners2`);
       if (res.status === 200) {
         setData(res.data.runnerList);
-        setDataStat(res.data)
+        setDataStat(res.data);
         setFilterOk(false);
       }
     } catch (error) {
@@ -160,7 +160,8 @@ function Admin(prop) {
   var filteredItems = data.filter(
     (item) =>
       item.username &&
-      (item.username.toLowerCase().includes(filterText.toLowerCase())||item.refer.toLowerCase().includes(filterText.toLowerCase()))
+      (item.username.toLowerCase().includes(filterText.toLowerCase()) ||
+        item.refer.toLowerCase().includes(filterText.toLowerCase()))
   );
   if (dataLoginDay) {
     var startDate = addDays(new Date(), dataLoginDay);
@@ -294,11 +295,12 @@ function Admin(prop) {
     {
       name: "Win%",
       selector: (row) => row.win,
-      format: (row) => <>{row.winPercent}%<br />
-      <AmountColor
-        amount={parseInt(row.win)}
-        sign={parseInt(row.win)}
-      /></>,
+      format: (row) => (
+        <>
+          {row.winPercent}%<br />
+          <AmountColor amount={parseInt(row.win)} sign={parseInt(row.win)} />
+        </>
+      ),
       sortable: true,
     },
     {
@@ -319,11 +321,11 @@ function Admin(prop) {
   ];
   const gettotal = (data, status, target) => {
     if (!data) return 0;
-    var _data = data.filter((d) => d.amount != 0);
+    var _data = data.filter((d) => d.baseAmount != 0);
     var _totalReward = 0;
     {
       _data.map((x, i) => {
-        var _am = x.amount;
+        var _am = x.baseAmount;
 
         _totalReward = _totalReward + _am;
       });
@@ -434,7 +436,6 @@ function Admin(prop) {
     if (filteredItems.length) {
       var link = "Total";
       ftxt = getDesc(link, ftxt);
-      
     }
     setFooterTxt(ftxt);
   }, [filteredItems, data]);
@@ -552,7 +553,11 @@ function Admin(prop) {
               </div>
             );
           })}
-          <br/>botTotalLive: {doCurrency(dataStat?.botTotalLive)} || botTotalRakeLive: {doCurrency(dataStat?.botTotalRakeLive)} || runnerTotalLive: {doCurrency(dataStat?.runnerTotalLive)} || runnerTotalRakeLive: {doCurrency(dataStat?.runnerTotalRakeLive)}
+          <br />
+          botTotalLive: {doCurrency(dataStat?.botTotalLive)} ||
+          botTotalRakeLive: {doCurrency(dataStat?.botTotalRakeLive)} ||
+          runnerTotalLive: {doCurrency(dataStat?.runnerTotalLive)} ||
+          runnerTotalRakeLive: {doCurrency(dataStat?.runnerTotalRakeLive)}
         </Segment>
       </div>
     </>

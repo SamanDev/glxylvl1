@@ -12,3 +12,6 @@ export const publicGetRules = () => {
 export const userGetRules = () => {
   return httpService("/req/getRewardsRulesUser", "get");
 };
+export const getGamesStatus = () => {
+  return httpService("/req/getGamesStatus", "get");
+};
