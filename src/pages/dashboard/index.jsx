@@ -61,68 +61,8 @@ function SegmentExamplePlaceholderInline(prop) {
             </div>
             <RewardStat {...prop} />
             <div className="container-md">
-                <div className="fadeoutend" style={{ height: 120, position: "relative" }}>
-                    <div style={{ position: "absolute", zIndex: 0, top: 10 }}>
-                        <AnimIcon icon="hciqteio" width="300px" height="140px" trigger="loop" />
-                    </div>
-                </div>
-                <Segment inverted padded="very" className="fadeoutend">
-                    <Grid reversed="computer tablet">
-                        <Grid.Column mobile={16} tablet={10} computer={10}>
-                            <div className="farsi">
-                                <h2 className="farsi">بازی پوکر آنلاین با پول واقعی</h2>
-                                <p className="lh-base">سلام، به سایت گلکسی کازینو خوش آمدید. در اینجا، شما می توانید بازی های پوکر آنلاین را با بازیکنانی از سراسر جهان تجربه کنید. با امکانات پیشرفته و رابط کاربری ساده، شما می توانید به راحتی بازی کنید و تجربه یک بازی پوکر واقعی را داشته باشید.</p>
-                                <p className="lh-base">در گلکسی کازینو، شما می توانید به انواع بازی های پوکر از جمله تگزاس هولدم، اوماها، سوپر ستود و... دسترسی پیدا کنید. همچنین، با شرکت در مسابقات و رقابت های مختلف، می توانید به عنوان یک بازیکن حرفه ای در پوکر به شهرت و پول برسید.</p>
-                                <p className="lh-base">در گلکسی کازینو، امنیت شما برای ما بسیار مهم است و به همین دلیل، با استفاده از فناوری های پیشرفته از جمله رمزنگاری، اطلاعات شما را محافظت می کنیم. بنابراین، با اطمینان کامل می توانید بازی کنید و لذت ببرید.</p>
-                            </div>
-                            <br />
-                            <Segment.Inline className="text-end">
-                                <Button basic color="yellow" size="large" className="farsi" onClick={() => $("#openRegister").trigger("click")}>
-                                    ثبت نام در گلکسی کازینو
-                                </Button>
-                            </Segment.Inline>
-                        </Grid.Column>
-                        <Grid.Column mobile={16} tablet={6} computer={6}>
-                            <Image src="/assets/images/pkr.webp" width="100" height="100" alt="بازی پوکر آنلاین با پول واقعی" fluid rounded />
-                        </Grid.Column>
-                    </Grid>
-                </Segment>
-                <Segment
-                    inverted
-                    className="fadeoust"
-                    style={{
-                        background: "rgba(0,0,0,.2)",
-
-                        overflow: "hidden",
-                        padding: "55px 0",
-                    }}
-                >
-                    <SiteStat {...prop} />
-                </Segment>
-                <Segment inverted padded="very" className="fadeoutend">
-                    <Grid>
-                        <Grid.Column mobile={16} tablet={10} computer={10}>
-                            <div className="farsi">
-                                <h3 className="farsi">شارژ حساب و برداشت آسان در گلکسی کازینو </h3>
-                                <p className="lh-base">برای شارژ حساب و کشوت (برداشت) در سایت گلکسی کازینو می توانید از طریق درگاه بانکی اقدام کنید و یا از سایت های ایرانی خرید و فروش اتوماتیک ووچر پرفکت مانی ، اقدام به خرید ووچر کرده و کد ووچرتان را در صفحه دیپازیت سایت وارد کنید تا بلافاصله اکانتتان معادل رقم آن ووچر شارژ گردد. علاوه بر آن می توانید از بیت کوین برای بازی پوکر آنلاین استفاده کنید.</p>
-                                <p className="lh-base">در هنگام کشوت از گلکسی کازینو هم بسته به گزینه انتخابی تان یا به صورت واریز شتاب به کارت بانکی تان پرداخت صورت می گیرد و یا معادل رقم درخواستی جهت برداشت یک ووچر در صفحه تراکنش تان به شما داده می شود.</p>
-                            </div>
-                            <br />
-                            <Segment.Inline className="text-end">
-                                <Button basic color="yellow" size="large" className="farsi" onClick={() => $("#openRegister").trigger("click")}>
-                                    ثبت نام در گلکسی کازینو
-                                </Button>
-                            </Segment.Inline>{" "}
-                            <br /> <br />
-                        </Grid.Column>
-                        <Grid.Column tablet={6} computer={6} only="tablet computer">
-                            <Image src="/assets/images/cash.webp" width="70" height="56" alt="شارژ حساب و برداشت آسان در گلکسی کازینو" fluid />
-                        </Grid.Column>
-                    </Grid>
-                </Segment>
-                <br />
-                <br />
-                <br />
+                
+               
                 <br />
                 <br />
                 <br />{" "}
