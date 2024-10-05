@@ -28,7 +28,7 @@ const onSubmit = async (values, submitMethods, navigate, prop, setRefresh) => {
   //values.dollarPrice = parseInt(values.amount / values.amountDollar);
   //values.amount = values.amountDollar;
   try {
-    const res = await cashierService(values, "nowPayments", "");
+    const res = await cashierService(values, "coinPayments", "");
     if (res.status == 200) {
       if (res.data?.address) {
         setRefresh(true);

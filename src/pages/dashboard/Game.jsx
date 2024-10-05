@@ -208,8 +208,8 @@ const getFrameLink = (game) => {
                             <> {secondaryGame == "wheel" || gameOptions.length == 0 ? (
                                 <iframe
                                     src={
-                                        siteInfo.gamesUrl +
-                                        //"http://localhost:3001/" +
+                                        //siteInfo.gamesUrl +
+                                        "https://mbj.wheelofpersia.com/" +
                                         loginToken.accessToken +
                                         "/" +
                                         loginToken.username
@@ -245,8 +245,8 @@ const getFrameLink = (game) => {
                                 {secondaryGame == "wheel" || gameOptions.length == -1 ? (
                                     <iframe
                                         src={
-                                            siteInfo.gamesUrl +
-                                            //"http://localhost:3001/" +
+                                            //siteInfo.gamesUrl +
+                                            "https://mbj.wheelofpersia.com/" +
                                             loginToken.accessToken +
                                             "/" +
                                             loginToken.username
