@@ -132,8 +132,10 @@ const Balance = (prop) => {
   };
   useEffect(() => {
     window.addEventListener("message", function (event) {
-      if (event.data == "openusdbank") {
-        $("#opendepositusd").trigger("click");
+      //console.log(event);
+      
+      if (event.data == "opendeposit") {
+        $("#opendeposit").trigger("click");
       }
 
       //console.log("Message received from the child: " + event.data); // Message received from child

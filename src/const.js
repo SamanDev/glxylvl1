@@ -184,11 +184,11 @@ const levelDataInfoRules = () => {
 };
 export const levelDataInfo = levelDataInfoRules();
 //export const gameDataMain = "poker,sportbet,crash,roulette".split(",");
-export const gameDataMain = "poker,wheel,bet,backgammon".split(",");
-export const gameDataMainName = "Poker,Online Wheel,Bet,Backgammon".split(",");
+export const gameDataMain = "poker,wheel,backgammon,blackjackmulti".split(",");
+export const gameDataMainName = "Poker,Online Wheel,Backgammon,Online Blackjack".split(",");
 export const gameDataMainCode = "poker,wheel,bet,backgammon".split(",");
-export const gameData = "boom,blackjack,blackjack3,roulette,roulette3d,baccarat,deuceswild,vpjacks,highlow,slotlucky,slotfruits,slotramses,slotarabian,slotsoccer,slotspace".split(",");
-export const gameDataName = "BoOoOoM,BlackJack,BlackJack3,Roulette,Roulette 3D,Baccarat,Deuces Wild,Jacks or Better,High Low,Slot Lucky Christmas,Slot Fruits,Slot Ramses,Slot Arabian,Slot Soccer,Slot Space".split(",");
+export const gameData = "boom,blackjack3,roulette,roulette3d,baccarat,deuceswild,vpjacks,highlow,slotfruits,slotramses,slotarabian,slotspace".split(",");
+export const gameDataName = "BoOoOoM,BlackJack3,Roulette,Roulette 3D,Baccarat,Deuces Wild,Jacks or Better,High Low,Slot Lucky Christmas,Slot Fruits,Slot Ramses,Slot Arabian,Slot Soccer,Slot Space".split(",");
 
     
     

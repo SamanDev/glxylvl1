@@ -5,10 +5,17 @@ import { publicGetRules, userGetRules } from "../services/public";
 import { getReportPenService } from "../services/report";
 import eventBus from "../services/eventBus";
 function sendMessage(message) {
+  //console.log(message)
   try {
     const iframe = document.querySelector("iframe[name=gameframe]");
     iframe.contentWindow.postMessage(message, "*");
-  } catch (error) {}
+    const iframe2 = document.querySelector("iframe[name=framegame]");
+    iframe2.contentWindow.postMessage(message, "*");
+  } catch (error) {
+const iframe3 = document.querySelector("iframe[name=framegame]");
+    iframe3.contentWindow.postMessage(message, "*");
+    
+  }
 }
 export const useUser = () => {
   var loginKey = localStorage.getItem("galaxyUserkeyToken");

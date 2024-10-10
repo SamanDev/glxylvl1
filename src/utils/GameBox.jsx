@@ -21,10 +21,10 @@ const SegmentExampleInverted = (prop) => {
         icon = "sroxggda";
     }
     if (prop.game == "wheel") {
-        name = "Online Blackjack";
-    //name = "چرخ شانس";
-    //icon = "aadumupd";
-    icon = "qdxgyudy";
+       // name = "Online Blackjack";
+    name = "چرخ شانس";
+    icon = "aadumupd";
+   // icon = "qdxgyudy";
     }
     if (prop.game == "bet") {
         name = "شرط بندی ورزشی";

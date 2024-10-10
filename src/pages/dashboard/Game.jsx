@@ -4,20 +4,19 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { getPokerSession } from "../../services/auth";
 
-
 import { Tab, Icon, Dropdown, Dimmer, Loader } from "semantic-ui-react";
 import { gameData, gameDataMain, gameDataName, gameDataMainName } from "../../const";
 import $ from "jquery";
 
 const getFrameLink = (game) => {
     var link = game;
-    if(link=="backgammon"){
-        link = "backgammonslobby"
+    if (link == "backgammon") {
+        link = "backgammonslobby";
     }
     return link;
-}
-    const Dashboard = (prop) => {
-        const navigate = useNavigate();
+};
+const Dashboard = (prop) => {
+    const navigate = useNavigate();
     const loginToken = prop.loginToken;
     const siteInfo = prop.siteInfo;
 
@@ -58,8 +57,7 @@ const getFrameLink = (game) => {
     const [activeSlide, setActiveSlide] = useState(defslide);
     const [gameOptions, setGameOptions] = useState([]);
     const [mainGame, setMainGame] = useState(params.gameId);
-    const [secondaryGame, setSecondaryGame] = useState(params.gameId != "poker"?params.gameId :localStorage.getItem("secondaryGame") ? localStorage.getItem("secondaryGame") : "wheel");
-    
+    const [secondaryGame, setSecondaryGame] = useState(params.gameId != "poker" ? params.gameId : localStorage.getItem("secondaryGame") ? localStorage.getItem("secondaryGame") : "wheel");
 
     const handleChange = (e, { value }) => {
         setGameLoader(true);
@@ -136,19 +134,19 @@ const getFrameLink = (game) => {
     }
     try {
         var defGamesStatus = JSON.parse(localStorage.getItem("getGamesStatus"));
-      } catch (error) {
-        var defGamesStatus = {}
-      }
-    
+    } catch (error) {
+        var defGamesStatus = {};
+    }
+
     useEffect(() => {
         var _gameOptions = [];
         {
             gameDataMain.map((gamename, i) => {
-                var game = gamename.toLowerCase()
+                var game = gamename.toLowerCase();
                 //console.log(game,defGamesStatus[game],mainGame)
-                if (game != mainGame && i > 0 && (defGamesStatus[game]||typeof defGamesStatus[game] === 'undefined')|| game=="wheel") {
+                if ((game != mainGame && i > 0 && (defGamesStatus[game] || typeof defGamesStatus[game] === "undefined")) || game == "wheel") {
                     _gameOptions.push({
-                        key: game ,
+                        key: game,
                         text: gameDataMainName[i],
                         value: game,
                     });
@@ -157,8 +155,8 @@ const getFrameLink = (game) => {
         }
         {
             gameData.map((gamename, i) => {
-                var game = gamename.toLowerCase()
-                if (game != mainGame && i >0 && (defGamesStatus[game])) {
+                var game = gamename.toLowerCase();
+                if (game != mainGame && i > 0 && defGamesStatus[game]) {
                     _gameOptions.push({
                         key: game,
                         text: gameDataName[i],
@@ -202,26 +200,48 @@ const getFrameLink = (game) => {
                                 </Dimmer>
                             </div>
                         )}
-                        {mainGame == "poker" ? <>{sessionKey != "" && siteInfo?.pokerUrl && 
-                        <iframe src={localStorage.getItem("tableName") ? siteInfo.pokerUrl + "?LoginName=" + loginToken?.username + "&SessionKey=" + sessionKey + "&TableType=R&TableName=" + localStorage.getItem("tableName") : siteInfo.pokerUrl + "?LoginName=" + loginToken?.username + "&SessionKey=" + sessionKey} id="pokerframe" className={"framegame"} onLoad={removeFrameLoad}></iframe>}</> : 
-                        <>{activeIndex == 0 && siteInfo?.gamesUrl && 
-                            <> {secondaryGame == "wheel" || gameOptions.length == 0 ? (
-                                <iframe
-                                    src={
-                                        //siteInfo.gamesUrl +
-                                        "https://mbj.wheelofpersia.com/" +
-                                        loginToken.accessToken +
-                                        "/" +
-                                        loginToken.username
-                                    }
-                                    name="gameframe"
-                                    className={"framegame casframe"}
-                                    onLoad={removeFrameLoad2}
-                                ></iframe>
-                            ) : (
-                                <iframe src={siteInfo.casinoGamesUrl+"/"+getFrameLink(secondaryGame)+".html?code=" + loginToken.accessToken + ""} name="gameframe" className={"framegame casframe"} onLoad={removeFrameLoad2}></iframe>
-                            )}</>
-                        }</>}
+                        {mainGame == "poker" ? (
+                            <>{sessionKey != "" && siteInfo?.pokerUrl && <iframe src={localStorage.getItem("tableName") ? siteInfo.pokerUrl + "?LoginName=" + loginToken?.username + "&SessionKey=" + sessionKey + "&TableType=R&TableName=" + localStorage.getItem("tableName") : siteInfo.pokerUrl + "?LoginName=" + loginToken?.username + "&SessionKey=" + sessionKey} id="pokerframe" className={"framegame"} onLoad={removeFrameLoad}></iframe>}</>
+                        ) : (
+                            <>
+                                {activeIndex == 0 && siteInfo?.gamesUrl && (
+                                    <>
+                                    
+                                        {secondaryGame == "wheel" || gameOptions.length == 0 ? (
+                                            <iframe
+                                                src={
+                                                    siteInfo.gamesUrl +
+                                                    //"https://mbj.wheelofpersia.com/" +
+                                                    //"http://localhost:3000/" + 
+                                                    loginToken.accessToken + "/" + loginToken.username
+                                                }
+                                                name="gameframe"
+                                                className={"framegame casframe"}
+                                                onLoad={removeFrameLoad2}
+                                            ></iframe>
+                                        ) : (
+                                            <>{secondaryGame == "blackjackmulti"  ? (
+                                                <iframe
+                                                    src={
+                                                        siteInfo.gamesUrl.replace("www","mbjui") +
+                                                        //"https://mbj.wheelofpersia.com/" +
+                                                        //"http://localhost:3000/" +
+                                                        loginToken.accessToken +
+                                                        "/" +
+                                                        loginToken.username
+                                                    }
+                                                    name="gameframe"
+                                                    className={"framegame casframe"}
+                                                    onLoad={removeFrameLoad2}
+                                                ></iframe>
+                                            ) : (
+                                                <iframe src={siteInfo.casinoGamesUrl + "/" + getFrameLink(secondaryGame) + ".html?code=" + loginToken.accessToken + ""} name="gameframe" className={"framegame casframe"} onLoad={removeFrameLoad2}></iframe>
+                                            )}</>
+                                        )}
+                                    </>
+                                )}
+                            </>
+                        )}
                     </div>
                 </Tab.Pane>
             ),
@@ -245,8 +265,9 @@ const getFrameLink = (game) => {
                                 {secondaryGame == "wheel" || gameOptions.length == -1 ? (
                                     <iframe
                                         src={
-                                            //siteInfo.gamesUrl +
-                                            "https://mbj.wheelofpersia.com/" +
+                                            siteInfo.gamesUrl +
+                                            //"https://mbj.wheelofpersia.com/" +
+                                            //"http://localhost:3000/" +
                                             loginToken.accessToken +
                                             "/" +
                                             loginToken.username
@@ -256,7 +277,24 @@ const getFrameLink = (game) => {
                                         onLoad={removeFrameLoad2}
                                     ></iframe>
                                 ) : (
-                                    <iframe src={siteInfo.casinoGamesUrl+"/"+getFrameLink(secondaryGame)+".html?code=" + loginToken.accessToken + ""} name="gameframe" className={"framegame casframe"} onLoad={removeFrameLoad2}></iframe>)}
+                                    <>{secondaryGame == "blackjackmulti"  ? (
+                                        <iframe
+                                            src={
+                                                siteInfo.gamesUrl.replace("www","mbjui") +
+                                                //"https://mbj.wheelofpersia.com/" +
+                                                //"http://localhost:3000/" +
+                                                loginToken.accessToken +
+                                                "/" +
+                                                loginToken.username
+                                            }
+                                            name="gameframe"
+                                            className={"framegame casframe"}
+                                            onLoad={removeFrameLoad2}
+                                        ></iframe>
+                                    ) : (
+                                        <iframe src={siteInfo.casinoGamesUrl + "/" + getFrameLink(secondaryGame) + ".html?code=" + loginToken.accessToken + ""} name="gameframe" className={"framegame casframe"} onLoad={removeFrameLoad2}></iframe>
+                                    )}</>
+                                )}
                             </>
                         )}
                     </div>
@@ -284,7 +322,6 @@ const getFrameLink = (game) => {
                                           transform: "translateY(-250px)",
                                           transformOrigin: "center",
                                           opacity: 0,
-                                          
                                       }
                                     : {
                                           transform: "translateY(-2px)",
@@ -331,12 +368,12 @@ const getFrameLink = (game) => {
                                           transform: "translateY(-350px) translateX(-50px)",
                                           transformOrigin: "center right",
                                           opacity: 0,
-                                          zIndex:-10
+                                          zIndex: -10,
                                       }
                                     : {
                                           transform: "translateY(-215px) translateX(-50px)",
                                           transformOrigin: "center right",
-                                          zIndex:10
+                                          zIndex: 10,
                                       }
                             }
                             compact

@@ -940,6 +940,37 @@ i.star.big {
     top: -100%;
     font-weight: 900;
 }
+.gamesbox a {
+    position: relative;
+  width: 100%;
+    display: block;
+    box-shadow: inset rgba(1, 1, 1, .91) 0px 0px 70px 1vw; 
+    border: 4px solid rgba(255, 255, 255,.051);
+    border-radius: 10px;
+    overflow: hidden;
+    aspect-ratio: 4 / 2;
+
+  }
+  .gamesbox .column{
+    margin-bottom: 20px !important;
+  }
+.gamesbox a img {
+  
+    z-index: -1;
+    
+   
+
+
+}
+
+  .gamesbox a[href*="#"] {
+   
+    filter: grayscale(96%);
+    border: 4px solid rgba(255, 255, 255,.01);
+    
+  }
+  
+
 .levelText {
     color: rgb(255, 255, 255);
     position: relative;
@@ -2395,7 +2426,7 @@ table {
 }
 @media (max-width: 1001px) {
     .framegame.casframe {
-        border: 4px solid #d2d2d2;
+        border: 0px solid #d2d2d2;
     }
 }
 @media (max-width: 900px) {
@@ -2410,7 +2441,7 @@ table {
         width: 100px;
     }
     .framegame.casframe {
-        border: 2px solid #d2d2d2;
+        border: 0px solid #d2d2d2;
     }
     .ui.black.label.balanceLable.amount {
         min-width: 50px !important;

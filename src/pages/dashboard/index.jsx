@@ -9,7 +9,7 @@ function SegmentExamplePlaceholderInline(prop) {
     const siteInfo = prop?.siteInfo;
     return (
         <>
-            <div className="container-md">
+            <div className="container-md" style={{overflow: 'hidden'}}>
                 <div style={{ height: 10, position: "relative" }}>
                     <div
                         style={{
