@@ -10,11 +10,11 @@ import { Alert } from "../../../../utils/alerts";
 import { cashierService } from "../../../../services/cashier";
 
 const initialValues = {
-  action: "deposit",
+  action: "payment",
   amount: 0,
-  coin: "USDT.TRC20",
+  
   amountDollar: 100,
-  usd: false,
+  dollar: false,
 };
 const validationSchema = Yup.object({
   amount: Yup.number().required("لطفا این فیلد را وارد کنید.").integer(),
@@ -30,11 +30,10 @@ const onSubmit = async (values, submitMethods, navigate, prop, setRefresh) => {
   try {
     const res = await cashierService(values, "nowPayments", "");
     if (res.status == 200) {
-      if (res.data?.address) {
-        setRefresh(true);
-      }
-      console.log(res.data);
-      submitMethods.resetForm();
+      //localAmount(values, prop);
+      window.location.href = res.data.replace(/ /g, "");
+
+    
     } else {
       Alert("متاسفم...!", res.data.message, "error");
     }

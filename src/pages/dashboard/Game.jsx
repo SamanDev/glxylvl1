@@ -212,7 +212,7 @@ const Dashboard = (prop) => {
                                                 src={
                                                     siteInfo.gamesUrl +
                                                     //"https://mbj.wheelofpersia.com/" +
-                                                    //"http://localhost:3000/" + 
+                                                    //"http://192.168.1.14:3000/" + 
                                                     loginToken.accessToken + "/" + loginToken.username
                                                 }
                                                 name="gameframe"
@@ -225,7 +225,7 @@ const Dashboard = (prop) => {
                                                     src={
                                                         siteInfo.gamesUrl.replace("www","mbjui") +
                                                         //"https://mbj.wheelofpersia.com/" +
-                                                        //"http://localhost:3000/" +
+                                                    //"http://192.168.1.14:3000/" +
                                                         loginToken.accessToken +
                                                         "/" +
                                                         loginToken.username
@@ -235,7 +235,7 @@ const Dashboard = (prop) => {
                                                     onLoad={removeFrameLoad2}
                                                 ></iframe>
                                             ) : (
-                                                <iframe src={siteInfo.casinoGamesUrl + "/" + getFrameLink(secondaryGame) + ".html?code=" + loginToken.accessToken + ""} name="gameframe" className={"framegame casframe"} onLoad={removeFrameLoad2}></iframe>
+                                                <iframe src={siteInfo.casinoGamesUrl + "/" + getFrameLink(secondaryGame) + ".html?code=" + loginToken.accessToken + ""}  className={"framegame casframe"} onLoad={removeFrameLoad2}></iframe>
                                             )}</>
                                         )}
                                     </>
@@ -267,7 +267,7 @@ const Dashboard = (prop) => {
                                         src={
                                             siteInfo.gamesUrl +
                                             //"https://mbj.wheelofpersia.com/" +
-                                            //"http://localhost:3000/" +
+                                            //"http://192.168.1.14:3000/" +
                                             loginToken.accessToken +
                                             "/" +
                                             loginToken.username
@@ -282,7 +282,7 @@ const Dashboard = (prop) => {
                                             src={
                                                 siteInfo.gamesUrl.replace("www","mbjui") +
                                                 //"https://mbj.wheelofpersia.com/" +
-                                                //"http://localhost:3000/" +
+                                                //"http://192.168.1.14:3000/" +
                                                 loginToken.accessToken +
                                                 "/" +
                                                 loginToken.username
@@ -292,7 +292,7 @@ const Dashboard = (prop) => {
                                             onLoad={removeFrameLoad2}
                                         ></iframe>
                                     ) : (
-                                        <iframe src={siteInfo.casinoGamesUrl + "/" + getFrameLink(secondaryGame) + ".html?code=" + loginToken.accessToken + ""} name="gameframe" className={"framegame casframe"} onLoad={removeFrameLoad2}></iframe>
+                                        <iframe src={siteInfo.casinoGamesUrl + "/" + getFrameLink(secondaryGame) + ".html?code=" + loginToken.accessToken + ""}  className={"framegame casframe"} onLoad={removeFrameLoad2}></iframe>
                                     )}</>
                                 )}
                             </>

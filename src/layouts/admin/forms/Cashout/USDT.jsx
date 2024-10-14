@@ -51,7 +51,7 @@ const depositArea = (prop) => {
         siteInfo.cashoutLimitDollar,
         "حداقل مبلغ " + siteInfo.cashoutLimitDollar + " دلار می باشد."
       ),
-    userWalletAddress: Yup.string()
+    walletAddress: Yup.string()
       .required("لطفا این فیلد را وارد کنید.")
       .min(10, "لطفا این فیلد را درست وارد کنید."),
     password: Yup.string()
@@ -64,11 +64,11 @@ const depositArea = (prop) => {
       initialValues={{
         amount: 0,
 
-        action: "cashout",
-        usd: false,
+        action: "payout",
+        dollar: false,
         coin: "USDT.TRC20",
         amountDollar: 0,
-        userWalletAddress: "",
+        walletAddress: "",
         username: "",
         password: "",
       }}
@@ -95,7 +95,7 @@ const depositArea = (prop) => {
               formik={formik}
               control="input"
               type="text"
-              name="userWalletAddress"
+              name="walletAddress"
               label="TRC20 Wallet"
               labelcolor="red"
               size={prop.size}
