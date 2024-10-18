@@ -16,7 +16,7 @@ Array.apply(0, Array(90)).map(function (x, i) {
   });
 });
 const loginoptions = [];
-loginoptions.push({ key: "blank", text: "No Filter Login", value: "" });
+loginoptions.push({ key: "blank", text: "No Filter", value: "" });
 Array.apply(0, Array(90)).map(function (x, i) {
   loginoptions.push({ key: i, text: (i + 1) * -1, value: (i + 1) * -1 });
 });
@@ -32,14 +32,13 @@ const DropdownExampleMultipleSelection = (prop) => {
         options={loginoptions}
         onChange={prop.onFilter}
         defaultValue={val}
-      />
+fluid      />
     );
   } else {
     return (
       <Dropdown
         placeholder={options[0].text}
-        floated="right"
-        selection
+fluid        selection
         onChange={prop.onFilter}
         defaultValue={val}
         options={options}

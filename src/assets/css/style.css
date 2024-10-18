@@ -343,6 +343,10 @@ a {
 .hiddenmenu {
     display: none !important;
 }
+.headcpntrl *{
+    font-size: 96% !important;
+
+}
 .mm-navbars:before {
     display: block;
     transform: scale(0.7);

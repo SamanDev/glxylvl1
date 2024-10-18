@@ -195,7 +195,7 @@ function Admin(prop) {
             onChange={setNotMessageVal}
           />
         </Form.Field>
-        <Form.Field className="s">
+        <Form.Field className="hiddenmenu">
           <label>Image</label>
           <img src={image} />
           <select value={image} onChange={setNotImage}>

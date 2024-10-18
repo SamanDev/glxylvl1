@@ -38,9 +38,9 @@ export const useUser = () => {
         return _siteInfo;
     }
     useEffect(() => {
-      console.log("inja")
+      
         window.addEventListener("message", function (event) {
-          console.log("inja"+event.data)
+         
             if (event.data == "userget") {
                 var newu = {
                     username: loginToken.username,

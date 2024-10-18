@@ -70,6 +70,22 @@ var expdate = new Date();
 nowdate = moment(nowdate).format("YYYY-MM-DD HH:00:00");
 mindate = moment(mindate).format("YYYY-MM-DD HH:00:00");
 expdate = moment(expdate).add(6, "hours").format("YYYY-MM-DD HH:mm:00");
+// Function to set a cookie
+const setCookie = (name, value, days) => {
+  const expirationDate = new Date();
+  expirationDate.setDate(expirationDate.getDate() + days);
+ 
+  document.cookie = `${name}=${value}; expires=${expirationDate.toUTCString()}; path=/`;
+ };
+ const getCookie = (name) => {
+  const cookies = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith(`${name}=`));
+ 
+  return cookies ? cookies.split("=")[1] : null;
+ };
+ 
+ // Example: Set a username cookie that expires in 7 days
 function Admin(prop) {
   const [myState, setMyState] = useState({
     list: [
@@ -88,6 +104,7 @@ function Admin(prop) {
       { id: "selectedList", val: prop.selectedList },
     ],
   });
+  const [sending,setSending] = useState(false)
   const siteInfo = prop.siteInfo;
   function genLinkurl(link, image) {
     var rules = link.split("login/");
@@ -95,7 +112,8 @@ function Admin(prop) {
     return image.replace("https://www.galaxypoker.vip/", rules[0]);
   }
   const setUsers = (data) => {
-    data.players.map((player, i) => {
+    setSending(true)
+    data.players.filter((user) => getCookie("sendmail"+user.username)!=data.subject).map((player, i) => {
       setTimeout(() => {
         var newData = {
           username: player.username,
@@ -109,6 +127,8 @@ function Admin(prop) {
             genLinkurl(player.link, data.image),
         };
         console.log(newData);
+        
+
         addGift(newData);
       }, 5000 * i);
     });
@@ -120,6 +140,7 @@ function Admin(prop) {
     try {
       const res = await adminPostService(data, "gMailService");
       if (res.status == 200) {
+        setCookie("sendmail"+player.username, data.subject, 1);
         $("#res" + data.username).html(
           '<i aria-hidden="true" class="checkmark green icon">'
         );
@@ -423,6 +444,7 @@ function Admin(prop) {
         Send Mail{" "}
         <Button
           floated="right"
+          disabled={findStateId(myState, "subject")==""}
           onClick={() => {
             setUsers({
               subject: findStateId(myState, "subject"),
@@ -433,16 +455,17 @@ function Admin(prop) {
             });
           }}
         >
-          Send
+          Send ({findStateId(myState, "selectedList").filter((user) => getCookie("sendmail"+user.username)!=findStateId(myState, "subject")).length})
         </Button>
       </Modal.Header>
-
-      <Modal.Content>
+{!sending &&<Modal.Content scrolling>
         <SendMail onUpdateItem={onUpdateItem} {...prop} />
-      </Modal.Content>
-      <Modal.Content>
+      </Modal.Content>}
+      
+      <Modal.Content scrolling>
         <Segment inverted>
-          {findStateId(myState, "selectedList").map((user, i) => {
+          {findStateId(myState, "selectedList").filter((user) => getCookie("sendmail"+user.username)!=findStateId(myState, "subject")).map((user, i) => {
+            
             return (
               <Form key={i}>
                 <Form.Group inline>
@@ -461,6 +484,7 @@ function Admin(prop) {
                 </Form.Group>
               </Form>
             );
+          
           })}
         </Segment>
       </Modal.Content>
