@@ -66,7 +66,7 @@ const GameInbox = (prop) => {
                        
                         return (
                             <Grid.Column mobile={8} tablet={8} computer={4}  key={i}>
-                                <Link  id={"open" + submenu} to={sessionmyKey[game]?"/games/" + submenu:"#/games/" + submenu} className="mini"><Image src={"/assets/images/games/" +submenu+".jpg"}  fluid /></Link>
+                                <Link  id={"open" + submenu} to={sessionmyKey[game]?"/games/" + submenu:"#/games/" + submenu} className="mini"><Image src={"/assets/images/games/" +submenu.toLowerCase()+".jpg"}  fluid /></Link>
                                
                             </Grid.Column>
                         );

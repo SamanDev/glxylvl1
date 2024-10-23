@@ -208,7 +208,7 @@ function listfinal(list) {
   var newlist = [];
   for (const [key, value] of Object.entries(list)) {
     if (
-      key.indexOf("Tots") > -1 ||
+      key.indexOf("Total") > -1 ||
       key.indexOf("Cost") > -1 ||
       key.indexOf("playersRake") > -1 ||
       key.indexOf("Rewards") > -1 ||
@@ -222,6 +222,8 @@ function listfinal(list) {
         key.indexOf("totalRewards") == -1 &&
         key.indexOf("pokerTotalFinal") == -1 &&
         key.indexOf("pokerCost") == -1 &&
+        key.indexOf("playersRake") == -1 &&
+        
         key.indexOf("casinoGamesSet") == -1
       ) {
         newlist.push({ name: key, value: value });
@@ -407,8 +409,8 @@ function Admin(prop) {
                 <br />
                 {doCurrency(
                   row.playersRake +
-                    row?.botsTots +
-                    row?.runnersTots +
+                    row?.botsTotal +
+                    row?.runnersTotal +
                     (row.totalRewards - row.pokerCost) * -1
                 )}
                 <span className="float-end">
