@@ -53,24 +53,7 @@ function Admin(prop) {
   };
   useEffect(() => {
     panes = [
-      {
-        menuItem: "Dashboard",
-        pane: (
-          <Tab.Pane key="Dashboard" inverted>
-            <Dashboard
-              addTabData={addTabData}
-              addMainTabData={addMainTabData}
-              handleGetGeteways={handleGetGeteways}
-              addGatewayTabData={addGatewayTabData}
-              removeTabData={removeTabData}
-              getwaysList={getwaysData}
-              search="username"
-              searchValue=""
-              {...prop}
-            />
-          </Tab.Pane>
-        ),
-      },
+      
       {
         menuItem: "Users",
         pane: (
@@ -195,6 +178,26 @@ function Admin(prop) {
         }
       );
     }
+    if (haveAdmin(loginToken.roles)) {
+      panes.push({
+      menuItem: "Dashboard",
+      pane: (
+        <Tab.Pane key="Dashboard" inverted>
+          <Dashboard
+            addTabData={addTabData}
+            addMainTabData={addMainTabData}
+            handleGetGeteways={handleGetGeteways}
+            addGatewayTabData={addGatewayTabData}
+            removeTabData={removeTabData}
+            getwaysList={getwaysData}
+            search="username"
+            searchValue=""
+            {...prop}
+          />
+        </Tab.Pane>
+      ),
+    })
+  }
   }, [loadingtickets]);
   useEffect(() => {
     if (activeIndex == 0) setTabData(panes);

@@ -7,7 +7,16 @@ import { getPokerSession } from "../../services/auth";
 import { Tab, Icon, Dropdown, Dimmer, Loader } from "semantic-ui-react";
 import { gameData, gameDataMain, gameDataName, gameDataMainName } from "../../const";
 import $ from "jquery";
-
+const getPropertyNoCase = (obj, prop) => {
+    
+   
+    try {
+       return obj[Object.keys(obj).find(key => key.toLowerCase() === prop.toLowerCase())]
+    } catch (error) {
+        
+    }
+   
+  };
 const getFrameLink = (game) => {
     var link = game;
     if (link == "backgammon") {
@@ -137,7 +146,7 @@ const Dashboard = (prop) => {
     } catch (error) {
         var defGamesStatus = {};
     }
-
+    const [sessionmyKey, setSessionmyKey] = useState(defGamesStatus);
     useEffect(() => {
         var _gameOptions = [];
         {
@@ -210,7 +219,7 @@ const Dashboard = (prop) => {
                                         {secondaryGame == "wheel" || gameOptions.length == 0 ? (
                                             <iframe
                                                 src={
-                                                    siteInfo.gamesUrl +
+                                                    siteInfo.gamesUrl.replace("www","mwheelui") +
                                                     //"https://mbj.wheelofpersia.com/" +
                                                     //"http://192.168.1.14:3000/" + 
                                                     loginToken.accessToken + "/" + loginToken.username
@@ -265,7 +274,7 @@ const Dashboard = (prop) => {
                                 {secondaryGame == "wheel" || gameOptions.length == -1 ? (
                                     <iframe
                                         src={
-                                            siteInfo.gamesUrl +
+                                            siteInfo.gamesUrl.replace("www","mwheelui")  +
                                             //"https://mbj.wheelofpersia.com/" +
                                             //"http://192.168.1.14:3000/" +
                                             loginToken.accessToken +
@@ -302,7 +311,9 @@ const Dashboard = (prop) => {
             ),
         },
     ];
-
+if(!getPropertyNoCase(sessionmyKey,secondaryGame)){
+    return <div className="mainsection" style={{textAlign:'center',padding:'100px 0',color:'white',fontSize:40}}>Game is not available.</div>
+}
     return (
         <>
             <div className="dashboard_section main_section ">

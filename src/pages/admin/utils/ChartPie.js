@@ -12,10 +12,11 @@ const sumOf = (array) => {
     } catch (error) {
       var desc = { dollarPrice: 50000 };
     }
+    
     var _am =
       currentValue.endBalance != currentValue.startBalance
         ? currentValue.amount
-        : currentValue.amount2 * desc.dollarPrice;
+        : currentValue.amount2 * (desc?.dollarPrice?desc?.dollarPrice:70000);
     if (_am < 0) {
       _am = _am * -1;
     }
@@ -95,7 +96,7 @@ function RisingPitch(prop) {
         },
       ],
     };
-    //console.log(chartdata)
+  
     new Chart(document.getElementById("acquisitions" + prop.mode + prop.day), {
       type: "doughnut",
       data: chartdata,

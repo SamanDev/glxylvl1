@@ -731,30 +731,9 @@ useEffect(() => {
             <div style={{ height: "calc(100vh - 150px)", overflow: "auto" }}  className="headcpntrl">
                 {prop.search == "refer" && prop.searchValue != "bots" ? (
                     <>
-                        {subHeaderComponentMemoDown}
-                        <DataTable
-                            columns={columnsDownLine}
-                            data={filteredItems}
-                            progressPending={loading}
-                            paginationPerPage={perPage}
-                            paginationServer
-                            onChangePage={handlePageChange}
-                            onChangeRowsPerPage={handlePerRowsChange}
-                            defaultSortFieldId={dataSortedID}
-                            defaultSortAsc={false}
-                            expandOnRowClicked={true}
-                            expandableRowsHideExpander={true}
-                            conditionalRowStyles={conditionalRowStyles}
-                            noDataComponent={noDataComponent}
-                            pagination
-                            paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
-                            persistTableHead
-                            paginationTotalRows={totalRows}
-                            contextActions={contextActions}
-                            paginationRowsPerPageOptions={[10, 25, 50, 100]}
-                            onSelectedRowsChange={handleChange}
-                            selectableRows
-                        />
+                        <span>{subHeaderComponentMemo}</span>
+                        <DataTable columns={columns} data={filteredItems} progressPending={loading} onChangeRowsPerPage={handlePerRowsChange} onChangePage={handlePageChange} paginationPerPage={perPage} expandOnRowClicked={true}  expandableRowsHideExpander={true} conditionalRowStyles={conditionalRowStyles} noDataComponent={noDataComponent} pagination persistTableHead paginationServer contextActions={contextActions} paginationRowsPerPageOptions={[10, 25, 50, 100, 500, 1000, 5000]} paginationTotalRows={totalRows} onSelectedRowsChange={handleChange} clearSelectedRows={toggledClearRows} selectableRows />
+                 
                     </>
                 ) : (
                   (           <>

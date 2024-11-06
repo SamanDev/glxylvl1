@@ -2,6 +2,7 @@ import React from "react";
 import { Dropdown } from "semantic-ui-react";
 
 const options = [];
+options.push({ key: 1, text: "All", value: "" });
 
 options.push({ key: 2, text: "Cashout", value: "cashout" });
 options.push({ key: 3, text: "Deposit", value: "deposit" });

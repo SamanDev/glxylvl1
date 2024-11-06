@@ -136,10 +136,18 @@ const Report = (prop) => {
               canShowPending = false;
             }
             try {
-              var desc = JSON.parse(item.description);
+              if(prop.gateway == "PerfectMoney"){
+                var desc = JSON.parse(item.description);
+                desc.amount = desc.dollarAmount
+              }else{
+              var desc2 = JSON.parse(item.description);
+              var desc = desc2.withdrawals[0]
+              }
             } catch (error) {
               var desc = {};
             }
+         if(desc?.address||prop.gateway != "USDT"){
+            
             return (
               <List.Item key={i}>
                 {prop.menu?.usd ? (
@@ -181,7 +189,7 @@ const Report = (prop) => {
                               <small>
                                 Amount &nbsp;
                                 <span className="text-golds">
-                                  ${doCurrency(desc.dollarAmount)}
+                                  ${doCurrency(desc.amount)}
                                 </span>{" "}
                                 - Fee &nbsp;
                                 <span className="text-golds">${desc.fee}</span>
@@ -190,10 +198,10 @@ const Report = (prop) => {
                               <span className="text-gold">
                                 $
                                 {doCurrency(
-                                  desc.VOUCHER_AMOUNT
-                                    ? desc.VOUCHER_AMOUNT
-                                    : parseFloat(desc.amount).toFixed(2)
-                                )}
+                                desc.VOUCHER_AMOUNT
+                                  ? desc.VOUCHER_AMOUNT
+                                  : parseFloat(desc.amount-desc.fee).toFixed(2)
+                              )}
                               </span>
                             </>
                           )}
@@ -202,7 +210,7 @@ const Report = (prop) => {
                           prop.gateway == "USDT") && (
                           <>
                             <span className="text-gold">
-                              {desc.walletAddress}
+                              {desc.address}
                             </span>
                           </>
                         )}
@@ -248,7 +256,7 @@ const Report = (prop) => {
                             <small>
                               Amount &nbsp;
                               <span className="text-golds">
-                                ${doCurrency(desc.dollarAmount)}
+                                ${doCurrency(desc.amount)}
                               </span>{" "}
                               - Fee &nbsp;
                               <span className="text-golds">${desc.fee}</span>
@@ -256,7 +264,7 @@ const Report = (prop) => {
                               Rate
                               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{" "}
                               <span className="text-gold">
-                                {doCurrency(desc.dollarPrice)}
+                                {doCurrency(item.amount/desc.amount*-1)}
                               </span>{" "}
                             </small>
                             <br /> Final Amount &nbsp;
@@ -265,12 +273,21 @@ const Report = (prop) => {
                               {doCurrency(
                                 desc.VOUCHER_AMOUNT
                                   ? desc.VOUCHER_AMOUNT
-                                  : parseFloat(desc.amount).toFixed(2)
+                                  : parseFloat(desc.amount-desc.fee).toFixed(2)
                               )}
                             </span>
                           </>
                         )}
+                        
                       </div>
+                      {(prop.gateway == "Bitcoin" ||
+                          prop.gateway == "USDT") && (
+                          <>
+                            <span className="text-gold">
+                              {desc.address}
+                            </span>
+                          </>
+                        )}
                     </List.Description>
                     {item.status === "Pending" &&
                       item.gateway == "IranShetab" && (
@@ -294,6 +311,7 @@ const Report = (prop) => {
               </List.Item>
             );
           }
+        }
         })}
       </List>
     );

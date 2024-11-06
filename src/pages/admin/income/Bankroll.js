@@ -77,8 +77,8 @@ function Admin(prop) {
   };
 
   useEffect(() => {
-    handleGetBTCRate();
-    handleGetRate();
+    //handleGetBTCRate();
+   // handleGetRate();
     fetchUsers(); // fetch page 1 of users
   }, []);
 
@@ -96,11 +96,10 @@ function Admin(prop) {
       </>
     );
   }
-  var btc = parseInt(data.btc * btcrate * rate);
-  var usdt = parseInt(data.usdt * rate);
-  var perfectMoney = parseInt(data.perfectMoney * rate);
+  var usdt = parseInt(data.usdtToman);
+  var perfectMoney = parseInt(data.perfectMoneyToman );
   var vgc = parseInt(data.bank);
-  var total = btc + usdt + vgc + perfectMoney;
+  var total =  usdt + vgc + perfectMoney;
 
   var totalchips =
     data.totalPlayers +
@@ -108,7 +107,7 @@ function Admin(prop) {
     parseInt(data.ringGame) +
     parseInt(data.ringGame2 * rate) +
     parseInt(data.finalTotal) +
-    parseInt(data.finalTotal2 * rate) -
+    parseInt(data.finalTotal2 * rate) +
     data.pendingCashout;
   return (
     <>
@@ -187,13 +186,7 @@ function Admin(prop) {
         className="bankroll"
         style={{ minWidth: 400, minHeight: 380, float: "left" }}
       >
-        <Statistic color="yellow" inverted>
-          <Statistic.Value>{doCurrency(btc)}</Statistic.Value>
-          <Statistic.Label>
-            <b>{data.btc}</b> BTC <br />
-            <b>{doCurrency(parseInt(data.btc * btcrate))}$</b>
-          </Statistic.Label>
-        </Statistic>
+       
         <Statistic color="green" inverted>
           <Statistic.Value>{doCurrency(usdt)}</Statistic.Value>
           <Statistic.Label>
@@ -222,10 +215,7 @@ function Admin(prop) {
             <Divider inverted />
           </Statistic.Label>
         </Statistic>
-        <Statistic inverted>
-          <Statistic.Value>{doCurrency(btcrate)}$</Statistic.Value>
-          <Statistic.Label>BTC Rate</Statistic.Label>
-        </Statistic>
+     
         <Statistic inverted>
           <Statistic.Value>{doCurrency(rate)}</Statistic.Value>
           <Statistic.Label>Dollar Rate</Statistic.Label>

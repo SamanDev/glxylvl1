@@ -5,6 +5,15 @@ import { Grid, Divider ,Image} from "semantic-ui-react";
 import { gameDataMain, gameData, gameDataName } from "../../const";
 import GameBox from "../../utils/GameBox";
 import { getGamesStatus } from "../../services/public";
+const getPropertyNoCase = (obj, prop) => {
+   
+    try {
+       return obj[Object.keys(obj).find(key => key.toLowerCase() === prop.toLowerCase())]
+    } catch (error) {
+        
+    }
+   
+  };
 const GameInbox = (prop) => {
    
     try {
@@ -34,7 +43,8 @@ const GameInbox = (prop) => {
              handleSession();
         //}
     }, []);
-   
+    
+
     return (
         <>
             <Grid centered reversed="computer tablet mobile" className="gamesbox" columns="equal" style={{ zIndex: 10, position: "relative", paddingBottom: 200 }}>
@@ -45,15 +55,15 @@ const GameInbox = (prop) => {
                     </Grid.Column>
                     <Grid.Column mobile={16} tablet={8} computer={8} >
                         
-                        <Link  to={"/games/" + gameDataMain[1]} id={"open" + gameDataMain[1]}><Image src={"/assets/images/games/" + gameDataMain[1]+"-min.jpg"}  fluid    /></Link>
+                        <Link  to={getPropertyNoCase(sessionmyKey,gameDataMain[1])?"/games/" + gameDataMain[1]:"#/games/" + gameDataMain[1]} id={"open" + gameDataMain[1]}><Image src={"/assets/images/games/" + gameDataMain[1]+"-min.jpg"}  fluid    /></Link>
                     </Grid.Column>
                     <Grid.Column mobile={16} tablet={8} computer={8} >
                         
-                        <Link  to={"/games/" + gameDataMain[2]} id={"open" + gameDataMain[2]}><Image src={"/assets/images/games/" + gameDataMain[2]+"-min.jpg"}  fluid    /></Link>
+                        <Link  to={getPropertyNoCase(sessionmyKey,gameDataMain[2])?"/games/" + gameDataMain[2]:"#/games/" + gameDataMain[2]} id={"open" + gameDataMain[2]}><Image src={"/assets/images/games/" + gameDataMain[2]+"-min.jpg"}  fluid    /></Link>
                     </Grid.Column>
                     <Grid.Column mobile={16} tablet={8} computer={8} >
                         
-                        <Link  to={"/games/" + gameDataMain[3]} id={"open" + gameDataMain[3]}><Image src={"/assets/images/games/" + gameDataMain[3]+"-min.jpg"}  fluid    /></Link>
+                        <Link  to={getPropertyNoCase(sessionmyKey,gameDataMain[3])?"/games/" + gameDataMain[3]:"#/games/" + gameDataMain[3]} id={"open" + gameDataMain[3]}><Image src={"/assets/images/games/" + gameDataMain[3]+"-min.jpg"}  fluid    /></Link>
                     </Grid.Column>
                     
 

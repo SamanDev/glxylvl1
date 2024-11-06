@@ -208,21 +208,18 @@ function listfinal(list) {
   var newlist = [];
   for (const [key, value] of Object.entries(list)) {
     if (
-      key.indexOf("Total") > -1 ||
-      key.indexOf("Cost") > -1 ||
+     
       key.indexOf("playersRake") > -1 ||
-      key.indexOf("Rewards") > -1 ||
-      key.indexOf("casino") > -1
+      key.indexOf("Rewards") > -1 
     ) {
       if (
         key.indexOf("finalTotal") == -1 &&
         key.indexOf("2") == -1 &&
   
-        key.indexOf("casino") == -1 &&
         key.indexOf("totalRewards") == -1 &&
         key.indexOf("pokerTotalFinal") == -1 &&
         key.indexOf("pokerCost") == -1 &&
-        key.indexOf("playersRake") == -1 &&
+      
         
         key.indexOf("casinoGamesSet") == -1
       ) {
@@ -265,7 +262,7 @@ function listreward(list) {
 function listcosts(list) {
   var newlist = [];
   for (const [key, value] of Object.entries(list)) {
-    if (key == "pokerCost") {
+    if (key == "pokerCost"||key == "botsTotal"||key == "runnersTotal") {
       newlist.push({ name: key, value: value });
     }
   }
@@ -305,7 +302,7 @@ function Admin(prop) {
   var columns = [
     {
       name: "Income",
-      selector: (row) => row.pokerTotal,
+      selector: (row) => row.playersRake,
       width: "100%",
       format: (row) => (
         <>
@@ -329,7 +326,7 @@ function Admin(prop) {
               <Header>
                 Poker
                 <br />
-                {doCurrency(row.pokerTotal)}
+                {doCurrency(row.playersRake)}
                 <span className="float-end">
                   {doCurrency(row.pokerTotal2)}$
                 </span>
@@ -355,7 +352,7 @@ function Admin(prop) {
                 <br />
                 {listpercent(
                   row.adminIncomeSet,
-                  row.pokerRake,
+                  row.playersRake,
                   row.pokerTotal2
                 )}
               </Segment>
@@ -383,14 +380,16 @@ function Admin(prop) {
               <Header>
                 Rewards
                 <br />
-                {doCurrency((row.totalRewards - row.pokerCost) * -1)}
+                {doCurrency(((row.totalRewards - row.pokerCost) * -1) +
+                    row?.botsTotal +
+                    row?.runnersTotal)}
                 <span className="float-end">
                   {doCurrency(row.totalRewards2 ? row.totalRewards2 * -1 : 0)}$
                 </span>
               </Header>
               <Segment raised inverted attached>
                 {listreward(row.rewards)}
-
+                <br />
                 <small className="dplock fw-bold">
                   Total:
                   <span className="float-end">
@@ -398,7 +397,7 @@ function Admin(prop) {
                   </span>
                 </small>
                
-                <br />
+                
 
                 {listcosts(row)}
               </Segment>
@@ -414,7 +413,7 @@ function Admin(prop) {
                     (row.totalRewards - row.pokerCost) * -1
                 )}
                 <span className="float-end">
-                  {doCurrency(row.finalTotal2)}$
+                  {doCurrency(row.casinoTomanFinal)}
                 </span>
               </Header>
               <Segment raised inverted attached>
@@ -422,7 +421,9 @@ function Admin(prop) {
                 <small className="dplock">
                   Rewards:
                   <span className="float-end">
-                    {doCurrency((row.totalRewards - row.pokerCost) * -1)}
+                    {doCurrency(((row.totalRewards - row.pokerCost) * -1) +
+                    row?.botsTotal +
+                    row?.runnersTotal)}
                   </span>
                 </small>
                 

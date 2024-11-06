@@ -130,7 +130,7 @@ function Admin(prop) {
         
 
         addGift(newData);
-      }, 5000 * i);
+      }, 10000 * i);
     });
   };
   const addGift = async (data) => {
@@ -140,7 +140,7 @@ function Admin(prop) {
     try {
       const res = await adminPostService(data, "gMailService");
       if (res.status == 200) {
-        setCookie("sendmail"+player.username, data.subject, 1);
+        setCookie("sendmail"+data.username, data.subject, 1);
         $("#res" + data.username).html(
           '<i aria-hidden="true" class="checkmark green icon">'
         );
@@ -148,7 +148,7 @@ function Admin(prop) {
         Alert("متاسفم...!", res.data.message, "error");
       }
     } catch (error) {
-      Alert(player.username, "متاسفانه مشکلی از سمت سرور رخ داده", "error");
+      //Alert(data.username, "متاسفانه مشکلی از سمت سرور رخ داده", "error");
     }
   };
   const findStateId = (st, val) => {

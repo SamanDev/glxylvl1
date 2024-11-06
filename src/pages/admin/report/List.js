@@ -87,7 +87,7 @@ function Admin(prop) {
     prop?.user?.username ? prop.user.username : ""
   );
   if (prop?.user?.username) {
-    var defmde = ["cashout", "deposit", "transfer", "bonus", "poker", "casino"];
+    var defmde = [""];
   } else {
     var defmde = ["cashout", "deposit", "transfer"];
   }

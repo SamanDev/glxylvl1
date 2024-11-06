@@ -123,7 +123,7 @@ function Admin(prop) {
         };
         console.log(newData);
         addGift(newData);
-      }, 5000 * i);
+      }, 10000 * i);
     });
   };
   const addGift = async (data) => {
@@ -140,7 +140,7 @@ function Admin(prop) {
         Alert("متاسفم...!", res.data.message, "error");
       }
     } catch (error) {
-      Alert(player.username, "متاسفانه مشکلی از سمت سرور رخ داده", "error");
+      //Alert(data.username, "متاسفانه مشکلی از سمت سرور رخ داده", "error");
     }
   };
   const findStateId = (st, val) => {
