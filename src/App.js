@@ -741,7 +741,7 @@ function App(prop) {
             // finalMenu = "";
             setIsUser(isLogin);
             startServiceWorker();
-            if (loginToken?.refer == "runner" || loginToken?.refer == "bots") {
+            if (loginToken?.refer == "Runner" || loginToken?.refer == "bots") {
                 $(".cashierarea").remove();
             }
         }
@@ -897,20 +897,7 @@ function App(prop) {
                                     <UserArea username={userProfile} siteInfo={siteInfo} loginToken={loginToken} size="small" labelcolor="orange" />
                                 </Suspense>
                             </Modal>
-                            <Modal
-                                basic
-                                size="tiny"
-                                closeOnEscape={false}
-                                closeOnDimmerClick={false}
-                                className="myaccount popupmenu  animated backInDown "
-                                onClose={() => {
-                                    setDcOpen(false);
-                                }}
-                                onOpen={() => setDcOpen(true)}
-                                open={dcOpen}
-                            >
-                                <DCArea setDcOpen={setDcOpen} loginToken={loginToken} siteInfo={siteInfo} isLogin={isUser} loadingLogin={loadingLogin} setIsUser={setIsUser} size="small" labelcolor="orange" />
-                            </Modal>
+                            
                         </>
                     ) : (
                         <>
@@ -978,7 +965,20 @@ function App(prop) {
                             </Modal>
                         </>
                     )}
-
+<Modal
+                                basic
+                                size="tiny"
+                                closeOnEscape={false}
+                                closeOnDimmerClick={false}
+                                className="myaccount popupmenu  animated backInDown "
+                                onClose={() => {
+                                    setDcOpen(false);
+                                }}
+                                onOpen={() => setDcOpen(true)}
+                                open={dcOpen}
+                            >
+                                <DCArea setDcOpen={setDcOpen} loginToken={loginToken} siteInfo={siteInfo} isLogin={isUser} loadingLogin={loadingLogin} setIsUser={setIsUser} size="small" labelcolor="orange" />
+                            </Modal>
                     <AdminLayout loginToken={loginToken} siteInfo={siteInfo} openPanel={openPanel} activePanel={activePanel} setActivePanel={setActivePanel} bindLastReward={bindLastReward} setFirstOpen={setFirstOpen} setSecondOpen={setSecondOpen} isLogin={isUser} loadingLogin={loadingLogin} getAccess={getAccess} setRefresh={setRefresh} setUserProfile={setUserProfile} setUserOpen={setUserOpen} reportWindowSize={reportWindowSize} handleOpenTable={handleOpenTable} />
 
                     <div style={{ position: "fixed", left: -100000 }}>

@@ -328,7 +328,7 @@ const Balance = (prop) => {
                 </Reveal.Content>
               </Reveal>
             </Label>
-            {loginToken?.refer != "runner" && loginToken?.refer != "bots" && (
+            {loginToken?.refer != "Runner" && loginToken?.refer != "bots" && (
               <>
                 <div
                   className="step0-3"

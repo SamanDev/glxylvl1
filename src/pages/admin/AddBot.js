@@ -117,9 +117,9 @@ const depositArea = (prop) => {
                   <Button
                     type="button"
                     onClick={() => {
-                      formik.setFieldValue("role", "runner");
+                      formik.setFieldValue("role", "Runner");
                     }}
-                    positive={formik.values.role === "runner"}
+                    positive={formik.values.role === "Runner"}
                     disabled={formik.values.mode === "add"}
                   >
                     Runner

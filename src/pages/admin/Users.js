@@ -454,7 +454,7 @@ function Admin(prop) {
         filteredItems = filteredItems.filter((item) => item.level >= parseInt(_val.replace("level", "").replace(" up", "")) && item.level < parseInt(_val.replace("level", "").replace(" up", "")) + lvlFilter);
     }
     if (!showBots) {
-        filteredItems = filteredItems.filter((item) => item?.refer != "runner" && item?.refer != "bots");
+        filteredItems = filteredItems.filter((item) => item?.refer != "Runner" && item?.refer != "bots");
     }
 
     useEffect(() => {
@@ -509,7 +509,7 @@ useEffect(() => {
         var newSelect = [];
         {
             selectedRows.map((user, i) => {
-                if (!user?.multiAccount && user?.refer != "runner" && user?.refer != "bots") {
+                if (!user?.multiAccount && user?.refer != "Runner" && user?.refer != "bots") {
                     var newUser = {};
                     newUser.username = user.username;
                     newUser.level = user.level;
