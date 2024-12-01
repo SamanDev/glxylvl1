@@ -234,7 +234,7 @@ const Dashboard = (prop) => {
                                                     src={
                                                         siteInfo.gamesUrl.replace("www","mbjui") +
                                                         //"https://mbj.wheelofpersia.com/" +
-                                                    //"http://192.168.1.14:3000/" +
+                                                    //"http://192.168.1.14:3001/" +
                                                         loginToken.accessToken +
                                                         "/" +
                                                         loginToken.username
@@ -244,7 +244,39 @@ const Dashboard = (prop) => {
                                                     onLoad={removeFrameLoad2}
                                                 ></iframe>
                                             ) : (
-                                                <iframe src={siteInfo.casinoGamesUrl + "/" + getFrameLink(secondaryGame) + ".html?code=" + loginToken.accessToken + ""}  className={"framegame casframe"} onLoad={removeFrameLoad2}></iframe>
+                                                <>{secondaryGame == "roulette"  ? (
+                                                    <iframe
+                                                        src={
+                                                            siteInfo.gamesUrl.replace("www","mroulleteui") +
+                                                            //"https://mbj.wheelofpersia.com/" +
+                                                        //"http://192.168.1.14:3001/" +
+                                                            loginToken.accessToken +
+                                                            "/" +
+                                                            loginToken.username
+                                                        }
+                                                        name="gameframe"
+                                                        className={"framegame casframe"}
+                                                        onLoad={removeFrameLoad2}
+                                                    ></iframe>
+                                                ) : (
+                                                    <>{secondaryGame == "baccarat"  ? (
+                                                        <iframe
+                                                            src={
+                                                                siteInfo.gamesUrl.replace("www","baccaratui") +
+                                                                //"https://mbj.wheelofpersia.com/" +
+                                                            //"http://192.168.1.14:3001/" +
+                                                                loginToken.accessToken +
+                                                                "/" +
+                                                                loginToken.username
+                                                            }
+                                                            name="gameframe"
+                                                            className={"framegame casframe"}
+                                                            onLoad={removeFrameLoad2}
+                                                        ></iframe>
+                                                    ) : (
+                                                        <iframe src={siteInfo.casinoGamesUrl + "/" + getFrameLink(secondaryGame) + ".html?code=" + loginToken.accessToken + ""}  className={"framegame casframe"} onLoad={removeFrameLoad2}></iframe>
+                                                    )}</>
+                                                )}</>
                                             )}</>
                                         )}
                                     </>
@@ -271,39 +303,69 @@ const Dashboard = (prop) => {
                         )}
                         {(activeIndex > 0 || activeIndexLoad) && siteInfo?.gamesUrl && (
                             <>
-                                {secondaryGame == "wheel" || gameOptions.length == -1 ? (
-                                    <iframe
-                                        src={
-                                            siteInfo.gamesUrl.replace("www","mwheelui")  +
-                                            //"https://mbj.wheelofpersia.com/" +
-                                            //"http://192.168.1.14:3000/" +
-                                            loginToken.accessToken +
-                                            "/" +
-                                            loginToken.username
-                                        }
-                                        name="gameframe"
-                                        className={"framegame casframe"}
-                                        onLoad={removeFrameLoad2}
-                                    ></iframe>
-                                ) : (
-                                    <>{secondaryGame == "blackjackmulti"  ? (
-                                        <iframe
-                                            src={
-                                                siteInfo.gamesUrl.replace("www","mbjui") +
-                                                //"https://mbj.wheelofpersia.com/" +
-                                                //"http://192.168.1.14:3000/" +
-                                                loginToken.accessToken +
-                                                "/" +
-                                                loginToken.username
-                                            }
-                                            name="gameframe"
-                                            className={"framegame casframe"}
-                                            onLoad={removeFrameLoad2}
-                                        ></iframe>
-                                    ) : (
-                                        <iframe src={siteInfo.casinoGamesUrl + "/" + getFrameLink(secondaryGame) + ".html?code=" + loginToken.accessToken + ""}  className={"framegame casframe"} onLoad={removeFrameLoad2}></iframe>
-                                    )}</>
-                                )}
+                                {secondaryGame == "wheel" || gameOptions.length == 0 ? (
+                                            <iframe
+                                                src={
+                                                    siteInfo.gamesUrl.replace("www","mwheelui") +
+                                                    //"https://mbj.wheelofpersia.com/" +
+                                                    //"http://192.168.1.14:3000/" + 
+                                                    loginToken.accessToken + "/" + loginToken.username
+                                                }
+                                                name="gameframe"
+                                                className={"framegame casframe"}
+                                                onLoad={removeFrameLoad2}
+                                            ></iframe>
+                                        ) : (
+                                            <>{secondaryGame == "blackjackmulti"  ? (
+                                                <iframe
+                                                    src={
+                                                        siteInfo.gamesUrl.replace("www","mbjui") +
+                                                        //"https://mbj.wheelofpersia.com/" +
+                                                    //"http://192.168.1.14:3001/" +
+                                                        loginToken.accessToken +
+                                                        "/" +
+                                                        loginToken.username
+                                                    }
+                                                    name="gameframe"
+                                                    className={"framegame casframe"}
+                                                    onLoad={removeFrameLoad2}
+                                                ></iframe>
+                                            ) : (
+                                                <>{secondaryGame == "roulette"  ? (
+                                                    <iframe
+                                                        src={
+                                                            siteInfo.gamesUrl.replace("www","mroulleteui") +
+                                                            //"https://mbj.wheelofpersia.com/" +
+                                                        //"http://192.168.1.14:3001/" +
+                                                            loginToken.accessToken +
+                                                            "/" +
+                                                            loginToken.username
+                                                        }
+                                                        name="gameframe"
+                                                        className={"framegame casframe"}
+                                                        onLoad={removeFrameLoad2}
+                                                    ></iframe>
+                                                ) : (
+                                                    <>{secondaryGame == "baccarat"  ? (
+                                                        <iframe
+                                                            src={
+                                                                siteInfo.gamesUrl.replace("www","baccaratui") +
+                                                                //"https://mbj.wheelofpersia.com/" +
+                                                            //"http://192.168.1.14:3001/" +
+                                                                loginToken.accessToken +
+                                                                "/" +
+                                                                loginToken.username
+                                                            }
+                                                            name="gameframe"
+                                                            className={"framegame casframe"}
+                                                            onLoad={removeFrameLoad2}
+                                                        ></iframe>
+                                                    ) : (
+                                                        <iframe src={siteInfo.casinoGamesUrl + "/" + getFrameLink(secondaryGame) + ".html?code=" + loginToken.accessToken + ""}  className={"framegame casframe"} onLoad={removeFrameLoad2}></iframe>
+                                                    )}</>
+                                                )}</>
+                                            )}</>
+                                        )}
                             </>
                         )}
                     </div>

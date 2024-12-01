@@ -48,7 +48,7 @@ function RisingPitch(prop) {
        
             var res;
       if (prop.day == 1) {
-        res = await adminGetService(`getIncome?page=1&number=10`);
+        res = await adminGetService(`getIncome?page=1&number=10&startDate=${_s}&endDate=${_e}`);
       } else {
         res = await adminGetService(
           `getIncome?page=1&number=10&startDate=${_s}&endDate=${_e}`

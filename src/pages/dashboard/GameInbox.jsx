@@ -65,6 +65,14 @@ const GameInbox = (prop) => {
                         
                         <Link  to={getPropertyNoCase(sessionmyKey,gameDataMain[3])?"/games/" + gameDataMain[3]:"#/games/" + gameDataMain[3]} id={"open" + gameDataMain[3]}><Image src={"/assets/images/games/" + gameDataMain[3]+"-min.jpg"}  fluid    /></Link>
                     </Grid.Column>
+                    <Grid.Column mobile={16} tablet={8} computer={8} >
+                        
+                        <Link  to={getPropertyNoCase(sessionmyKey,gameDataMain[4])?"/games/" + gameDataMain[4]:"#/games/" + gameDataMain[4]} id={"open" + gameDataMain[4]}><Image src={"/assets/images/games/" + gameDataMain[4]+"-min.jpg"}  fluid    /></Link>
+                    </Grid.Column>
+                    <Grid.Column mobile={16} tablet={8} computer={8} >
+                        
+                        <Link  to={getPropertyNoCase(sessionmyKey,gameDataMain[5])?"/games/" + gameDataMain[5]:"#/games/" + gameDataMain[5]} id={"open" + gameDataMain[5]}><Image src={"/assets/images/games/" + gameDataMain[5]+"-min.jpg"}  fluid    /></Link>
+                    </Grid.Column>
                     
 
                 </Grid.Row>
