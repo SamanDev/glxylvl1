@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Segment } from "semantic-ui-react";
 import ActiveTable from "./pages/dashboard/ActiveTableJson.jsx";
 import LastReward from "./pages/dashboard/LastRewardJson";
+import LastWins from "./pages/dashboard/LastWinsJson";
+
 import { useLastReward } from "./hook/userHook";
 import $ from "jquery";
 import { Tab } from "semantic-ui-react";
@@ -44,6 +46,29 @@ function RightPanel(prop) {
         className: "farsi w-50",
         content: (
           <>
+           
+           پاداش ها
+          </>
+        ),
+      },
+
+      render: () => (
+        <Tab.Pane
+          attached={false}
+          inverted
+          className="mm-panel--opened  step1-3 active"
+          style={{ height: "100%", overflow: "auto", maxHeight: "100vh" }}
+        >
+          <LastReward {...prop} lastReward={lastReward} />
+        </Tab.Pane>
+      ),
+    },
+    {
+      menuItem: {
+        key: "wins",
+        className: "farsi w-50",
+        content: (
+          <>
             <Segment
               basic
               style={{
@@ -69,7 +94,7 @@ function RightPanel(prop) {
                 <span></span>
               </div>
             </Segment>{" "}
-            آخرین پاداش ها
+             برنده ها
           </>
         ),
       },
@@ -81,7 +106,7 @@ function RightPanel(prop) {
           className="mm-panel--opened  step1-3 active"
           style={{ height: "100%", overflow: "auto", maxHeight: "100vh" }}
         >
-          <LastReward {...prop} lastReward={lastReward} />
+          <LastWins {...prop} lastReward={lastReward} />
         </Tab.Pane>
       ),
     },

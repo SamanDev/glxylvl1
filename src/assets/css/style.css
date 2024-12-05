@@ -18,10 +18,10 @@ body {
     width: 100%;
 }
 .w-50 {
-    width: 40% !important;
+    width: 27% !important;
     text-align: center !important;
     display: inline-block !important;
-    font-size: 13px !important;
+    font-size: 11px !important;
     padding: 20px 0 !important;
     position: static !important;
 }
@@ -346,6 +346,39 @@ a {
 .headcpntrl *{
     font-size: 96% !important;
 
+}
+.xwin{
+    left: 80px;
+    top: 20px;
+    font-size: 50px;
+    color: rgba(255, 255, 255, 0.05);
+    position: absolute;
+    font-family: monospace;
+    font-weight: bold;
+    transform: rotate(25deg);
+}
+.rewardname img{
+    filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.443));
+}
+.BlackjackMulti.rewardname{
+    background: linear-gradient(rgb(28, 38, 32), rgb(48, 64, 51) 98.9%);
+    padding-left: 15px;
+    margin-left: -15px;
+}
+.Roulette.rewardname{
+    background: linear-gradient(rgb(38, 28, 28), rgb(64, 48, 48) 98.9%);
+    padding-left: 15px;
+    margin-left: -15px;
+}
+.Baccarat.rewardname{
+    background: linear-gradient(rgb(38, 28, 38), rgb(63, 48, 64) 98.9%);
+    padding-left: 15px;
+    margin-left: -15px;
+}
+.Wheel.rewardname{
+    background: linear-gradient(rgb(28, 29, 38), rgb(55, 78, 109) 98.9%);
+    padding-left: 15px;
+    margin-left: -15px;
 }
 .mm-navbars:before {
     display: block;

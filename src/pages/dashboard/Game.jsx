@@ -69,10 +69,12 @@ const Dashboard = (prop) => {
     const [secondaryGame, setSecondaryGame] = useState(params.gameId != "poker" ? params.gameId : localStorage.getItem("secondaryGame") ? localStorage.getItem("secondaryGame") : "wheel");
 
     const handleChange = (e, { value }) => {
+        if(value){
         setGameLoader(true);
         setSecondaryGame(value);
         setActiveIndex(1);
         localStorage.setItem("secondaryGame", value);
+        }
     };
 
     const handleRangeChange = () => {
@@ -149,6 +151,11 @@ const Dashboard = (prop) => {
     const [sessionmyKey, setSessionmyKey] = useState(defGamesStatus);
     useEffect(() => {
         var _gameOptions = [];
+        _gameOptions.push({
+            key: "---",
+            text: "---- MultiPlayer Games ----",
+            value: "",
+        });
         {
             gameDataMain.map((gamename, i) => {
                 var game = gamename.toLowerCase();
@@ -162,6 +169,11 @@ const Dashboard = (prop) => {
                 }
             });
         }
+        _gameOptions.push({
+            key: "---3",
+            text: "------ Casino Games ------",
+            value: "",
+        });
         {
             gameData.map((gamename, i) => {
                 var game = gamename.toLowerCase();
@@ -169,7 +181,7 @@ const Dashboard = (prop) => {
                     _gameOptions.push({
                         key: game,
                         text: gameDataName[i],
-                        value: game,
+                        value: gamename,
                     });
                 }
             });
@@ -336,7 +348,7 @@ const Dashboard = (prop) => {
                                                         src={
                                                             siteInfo.gamesUrl.replace("www","mroulleteui") +
                                                             //"https://mbj.wheelofpersia.com/" +
-                                                        //"http://192.168.1.14:3001/" +
+                                                       // "http://192.168.1.14:3001/" +
                                                             loginToken.accessToken +
                                                             "/" +
                                                             loginToken.username
@@ -432,6 +444,7 @@ if(!getPropertyNoCase(sessionmyKey,secondaryGame)){
                             value={secondaryGame}
                             options={gameOptions}
                             selectOnNavigation={false}
+                            
                             name="false"
                             direction="left"
                             className="selectgame"
