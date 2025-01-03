@@ -3,7 +3,7 @@ import { Icon, Label, Button, Header, Divider } from "semantic-ui-react";
 import { Statistic, Segment } from "semantic-ui-react";
 import $ from "jquery";
 import CashoutArea from "./cashoutComponent";
-import { cashoutData, cashoutDataDollar, doCurrency } from "../../../../const";
+import { cashoutData, cashoutDataDollar,activeDollarBalance, doCurrency } from "../../../../const";
 const defCol = "black";
 const selCol = "green";
 const defColBtn = "grey";
@@ -77,7 +77,7 @@ const depositArea = (prop) => {
             }
           })}
         </Button.Group>
-        {loginToken?.balance2 >= 1 && (
+        {loginToken?.balance2 >= 1 && activeDollarBalance && (
           <>
             <Divider inverted />
             <Header as="h6" className="farsi">

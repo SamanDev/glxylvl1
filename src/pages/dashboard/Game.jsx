@@ -120,7 +120,7 @@ const Dashboard = (prop) => {
     useEffect(() => {
         if (sessionKey == "") {
             setMainGame("poker");
-
+$('.step0-1').trigger('click');
             // setSessionKey("");
             if (loginToken?.accessToken && !loginToken?.logout && mainGame == "poker") {
                 handleSession();

@@ -9,7 +9,7 @@ import { GetMenu, haveAdmin, haveModerator, getEvent, dayOfTournament, haveOpera
 import LazyLoad from "react-lazyload";
 import { forceCheck } from "react-lazyload";
 import { Link } from "react-router-dom";
-import { startServiceWorker } from "./const";
+import { startServiceWorker ,activeDollarBalance} from "./const";
 import $ from "jquery";
 import { useIsLogin } from "./hook/authHook";
 import { useUser, useSiteInfo } from "./hook/userHook";
@@ -594,7 +594,7 @@ function App(prop) {
                 localStorage.removeItem("galaxyUserkeyToken");
             }
             localStorage.setItem("balance", 0);
-            UserWebsocket.disconnect();
+            //UserWebsocket.disconnect();
             UserWebsocket.connect();
             setDcOpen(false);
             navigate("/");
@@ -743,9 +743,20 @@ function App(prop) {
             startServiceWorker();
             if (loginToken?.refer == "Runner" || loginToken?.refer == "bots") {
                 $(".cashierarea").remove();
+                $(".cashierareadollar").remove();
+            }
+            if(!activeDollarBalance){
+                $(".cashierareadollar").remove();
             }
         }
     }, [isLogin]);
+    useEffect(() => {
+        
+            if(!activeDollarBalance){
+                $(".cashierareadollar").remove();
+            }
+        
+    });
 
     useEffect(() => {
         if (window.location.href.toString().indexOf("/login") > -1 && window.location.href.toString().indexOf("/login/") == -1) {

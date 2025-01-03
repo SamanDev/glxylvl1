@@ -12,7 +12,7 @@ var _lvl = prop.item.userdata;
 var _lvl1 = _lvl.split('avatar":"lvl')[1]
 var _lvl2 = _lvl1.split('"')[0]
 _lvl = _lvl2
-console.log(_lvl2);
+//console.log(_lvl2);
 
   return (
     <Grid

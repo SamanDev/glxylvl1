@@ -31,7 +31,7 @@ const Report = (prop) => {
         var _res = res.data.filter((item) =>
           prop.menu?.usd
             ? item.endBalance2 != item.startBalance2
-            : item.endBalance != item.startBalance
+            : item.endBalance != item.startBalance && item.status !="Refund"
         );
 
         setData(_res);
@@ -81,6 +81,10 @@ const Report = (prop) => {
 
             try {
               var desc = JSON.parse(item.description);
+              if(!desc.dollarAmount){desc.dollarAmount = desc.price_amount}
+              if(!desc.dollarPrice){desc.dollarPrice = item.amount/desc.price_amount}
+
+              
             } catch (error) {}
 
             return (
@@ -153,7 +157,7 @@ const Report = (prop) => {
                         sign={item.endBalance - item.startBalance + 1}
                         className="text-gold"
                       />
-                      {!prop.pending && (
+                      {!prop.pending && gateway != "USDT" && (
                         <div>
                           {item.gateway &&
                             item.gateway.replace(

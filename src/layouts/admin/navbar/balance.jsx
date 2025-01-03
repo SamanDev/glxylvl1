@@ -124,6 +124,7 @@ const Balance = (prop) => {
         _n = 0;
       }
     }
+   
     setStateMode(_n);
   };
   const openProfile = () => {
@@ -212,6 +213,8 @@ const Balance = (prop) => {
               disabled={
                 _event != "GPass" || loginToken.takeGPass || stateMode == 0
               }
+              mouseEnterDelay={500}
+              mouseLeaveDelay={500}
               content={
                 <div
                   className="helparea fadeoutend"

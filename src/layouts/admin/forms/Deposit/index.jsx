@@ -1,7 +1,7 @@
 import $ from "jquery";
 import React, { useState } from "react";
 import { Button, Divider, Header, Icon, Label } from "semantic-ui-react";
-import { depositData, depositDollarData, doCurrency } from "../../../../const";
+import { depositData, depositDollarData,activeDollarBalance, doCurrency } from "../../../../const";
 import DepositArea from "./depositComponent";
 import { Statistic, Segment } from "semantic-ui-react";
 const defCol = "black";
@@ -142,7 +142,8 @@ const depositArea = (prop) => {
             }
           })}
         </Button.Group>
-        <Divider inverted />
+        {activeDollarBalance && <>
+          <Divider inverted />
         <Header as="h6" className="farsi">
           یا روش پرداخت دلاری را انتخاب کنید
         </Header>
@@ -210,6 +211,8 @@ const depositArea = (prop) => {
             }
           })}
         </Button.Group>
+        </>}
+        
       </div>
       <div
         id="dep2"

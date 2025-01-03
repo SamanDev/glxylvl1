@@ -191,7 +191,8 @@ export const gameData = "boom,blackjack3,roulette3D,deuceswild,vpjacks,highlow,s
 export const gameDataName = "BoOoOoM,BlackJack3,Roulette 3D,Deuces Wild,Jacks or Better,High Low,Slot Lucky Christmas,Slot Fruits,Slot Ramses,Slot Arabian,Slot Soccer,Slot Space".split(",");
 
     
-    
+export const activeDollarBalance = false;
+
 export const gameDataCode = "bj3,bj,r,r3,br,slr,slf,jb,dw,wf,sla,hl,sls,slc,st,slsp".split(",");
 export const cashoutData = [
     {
@@ -293,7 +294,7 @@ export const depositData = [
     {
         key: "USDT",
         getwaykey: "USDT",
-        text: "USDT TRC20",
+        text: "ارز دیجیتال",
         value: "USDT",
         icon: "dollar",
         limit: "Unlimited",
@@ -440,7 +441,7 @@ export const GetMenu = (siteInfo, loginToken) => {
                 {
                     label: "صندوق دلاری",
                     title: "صندوق دلاری",
-                    aria: "cashierarea",
+                    aria: "cashierareadollar",
                     icon: "huwchbks.svg",
                     submenu: [
                         {

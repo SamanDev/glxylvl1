@@ -8,29 +8,12 @@ const moment = require("moment");
 const depositArea = (prop) => {
   var _tot = 0;
   const [user, setUser] = useState(false);
-  const handleGetReports = async () => {
-    try {
-      const newValues = {
-        orderId: prop.id,
-        mode: "cashoutdetails",
-      };
-      const res = await cashierService(newValues, "cardService/cashout", "");
-      if (res.status === 200) {
-        setUser(res.data);
-      }
-    } catch (error) {}
-  };
+ 
 
   useEffect(() => {
-    if (
-      prop.item &&
-      prop.item?.destinationCardNumber &&
-      (prop.item?.paidAmount == prop.item?.totalWithdrawalAmount || prop.item?.paidAmount<0)
-    ) {
+    
       setUser(prop.item);
-    } else {
-      handleGetReports();
-    }
+    
   }, []);
   if (!user) {
     return <>...</>;
@@ -44,7 +27,7 @@ const depositArea = (prop) => {
             className="text-gold"
             style={{ direction: "ltr", display: "inline-block" }}
           >
-            <ConvertCart cartNo={user.destinationCardNumber} isLock={true} />
+            {user.destinationCardNumber}
           </span>
         </div>
         <div className="text-gold fs-3 p-3">
@@ -61,6 +44,7 @@ const depositArea = (prop) => {
           .map((f, i) => {
             var _a = f?.amount ? f.amount : f.Amount;
             _tot = _tot + _a;
+            
             return (
               <div key={i.toString()}>
                 <span className="text-gold  float-start">
@@ -68,13 +52,9 @@ const depositArea = (prop) => {
                 </span>
                 <span className="rightfloat">
                   <div className="date">
-                    {moment(f?.DateTime ? f.DateTime : f.dateTime).format(
-                      "YYYY/MM/DD"
-                    )}{" "}
+                    
                     <span className="time">
-                      {moment(f?.DateTime ? f.DateTime : f.dateTime).format(
-                        "HH:mm"
-                      )}
+                      {f?.dateTime}
                     </span>
                   </div>
                 </span>
@@ -82,15 +62,7 @@ const depositArea = (prop) => {
                 <div className="farsi text-secondary rightfloat">
                   مجموع: <span className="text-gold">{doCurrency(_tot)}</span>
                 </div>
-
-                <ConvertCart
-                  cartNo={
-                    f?.sourceCardNumber
-                      ? f?.sourceCardNumber
-                      : f.SourceCardNumber
-                  }
-                  isLock={true}
-                />
+                <br/>
                 {ste.length > i + 1 && <Divider />}
               </div>
             );

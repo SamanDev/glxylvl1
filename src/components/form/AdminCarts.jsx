@@ -38,8 +38,8 @@ const editAmount = (carts, total, formik) => {
           ) : (
             <small className="farsi dropbank">{item.bankName}</small>
           )}
-
-          <ConvertCart isLock cartNo={item.cardNumber} />
+IR{item.shebaNumber}<br/>
+          <ConvertCart  cartNo={item.cardNumber} />
         </>
       ),
     });

@@ -72,12 +72,13 @@ class UserWebsocket {
                 }
             } else {
                 if (message === "closeConnection") {
-                    clearInterval(timerId);
+                    
+                    if (tkn) {
+                        clearInterval(timerId);
                     try {
                         ws?.close();
                     } catch (error) {}
                     ws = null;
-                    if (tkn) {
                         eventBus.dispatch("eventsDC", "");
                     }
                 } else if (message === "PasswordChanged") {

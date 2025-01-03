@@ -19,7 +19,9 @@ import CheckboxToggle from "./utils/toggle";
 import AddGift from "./AddAmjReport";
 import { convertDateToJalali } from "../../utils/convertDate";
 import { doCurrency, levelDataInfo } from "../../const";
+import Confirm from "./request/ConfirmManualCash";
 
+import ActionBtn from "../../utils/actionBtn";
 const conditionalRowStyles = [
   {
     when: (row) => row.endBalance < row.startBalance,
@@ -102,6 +104,7 @@ const updateUserObj = async (e, data) => {
 function generateRandomInteger(min, max) {
   return Math.floor(min + Math.random() * (max - min + 1));
 }
+
 const setGiftAmount = (level) => {
   if (level >= levelDataInfo[4].minLevel) {
     var g = generateRandomInteger(
@@ -141,6 +144,9 @@ function Admin(prop) {
 
   const [filterText, setFilterText] = React.useState("");
   const [filterOk, setFilterOk] = React.useState(false);
+  const [firstDone, setFirstDone] = React.useState(false);
+  const [firstDoneRow, setFirstDoneRow] = React.useState(false);
+  const [firstStatus, setFirstStatus] = React.useState(false);
 var filteredItems = data.filter(
     (item) =>
       item.username &&
@@ -252,7 +258,7 @@ var filteredItems = data.filter(
       sortable: true,
     },
   ];
-  const fetchUsers = async (page) => {
+  const fetchUsers = async (page,man) => {
     var _name = prop.search;
     var _val = prop.searchValue;
     var _contain = true;
@@ -271,14 +277,30 @@ var filteredItems = data.filter(
       //setLoading(false);
     }
     try {
-      const res = await adminGetService(
-        `getVgcReport?name=${_name}&value=${_val}&page=${page}&number=500&login=${dataLoginDay}&contain=${_contain}`
-      );
-      if (res.status === 200) {
-        setData(res.data.content);
-        setTotalRows(res.data.numberOfElements);
-        // setFilterOk(false);
+      var res
+      if(man){
+         res = await adminGetService(
+          `visaGiftCode/getManualCashout`
+        );
+        setTotalRows(100);
+        if (res.status === 200) {
+          setData(res.data);
+          
+          // setFilterOk(false);
+        }
+      }else{
+         res = await adminGetService(
+          `getVgcReport?name=${_name}&value=${_val}&page=${page}&number=500&login=${dataLoginDay}&contain=${_contain}`
+        );
+        setTotalRows(500);
+        if (res.status === 200) {
+          setData(res.data.content);
+          
+          // setFilterOk(false);
+        }
       }
+     
+      
     } catch (error) {
       //console.log(error.message);
     } finally {
@@ -293,7 +315,11 @@ var filteredItems = data.filter(
   const handlePageChange = (page) => {
     fetchUsers(page);
   };
-  
+  const updateStatus = (row, status) => {
+    setFirstDone(true);
+    setFirstDoneRow(row);
+    setFirstStatus(status);
+  };
   var filteredItems = data.filter(
     (item) =>
      
@@ -337,7 +363,107 @@ var filteredItems = data.filter(
       prop.addTabData(params.username, prop.getwaysList);
     }
   }, []);
-  
+  const columns2 = [
+    {
+      name: "id",
+      selector: (row) => row.id,
+      sortable: true,
+      width: "120px",
+    },
+    {
+      name: "Username",
+      selector: (row) => row.username,
+      format: (row) => (
+        <>
+          <span
+            className="msglink fw-bold"
+            onClick={() => prop.addTabData(row.username)}
+          >
+            {row.username}
+          </span>
+        </>
+      ),
+      sortable: true,
+      width: "120px",
+    },
+
+    {
+      name: "Amount",
+      selector: (row) =>
+        row.endBalance >= row.startBalance ? row.amount : row.amount * -1,
+      format: (row) => (
+        <>
+          {row.amount2 ? (
+            <>
+              <AmountColor
+                amount={row.amount2}
+                sign={row.endBalance2 - row.startBalance2}
+              />{" "}
+              $
+            </>
+          ) : (
+            <AmountColor
+              amount={row.amount}
+              sign={row.endBalance - row.startBalance}
+            />
+          )}
+        </>
+      ),
+      sortable: true,
+      width: "100px",
+    },
+    {
+      name: "PendingAmount",
+      selector: (row) => row.pendingAmount,
+      format: (row) => (
+        <span className=" fw-bold">
+          <AmountColor amount={row.pendingAmount} />
+        </span>
+      ),
+      sortable: true,
+    },
+    {
+      name: "Desc",
+      selector: (row) => row.description,
+      format: (row) => (
+        <>
+          {row.description.indexOf("AmjadCard") > -1 ? (
+            <>{prinDesc(row.description)}</>
+          ) : (
+            <>
+              {row.description} -{" "}
+              {row.status === "Done" &&
+                row.gateway == "IranShetab" &&
+                row.description.indexOf("V-G-C") == -1 && (
+                  <CshList id={row.id} item={row.cashoutDescription} />
+                )}
+            </>
+          )}
+        </>
+      ),
+      sortable: true,
+      width: "600px",
+    },
+
+    {
+      name: "Date",
+      selector: (row) => row.createDate,
+      format: (row) => (
+        <div className="blacktext">{convertDateToJalali(row.createDate)}</div>
+      ),
+      sortable: true,
+      width: "200px",
+    },
+    {
+      name: "Action",
+      selector: (row) => row.id,
+      format: (row) => (
+        <ActionBtn row={row}  updateStatus={updateStatus} />
+      ),
+      sortable: false,
+      width: "200px",
+    },
+  ];
   const subHeaderComponentMemo = React.useMemo(() => {
     const handleClear = () => {
       if (filterText) {
@@ -345,6 +471,7 @@ var filteredItems = data.filter(
         setFilterText("");
       }
     };
+    
     return (
       <>
         <Grid
@@ -364,6 +491,13 @@ var filteredItems = data.filter(
                 onClick={() => fetchUsers(1)}
               >
                 Reload
+              </Button>
+              <Button
+                className="float-end"
+                color="red"
+                onClick={() => fetchUsers(1,true)}
+              >
+                Reload Manual
               </Button>
               <Button
                 color="blue"
@@ -416,38 +550,51 @@ var filteredItems = data.filter(
   return (
     <>
       <Modal
-        onClose={() => setFirstOpen(false)}
-        onOpen={() => setFirstOpen(true)}
-        open={firstOpen}
-        size="large"
+        onClose={() => setFirstDone(false)}
+        onOpen={() => setFirstDone(true)}
+        open={firstDone}
         style={{ height: "auto" }}
+        basic
+        closeOnDimmerClick={false}
+        closeIcon
       >
-        <AddGift selectedList={selectedList} setFirstOpen={setFirstOpen} />
+        <div className="myaccount popupmenu" style={{ margin: 50 }}>
+          <Confirm
+            {...prop}
+            gateway="BankTransfer"
+            setFilterOk={setFilterOk}
+            item={firstDoneRow}
+            status={firstStatus}
+            setFirstDone={setFirstDone}
+            setFirstStatus={setFirstStatus}
+          />
+        </div>
       </Modal>
       <div style={{ height: "calc(100vh - 150px)", overflow: "auto" }}>
-        {prop.search == "refer" && prop.searchValue != "bots" ? (
+        {totalRows == "100" ? (
           <>
+             {subHeaderComponentMemo}
             <DataTable
-              columns={columnsDownLine}
+              columns={columns2}
               data={filteredItems}
               progressPending={loading}
-              paginationPerPage={perPage}
-              paginationServer
-              onChangePage={handlePageChange}
               onChangeRowsPerPage={handlePerRowsChange}
+              onChangePage={handlePageChange}
+              paginationPerPage={perPage}
+              expandOnRowClicked={true}
               defaultSortFieldId={dataSortedID}
               defaultSortAsc={false}
-              expandOnRowClicked={true}
               expandableRowsHideExpander={true}
               conditionalRowStyles={conditionalRowStyles}
               noDataComponent={noDataComponent}
               pagination
               paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
               persistTableHead
-              paginationTotalRows={totalRows}
+              paginationServer
               contextActions={contextActions}
-              paginationRowsPerPageOptions={[10, 25, 50, 100]}
-              onSelectedRowsChange={handleChange}
+              paginationRowsPerPageOptions={[10, 25, 50, 100, 500, 1000, 5000]}
+              paginationTotalRows={totalRows}
+             
             />
           </>
         ) : (

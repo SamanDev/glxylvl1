@@ -32,7 +32,8 @@ const BonusArea = (prop) => {
       <Grid.Column width={10} textAlign="right">
         <div className="farsi">آخرین ورود</div>
 
-        {convertDateToJalali(loginToken.lastLogin)}
+        {convertDateToJalali(loginToken.lastLogin)}<br/>
+     
       </Grid.Column>
     </Grid.Row>
   );

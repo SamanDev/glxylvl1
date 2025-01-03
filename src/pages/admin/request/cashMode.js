@@ -27,6 +27,15 @@ class RadioExampleRadioGroup extends Component {
         </Form.Field>
         <Form.Field>
           <Radio
+            label="Manual Cashout"
+            name="radioGroup"
+            value="ManualCashout"
+            checked={this.state.value === "ManualCashout"}
+            onChange={this.handleChange}
+          />
+        </Form.Field>
+        <Form.Field>
+          <Radio
             label="Visa Gift Code"
             name="radioGroup"
             value="VisaGiftCode"
