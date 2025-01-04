@@ -22,6 +22,7 @@ import DateReng from "../utils/dateReng";
 import FilterMode from "./Filter";
 import Confirm from "./Confirm";
 import CshList from "./getcashlistadmin";
+import CshListManual from "./getcashlistmanualadmin";
 
 const conditionalRowStyles = [
   {
@@ -347,7 +348,14 @@ function Admin(prop) {
       format: (row) => (
         <>
           {row.description.indexOf("AmjadCard") > -1 ? (
-            <>{prinDesc(row.description)}</>
+            <>{prinDesc(row.description)}
+            {row.status === "Done" &&
+                row.gateway == "ManualCashout" &&
+                 (
+                  <CshListManual id={row.id} item={row.cashoutDescription} />
+                )}
+            </>
+
           ) : (
             <>
               {row.description} -{" "}
@@ -356,6 +364,8 @@ function Admin(prop) {
                 row.description.indexOf("V-G-C") == -1 && (
                   <CshList id={row.id} item={row.cashoutDescription} />
                 )}
+                
+                
             </>
           )}
         </>

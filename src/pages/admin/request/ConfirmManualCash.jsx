@@ -6,7 +6,7 @@ import FormikControl from "../../../components/form/FormikControl";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import CopyBtn from "../../../utils/copyInputBtn";
-import CashMode from "./cashMode";
+import CashMode from "./cashModeManual";
 import { adminGetService, adminPostService, adminPutService } from "../../../services/admin";
 import { doCurrency } from "../../../const";
 
@@ -15,10 +15,12 @@ const onSubmit = async (values, submitMethods, prop) => {
 
     var newValues = {
         id: values.id,
-        amount: values.amount * -1,
+        amount: values.amount,
+
+        vgcBank: values.vgcBank,
         detail: "IR" + values.toobj.shebaNumber,
     };
-   // return newValues;
+    // return newValues;
     const res = await adminPostService(newValues, "visaGiftCode/manualCashoutEdit", "");
     if (res.status == 200) {
         submitMethods.resetForm();
@@ -52,13 +54,19 @@ const depositArea = (prop) => {
     const validationSchema = Yup.object({
         amount: Yup.number()
             .required("لطفا این فیلد را وارد کنید.")
-
+            .min(
+                100000,
+                "حداقل مبلغ " +
+                  doCurrency(100000) +
+                  " تومان می باشد."
+              )
+              .max(prop.item.pendingAmount, "حداکثر مبلغ " +
+                  doCurrency(prop.item.pendingAmount) +
+                  " تومان می باشد.")
             .integer(),
         userBankId: Yup.string().required("لطفا این فیلد را وارد کنید."),
 
-        mode: Yup.string().required("لطفا این فیلد را وارد کنید.")
-        .min(10, "لطفا این فیلد را درست وارد کنید.")
-    
+        mode: Yup.string().required("لطفا این فیلد را وارد کنید.").min(10, "لطفا این فیلد را درست وارد کنید."),
     });
     const carOptions = [
         {
@@ -101,6 +109,7 @@ const depositArea = (prop) => {
                     tobank: "",
                     ticket: "",
                     mode: "IR",
+                    vgcBank: true,
                 }}
                 onSubmit={(values, submitMethods) => onSubmit(values, submitMethods, prop)}
                 validationSchema={validationSchema}
@@ -118,8 +127,28 @@ const depositArea = (prop) => {
                                         <Carts formik={formik} name="tobank" label="واریز به" labelcolor={prop.labelcolor} size={prop.size} namemix updateCartInfo={updateCartInfoTo} gateway={prop.gateway} loginToken={user} carts={""} />
 
                                         <FormikControl formik={formik} control="amount" name="amount" labelcolor={prop.labelcolor} size={prop.size} readOnly />
-                                        <FormikControl formik={formik} control="input"  label="واریز از" name="mode" labelcolor={prop.labelcolor} size={prop.size} />
-
+                                        <Button.Group fluid widths={3}>
+                                            <Button
+                                                type="button"
+                                                onClick={() => {
+                                                    formik.setFieldValue("vgcBank", true);
+                                                }}
+                                                positive={formik.values.vgcBank === true}
+                                            >
+                                                From VgcBank
+                                            </Button>
+                                            <Button.Or text="or" />
+                                            <Button
+                                                type="button"
+                                                onClick={() => {
+                                                    formik.setFieldValue("vgcBank", false);
+                                                }}
+                                                positive={formik.values.vgcBank === false}
+                                            >
+                                                From Players
+                                            </Button>
+                                        </Button.Group>
+                                       
                                         <Divider />
                                         <Button
                                             content={"انجام شد"}
