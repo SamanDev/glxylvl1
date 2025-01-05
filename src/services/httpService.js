@@ -26,7 +26,7 @@ export function checkBlock(res) {
         );
       } else {
         UserWebsocket.disconnect();
-        window.location = "/logout";
+        window.location = "/logoutauto";
       }
     }
   } else {
@@ -73,7 +73,7 @@ axios.interceptors.response.use(
   (error) => {
     if (error.response.status == 401 || error.response.status == 400) {
       //MyToast("متاسفانه مشکلی از سمت سرور رخ داده", "error");
-      //window.location = "/logout";
+      //window.location = "/logoutauto";
       if (localStorage.getItem("galaxyUserkeyToken")) {
         localStorage.setItem(
           "oldgalaxyUserkey",
@@ -106,7 +106,7 @@ axios.interceptors.response.use(
       var loginToken = JSON.parse(localStorage.getItem(loginKey + "Token"));
       if (loginToken) {
         UserWebsocket.disconnect();
-        window.location = "/logout";
+        window.location = "/logoutauto";
       } else {
         MyToast("نام کاربری یا کلمه عبور اشتباه است.", "error");
       }
@@ -121,12 +121,14 @@ export const httpService = (url, method, data = null) => {
   var loginKey = localStorage.getItem("galaxyUserkeyToken");
 
   var tokenInfo = JSON.parse(localStorage.getItem(loginKey + "Token"));
+  const source = axios.CancelToken.source();
+  source.cancel();
   return axios({
     url: apiPath + "/api" + url,
     method,
     data,
 
-    timeout: 60000,
+    timeout: 10000,
 
     headers: {
       Authorization: tokenInfo ? `LooLe  ${tokenInfo.accessToken}` : null,

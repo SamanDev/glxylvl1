@@ -76,10 +76,18 @@ const Content = (prop) => {
                             }
                         />
                         <Route
+                            path="/logoutauto"
+                            element={
+                                <Suspense fallback={<MenuLoader />}>
+                                    
+                                </Suspense>
+                            }
+                        />
+                        <Route
                             path="/logout"
                             element={
                                 <Suspense fallback={<MenuLoader />}>
-                                    <Dashboard {...prop} />
+                                    
                                 </Suspense>
                             }
                         />
@@ -87,7 +95,7 @@ const Content = (prop) => {
                             path="/login/:u/:p"
                             element={
                                 <Suspense fallback={<MenuLoader />}>
-                                    <Dashboard {...prop} />
+                                  
                                 </Suspense>
                             }
                         />

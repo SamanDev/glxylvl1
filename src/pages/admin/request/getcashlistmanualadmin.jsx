@@ -32,7 +32,7 @@ const depositArea = (prop) => {
           </div>
           <div className="text-gold fs-3 p-3">
             {parseFloat(
-              ((user.paidAmount>0?user.paidAmount:(user.paidAmount*-1)) * 100) / (user.totalWithdrawalAmount+user.remainedAmount)
+              ((user.paidAmount>0?user.paidAmount:(user.paidAmount*-1)) * 100) / user.totalWithdrawalAmount
             ).toFixed(0)}
             %
           </div></>}

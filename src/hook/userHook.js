@@ -90,6 +90,7 @@ export const useSiteInfo = (login) => {
 
     const [loginToken, setLoginToken] = useState(login ? login : localStorage.getItem(loginKey + "Token") && isJson(localStorage.getItem(loginKey + "Token")) ? JSON.parse(localStorage.getItem(loginKey + "Token")) : {});
     const handleCheckLogin = async () => {
+        
         try {
             const res = await publicGetRules();
             if (res.status === 200) {
@@ -116,17 +117,37 @@ export const useSiteInfo = (login) => {
         }
     };
     useEffect(() => {
-        if (loginToken.accessToken && !loginToken.logout) {
-            handleCheckLoginUser(loginToken);
-        } else {
-            handleCheckLogin();
-        }
+       
+        
+            if (!siteInfo) {
+                if (loginToken.accessToken && !loginToken.logout) {
+                    handleCheckLoginUser(loginToken);
+                } else {
+                    handleCheckLogin();
+                }
+            } else {
+              var form_date = new Date(siteInfo?.updateday);
+              var today = new Date();
+              let difference =
+                form_date > today ? form_date - today : today - form_date;
+              let diff_days = Math.floor(difference / (1000 * 3600 * 24));
+              if (diff_days > 1) {
+                if (loginToken.accessToken && !loginToken.logout) {
+                    handleCheckLoginUser(loginToken);
+                } else {
+                    handleCheckLogin();
+                }
+              }
+            }
+      
+       
 
         eventBus.on("updateSiteInfo", (dataGet) => {
             setSiteInfo(dataGet);
         });
         eventBus.on("updateUser", (dataGet) => {
-            if (!siteInfo?.pokerUrl) {
+            if (!siteInfo?.pokerUrl || siteInfo?.pokerUrl == "/") {
+                localStorage.removeItem("siteInfo");
                 setLoginToken(dataGet);
                 //handleCheckLoginUser(dataGet);
             }
@@ -166,7 +187,7 @@ export const useActiveTable = () => {
             let difference = form_date > today ? form_date - today : today - form_date;
             let diff_days = Math.floor(difference / 1000);
 
-            if (diff_days > 180 || 1 == 1) handleGetActiveTable();
+            if (diff_days > 5) handleGetActiveTable();
         }
 
         eventBus.on("updateActiveTables", (dataGet) => {

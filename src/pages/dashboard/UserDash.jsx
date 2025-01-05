@@ -49,12 +49,13 @@ const Dashboard = (prop) => {
       localStorage.getItem(btoa(loginToken.username)) &&
       window.location.href.indexOf(siteInfo?.userSiteUrl) == -1
     ) {
-      let sUrl =
+      
+        let sUrl =
         siteInfo?.userSiteUrl +
         "/login/" +
         btoa(loginToken.username) +
         "/" +
-        localStorage.getItem(btoa(loginToken.username));
+        localStorage.getItem(btoa(loginToken.username)).replace("/","@@@");
       //window.location.href = sUrl;
       //return false;
     }

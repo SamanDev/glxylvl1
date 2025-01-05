@@ -42,7 +42,7 @@ const Report = (prop) => {
             const res = await getReportService(
                 loginToken.id,
                 prop.mode,
-                gateway,
+                "",
 
                 prop.menu?.usd
             );
@@ -51,13 +51,16 @@ const Report = (prop) => {
 
                 setData(_res);
                 if (gateway == "IranShetab") {
-                    handleGetReports2(_res, gateway);
+                     _res = _res.filter((item) => (item.gateway == "IranShetab" || item.gateway == "ManualCashout" || item.gateway == "VisaGiftCode"));
+
+                setData(_res);
+                    //handleGetReports2(_res, gateway);
                 }
             }
         } catch (error) {
             //console.log(error.message);
         } finally {
-            //setLoading(false);
+            setLoading(false);
         }
     };
     const handleGetReports2 = async (data, getGateways) => {

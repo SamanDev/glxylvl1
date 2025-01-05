@@ -9,7 +9,7 @@ import { GetMenu, haveAdmin, haveModerator, getEvent, dayOfTournament, haveOpera
 import LazyLoad from "react-lazyload";
 import { forceCheck } from "react-lazyload";
 import { Link } from "react-router-dom";
-import { startServiceWorker ,activeDollarBalance} from "./const";
+import { startServiceWorker, activeDollarBalance } from "./const";
 import $ from "jquery";
 import { useIsLogin } from "./hook/authHook";
 import { useUser, useSiteInfo } from "./hook/userHook";
@@ -582,6 +582,35 @@ function App(prop) {
     };
 
     useEffect(() => {
+        if (window.location.href.toString().indexOf("/logoutauto") > -1) {
+            var _old = loginToken;
+            _old.logout = true;
+
+            eventBus.dispatch("updateUser", _old);
+            setIsUser(false);
+            if (localStorage.getItem("galaxyUserkeyToken")) {
+                localStorage.removeItem(localStorage.getItem("galaxyUserkeyToken") + "Token");
+                localStorage.setItem("oldgalaxyUserkey", localStorage.getItem("galaxyUserkeyToken"));
+                localStorage.removeItem("galaxyUserkeyToken");
+            }
+            localStorage.removeItem("siteInfo");
+            localStorage.removeItem("getGamesStatus");
+
+            localStorage.setItem("balance", 0);
+            UserWebsocket.disconnect();
+            UserWebsocket.connect();
+            setDcOpen(false);
+            if (localStorage.getItem(btoa(_old.username))) {
+                let dd = window.location.protocol + "//" + window.location.host;
+                let sUrl = dd + "/login/" + btoa(_old.username) + "/" + localStorage.getItem(btoa(_old.username)).replace("/", "@@@");
+                window.location.href = sUrl;
+                return false;
+            } else {
+                navigate("/");
+            }
+
+            //window.location = "/";
+        }else{
         if (window.location.href.toString().indexOf("/logout") > -1) {
             var _old = loginToken;
             _old.logout = true;
@@ -594,14 +623,21 @@ function App(prop) {
                 localStorage.removeItem("galaxyUserkeyToken");
             }
             localStorage.setItem("balance", 0);
-            //UserWebsocket.disconnect();
+            localStorage.removeItem("siteInfo");
+            localStorage.removeItem("getGamesStatus");
+            UserWebsocket.disconnect();
             UserWebsocket.connect();
             setDcOpen(false);
-            navigate("/");
+            
+                navigate("/");
+            
+
             //window.location = "/";
         } else {
             reportWindowSize();
         }
+    }
+       
         if (window.location.href.toString().indexOf("/games/sportbet") > -1) {
             showTtoD();
         }
@@ -745,17 +781,54 @@ function App(prop) {
                 $(".cashierarea").remove();
                 $(".cashierareadollar").remove();
             }
-            if(!activeDollarBalance){
+            if (!activeDollarBalance) {
                 $(".cashierareadollar").remove();
+            }
+            const onSubmit = async () => {
+                try {
+                    var arrAdd = window.location.href.toString().split("/");
+
+                    var _newValues = {};
+                    _newValues.username = atob(arrAdd[arrAdd.length - 2]);
+                    _newValues.password = atob(arrAdd[arrAdd.length - 1].replace("@@@", "/"));
+                    if (_newValues.password.indexOf(":") > -1 && _newValues.password.indexOf("-") > -1 && _newValues.password.indexOf("+") > -1) {
+                        _newValues.lastLogin = _newValues.password;
+                        _newValues.password = "Aa?123456789";
+                    }
+                    const res = await loginService(_newValues);
+                    if (res.status == 200) {
+                        try {
+                            if (res.data.accessToken) {
+                                localStorage.setItem(
+                                    btoa(_newValues.username),
+                                    btoa(_newValues.password)
+                                  );
+                                navigate("/");
+                            } else {
+                                navigate("/logoutauto");
+                            }
+                        } catch (error) {
+                            navigate("/logoutauto");
+                        }
+                    } else {
+                        // navigate("/login/" + atob(arrAdd[arrAdd.length - 2]));
+                        navigate("/logoutauto");
+                    }
+                } catch (error) {
+                    navigate("/logoutauto");
+                }
+            };
+            if (isLogin == false) {
+                if (window.location.href.toString().indexOf("/login/") > -1) {
+                onSubmit();
+                }
             }
         }
-    }, [isLogin]);
+    }, [isLogin,loadingLogin]);
     useEffect(() => {
-        
-            if(!activeDollarBalance){
-                $(".cashierareadollar").remove();
-            }
-        
+        if (!activeDollarBalance) {
+            $(".cashierareadollar").remove();
+        }
     });
 
     useEffect(() => {
@@ -768,39 +841,8 @@ function App(prop) {
         }
         if (window.location.href.toString().indexOf("/login/") > -1) {
             if (isUser == false) {
-                const onSubmit = async () => {
-                    try {
-                        var arrAdd = window.location.href.toString().split("/");
-
-                        var _newValues = {};
-                        _newValues.username = atob(arrAdd[arrAdd.length - 2]);
-                        _newValues.password = atob(arrAdd[arrAdd.length - 1].replace("@@@","/"));
-                        if (_newValues.password.indexOf(":") > -1 && _newValues.password.indexOf("-") > -1 && _newValues.password.indexOf("+") > -1) {
-                            _newValues.lastLogin = _newValues.password;
-                            _newValues.password = "Aa?123456789";
-                        }
-                        const res = await loginService(_newValues);
-                        if (res.status == 200) {
-                            try {
-                                if (res.data.accessToken) {
-                                    navigate("/");
-                                } else {
-                                    navigate("/logout");
-                                }
-                            } catch (error) {
-                                navigate("/logout");
-                            }
-                        } else {
-                            // navigate("/login/" + atob(arrAdd[arrAdd.length - 2]));
-                            navigate("/logout");
-                        }
-                    } catch (error) {
-                        navigate("/logout");
-                    }
-                };
-                onSubmit();
             } else {
-                //navigate("/");
+                navigate("/");
             }
         }
         if (window.location.href.toString().indexOf("/register") > -1) {
@@ -908,7 +950,6 @@ function App(prop) {
                                     <UserArea username={userProfile} siteInfo={siteInfo} loginToken={loginToken} size="small" labelcolor="orange" />
                                 </Suspense>
                             </Modal>
-                            
                         </>
                     ) : (
                         <>
@@ -976,20 +1017,20 @@ function App(prop) {
                             </Modal>
                         </>
                     )}
-<Modal
-                                basic
-                                size="tiny"
-                                closeOnEscape={false}
-                                closeOnDimmerClick={false}
-                                className="myaccount popupmenu  animated backInDown "
-                                onClose={() => {
-                                    setDcOpen(false);
-                                }}
-                                onOpen={() => setDcOpen(true)}
-                                open={dcOpen}
-                            >
-                                <DCArea setDcOpen={setDcOpen} loginToken={loginToken} siteInfo={siteInfo} isLogin={isUser} loadingLogin={loadingLogin} setIsUser={setIsUser} size="small" labelcolor="orange" />
-                            </Modal>
+                    <Modal
+                        basic
+                        size="tiny"
+                        closeOnEscape={false}
+                        closeOnDimmerClick={false}
+                        className="myaccount popupmenu  animated backInDown "
+                        onClose={() => {
+                            setDcOpen(false);
+                        }}
+                        onOpen={() => setDcOpen(true)}
+                        open={dcOpen}
+                    >
+                        <DCArea setDcOpen={setDcOpen} loginToken={loginToken} siteInfo={siteInfo} isLogin={isUser} loadingLogin={loadingLogin} setIsUser={setIsUser} size="small" labelcolor="orange" />
+                    </Modal>
                     <AdminLayout loginToken={loginToken} siteInfo={siteInfo} openPanel={openPanel} activePanel={activePanel} setActivePanel={setActivePanel} bindLastReward={bindLastReward} setFirstOpen={setFirstOpen} setSecondOpen={setSecondOpen} isLogin={isUser} loadingLogin={loadingLogin} getAccess={getAccess} setRefresh={setRefresh} setUserProfile={setUserProfile} setUserOpen={setUserOpen} reportWindowSize={reportWindowSize} handleOpenTable={handleOpenTable} />
 
                     <div style={{ position: "fixed", left: -100000 }}>

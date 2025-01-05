@@ -175,6 +175,7 @@ const depositArea = (prop) => {
           cardNumber: "",
           bankName: "",
           mode: "getLink",
+          callbackUrl: window.location.protocol + "//"+window.location.hostname
         }}
         onSubmit={(values, submitMethods) =>
           onSubmit(values, submitMethods, navigate, prop)

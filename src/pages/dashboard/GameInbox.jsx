@@ -39,9 +39,9 @@ const GameInbox = (prop) => {
         //setMainGame(params.gameId);
         //setsessionmyKey("");
 
-       // if (loginToken?.accessToken && !loginToken?.logout ) {
+        if (!sessionmyKey ) {
              handleSession();
-        //}
+        }
     }, []);
     
 
