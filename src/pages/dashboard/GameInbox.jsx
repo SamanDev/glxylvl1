@@ -15,11 +15,11 @@ const getPropertyNoCase = (obj, prop) => {
    
   };
 const GameInbox = (prop) => {
-   
+    var defGamesStatus
     try {
-        var defGamesStatus = JSON.parse(localStorage.getItem(  "getGamesStatus"));
+         defGamesStatus = JSON.parse(localStorage.getItem("getGamesStatus"));
       } catch (error) {
-        var defGamesStatus = []
+         defGamesStatus = {"id":1,"backgammon":false,"blackjack":true,"blackjack3":false,"blackjackMulti":true,"baccarat":true,"deuceswild":false,"highlow":false,"slotlucky":false,"slotfruits":false,"slotramses":false,"slotarabian":false,"slotsoccer":false,"slotspace":false,"roulette":true,"roulette3d":false,"wheel":true,"wheelMulti":true,"vpjacks":false,"studpoker":false,"boom":false,"bet":true,"asianHandicap":true,"asianHandicapHalf":true,"corners":true,"cornersHalf":true,"overUnder":true,"overUnderHalf":true,"resultHalf":true}
       }
     const [sessionmyKey, setSessionmyKey] = useState(defGamesStatus);
     
@@ -89,10 +89,10 @@ const GameInbox = (prop) => {
                             </Grid.Column>
                         );
                         } catch (error) {
-                            var game = submenu.toLowerCase();
-                        console.log(game,sessionmyKey);
+                           // var game = submenu.toLowerCase();
+                       // console.log(game,sessionmyKey);
                        
-                        return <></>;
+                       // return <></>;
                         }
                         
                     
