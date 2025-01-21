@@ -128,7 +128,7 @@ export const httpService = (url, method, data = null) => {
     method,
     data,
 
-    timeout: 10000,
+    timeout: 40000,
 
     headers: {
       Authorization: tokenInfo ? `LooLe  ${tokenInfo.accessToken}` : null,

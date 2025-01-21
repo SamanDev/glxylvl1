@@ -155,6 +155,9 @@ function Admin(prop) {
     const [dataLoginDay, setDataLoginDay] = useState("");
     const getRate = localStorage.getItem("getRate") ? localStorage.getItem("getRate") : 50000;
     var siteInfo = JSON.parse(localStorage.getItem("siteInfo"));
+if(!siteInfo?.secondForGift){
+    siteInfo = JSON.parse(localStorage.getItem("siteInfoAdmin"))
+}
     const [selectedList, setSelected] = useState([]);
     const [toggledClearRows, setToggleClearRows] = React.useState(false);
 

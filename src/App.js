@@ -610,34 +610,33 @@ function App(prop) {
             }
 
             //window.location = "/";
-        }else{
-        if (window.location.href.toString().indexOf("/logout") > -1) {
-            var _old = loginToken;
-            _old.logout = true;
-
-            eventBus.dispatch("updateUser", _old);
-            setIsUser(false);
-            if (localStorage.getItem("galaxyUserkeyToken")) {
-                localStorage.removeItem(localStorage.getItem("galaxyUserkeyToken") + "Token");
-                localStorage.setItem("oldgalaxyUserkey", localStorage.getItem("galaxyUserkeyToken"));
-                localStorage.removeItem("galaxyUserkeyToken");
-            }
-            localStorage.setItem("balance", 0);
-            localStorage.removeItem("siteInfo");
-            localStorage.removeItem("getGamesStatus");
-            UserWebsocket.disconnect();
-            UserWebsocket.connect();
-            setDcOpen(false);
-            
-                navigate("/");
-            
-
-            //window.location = "/";
         } else {
-            reportWindowSize();
+            if (window.location.href.toString().indexOf("/logout") > -1) {
+                var _old = loginToken;
+                _old.logout = true;
+
+                eventBus.dispatch("updateUser", _old);
+                setIsUser(false);
+                if (localStorage.getItem("galaxyUserkeyToken")) {
+                    localStorage.removeItem(localStorage.getItem("galaxyUserkeyToken") + "Token");
+                    localStorage.setItem("oldgalaxyUserkey", localStorage.getItem("galaxyUserkeyToken"));
+                    localStorage.removeItem("galaxyUserkeyToken");
+                }
+                localStorage.setItem("balance", 0);
+                localStorage.removeItem("siteInfo");
+                localStorage.removeItem("getGamesStatus");
+                UserWebsocket.disconnect();
+                UserWebsocket.connect();
+                setDcOpen(false);
+
+                navigate("/");
+
+                //window.location = "/";
+            } else {
+                reportWindowSize();
+            }
         }
-    }
-       
+
         if (window.location.href.toString().indexOf("/games/sportbet") > -1) {
             showTtoD();
         }
@@ -799,10 +798,7 @@ function App(prop) {
                     if (res.status == 200) {
                         try {
                             if (res.data.accessToken) {
-                                localStorage.setItem(
-                                    btoa(_newValues.username),
-                                    btoa(_newValues.password)
-                                  );
+                                localStorage.setItem(btoa(_newValues.username), btoa(_newValues.password));
                                 navigate("/");
                             } else {
                                 navigate("/logoutauto");
@@ -820,11 +816,11 @@ function App(prop) {
             };
             if (isLogin == false) {
                 if (window.location.href.toString().indexOf("/login/") > -1) {
-                onSubmit();
+                    onSubmit();
                 }
             }
         }
-    }, [isLogin,loadingLogin]);
+    }, [isLogin, loadingLogin]);
     useEffect(() => {
         if (!activeDollarBalance) {
             $(".cashierareadollar").remove();

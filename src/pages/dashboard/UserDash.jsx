@@ -20,7 +20,7 @@ const isWebview = () => {
   const ios = /iphone|ipod|ipad/.test(userAgent);
 
   return ios ? !standalone && !safari : /\bwv\b/.test(userAgent);
-}; 
+};
 const Dashboard = (prop) => {
   const loginToken = prop.loginToken;
   const siteInfo = prop.siteInfo;

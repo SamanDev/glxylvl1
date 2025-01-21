@@ -611,7 +611,7 @@ body.fullscreen .fullopenpanel {
     padding-bottom: 20px !important;
 }
 .helparea p {
-    text-align: justify;
+    text-align: right;
     padding: 10px;
     margin: 0 !important;
     line-height: 18px;

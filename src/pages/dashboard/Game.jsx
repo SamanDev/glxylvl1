@@ -22,6 +22,9 @@ const getFrameLink = (game) => {
     if (link == "backgammon") {
         link = "backgammonslobby";
     }
+    if (link == "boom") {
+        link = "crash";
+    }
     return link;
 };
 const Dashboard = (prop) => {

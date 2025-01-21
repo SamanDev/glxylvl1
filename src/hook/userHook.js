@@ -215,6 +215,26 @@ export const useLastReward = () => {
                 setLastReward(_data);
 
                 localStorage.setItem("lastReward", JSON.stringify(_data));
+               // handleGetLastReward2()
+            }
+        } catch (error) {
+            ////console.log(error.message);
+            // setLastReward(_bonuses);
+            //localStorage.setItem("lastReward", JSON.stringify(_bonuses));
+        }
+    };
+    const handleGetLastReward2 = async () => {
+        try {
+            const res = await getReportPenService("getLastRewards?page=2&number=500", false);
+
+            if (res.status === 200 && isJson(res.data)) {
+                var _data = res.data.sort((a, b) => (a.date < b.date ? 1 : -1));
+                var newdata = lastReward;
+
+                const children = newdata.concat(_data).sort((a, b) => (a.date < b.date ? 1 : -1));
+                setLastReward(children);
+
+                localStorage.setItem("lastReward", JSON.stringify(children));
             }
         } catch (error) {
             ////console.log(error.message);

@@ -26,11 +26,7 @@ class UserWebsocket {
 
         if (ws == null) {
             ws = new WebSocket(USERSOCKETPUBLICURL + _t);
-            if (token) {
-                tkn = true;
-            } else {
-                tkn = false;
-            }
+        
             ws.onopen = function live() {
                 if (token) {
                     tkn = true;
@@ -51,10 +47,10 @@ class UserWebsocket {
             ws.onmessage = function (data) {
                 var message = data.data;
                 //  new UserWebsocket().serverMessage(data.data);
-    
+
                 if (isJson(message)) {
                     var msg = JSON.parse(message);
-    
+
                     //alert((msg.Command))
                     if (msg.Command === "updateUser") {
                         eventBus.dispatch("updateUser", msg.data);
@@ -67,13 +63,12 @@ class UserWebsocket {
                     }
                 } else {
                     if (message === "closeConnection") {
-                        
                         if (tkn) {
                             clearInterval(timerId);
-                        try {
-                            ws?.close();
-                        } catch (error) {}
-                        ws = null;
+                            try {
+                                ws?.close();
+                            } catch (error) {}
+                            ws = null;
                             eventBus.dispatch("eventsDC", "");
                         }
                     } else if (message === "PasswordChanged") {
@@ -101,7 +96,6 @@ class UserWebsocket {
             //token = null;
             //tkn = false;
         }
-       
     }
 
     disconnect() {
