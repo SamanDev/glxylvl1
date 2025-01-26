@@ -359,7 +359,7 @@ function Admin(prop) {
           ) : (
             <>
               {row.description} -{" "}
-              {row.status === "Done" &&
+              {
                 row.gateway == "IranShetab" &&
                 row.description.indexOf("V-G-C") == -1 && (
                   <CshList id={row.id} item={row.cashoutDescription} />

@@ -289,7 +289,23 @@ $('.step0-1').trigger('click');
                                                             onLoad={removeFrameLoad2}
                                                         ></iframe>
                                                     ) : (
-                                                        <iframe src={siteInfo.casinoGamesUrl + "/" + getFrameLink(secondaryGame) + ".html?code=" + loginToken.accessToken + ""}  className={"framegame casframe"} onLoad={removeFrameLoad2}></iframe>
+                                                        <>{secondaryGame == "777slot"  ? (
+                                                            <iframe
+                                                                src={
+                                                                    siteInfo.gamesUrl.replace("www","777slot") +
+                                                                    //"https://mbj.wheelofpersia.com/" +
+                                                                //"http://192.168.1.14:3001/" +
+                                                                    loginToken.accessToken +
+                                                                    "/" +
+                                                                    loginToken.username
+                                                                }
+                                                                name="gameframe"
+                                                                className={"framegame casframe"}
+                                                                onLoad={removeFrameLoad2}
+                                                            ></iframe>
+                                                        ) : (
+                                                            <iframe src={siteInfo.casinoGamesUrl + "/" + getFrameLink(secondaryGame) + ".html?code=" + loginToken.accessToken + ""}  className={"framegame casframe"} onLoad={removeFrameLoad2}></iframe>
+                                                        )}</>
                                                     )}</>
                                                 )}</>
                                             )}</>
@@ -376,7 +392,23 @@ $('.step0-1').trigger('click');
                                                             onLoad={removeFrameLoad2}
                                                         ></iframe>
                                                     ) : (
-                                                        <iframe src={siteInfo.casinoGamesUrl + "/" + getFrameLink(secondaryGame) + ".html?code=" + loginToken.accessToken + ""}  className={"framegame casframe"} onLoad={removeFrameLoad2}></iframe>
+                                                        <>{secondaryGame == "777slot"  ? (
+                                                            <iframe
+                                                                src={
+                                                                    siteInfo.gamesUrl.replace("www","777slot") +
+                                                                    //"https://mbj.wheelofpersia.com/" +
+                                                                //"http://192.168.1.14:3001/" +
+                                                                    loginToken.accessToken +
+                                                                    "/" +
+                                                                    loginToken.username
+                                                                }
+                                                                name="gameframe"
+                                                                className={"framegame casframe"}
+                                                                onLoad={removeFrameLoad2}
+                                                            ></iframe>
+                                                        ) : (
+                                                            <iframe src={siteInfo.casinoGamesUrl + "/" + getFrameLink(secondaryGame) + ".html?code=" + loginToken.accessToken + ""}  className={"framegame casframe"} onLoad={removeFrameLoad2}></iframe>
+                                                        )}</>
                                                     )}</>
                                                 )}</>
                                             )}</>
@@ -388,7 +420,7 @@ $('.step0-1').trigger('click');
             ),
         },
     ];
-if(!getPropertyNoCase(sessionmyKey,secondaryGame)){
+if(!getPropertyNoCase(sessionmyKey,secondaryGame) && secondaryGame != '777slot'){
     return <div className="mainsection" style={{textAlign:'center',padding:'100px 0',color:'white',fontSize:40}}>Game is not available.</div>
 }
     return (

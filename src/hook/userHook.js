@@ -38,9 +38,7 @@ export const useUser = () => {
         return _siteInfo;
     }
     useEffect(() => {
-      
         window.addEventListener("message", function (event) {
-         
             if (event.data == "userget") {
                 var newu = {
                     username: loginToken.username,
@@ -90,7 +88,6 @@ export const useSiteInfo = (login) => {
 
     const [loginToken, setLoginToken] = useState(login ? login : localStorage.getItem(loginKey + "Token") && isJson(localStorage.getItem(loginKey + "Token")) ? JSON.parse(localStorage.getItem(loginKey + "Token")) : {});
     const handleCheckLogin = async () => {
-        
         try {
             const res = await publicGetRules();
             if (res.status === 200) {
@@ -117,39 +114,36 @@ export const useSiteInfo = (login) => {
         }
     };
     useEffect(() => {
-       
-        
-            if (!siteInfo) {
-                if (loginToken.accessToken && !loginToken.logout) {
-                    handleCheckLoginUser(loginToken);
-                } else {
-                    handleCheckLogin();
-                }
+        if (!siteInfo) {
+            if (loginToken.accessToken && !loginToken.logout) {
+                handleCheckLoginUser(loginToken);
             } else {
-              var form_date = new Date(siteInfo?.updateday);
-              var today = new Date();
-              let difference =
-                form_date > today ? form_date - today : today - form_date;
-              let diff_days = Math.floor(difference / (1000 * 3600 * 24));
-              if (diff_days > 1) {
+                handleCheckLogin();
+            }
+        } else {
+            var form_date = new Date(siteInfo?.updateday);
+            var today = new Date();
+            let difference = form_date > today ? form_date - today : today - form_date;
+            let diff_days = Math.floor(difference / (1000 * 3600 * 24));
+            //console.log(diff_days);
+
+            if (diff_days > 1 || 1 == 1) {
                 if (loginToken.accessToken && !loginToken.logout) {
                     handleCheckLoginUser(loginToken);
                 } else {
                     handleCheckLogin();
                 }
-              }
             }
-      
-       
+        }
 
         eventBus.on("updateSiteInfo", (dataGet) => {
             setSiteInfo(dataGet);
         });
         eventBus.on("updateUser", (dataGet) => {
             if (!siteInfo?.pokerUrl || siteInfo?.pokerUrl == "/") {
-                localStorage.removeItem("siteInfo");
+                //localStorage.removeItem("siteInfo");
                 setLoginToken(dataGet);
-                //handleCheckLoginUser(dataGet);
+                handleCheckLoginUser(dataGet);
             }
         });
     }, [loginToken.accessToken, loginToken.logout]);
@@ -187,7 +181,7 @@ export const useActiveTable = () => {
             let difference = form_date > today ? form_date - today : today - form_date;
             let diff_days = Math.floor(difference / 1000);
 
-            if (diff_days > 5) handleGetActiveTable();
+            if (diff_days > 15) handleGetActiveTable();
         }
 
         eventBus.on("updateActiveTables", (dataGet) => {
@@ -215,7 +209,7 @@ export const useLastReward = () => {
                 setLastReward(_data);
 
                 localStorage.setItem("lastReward", JSON.stringify(_data));
-               // handleGetLastReward2()
+                // handleGetLastReward2()
             }
         } catch (error) {
             ////console.log(error.message);
