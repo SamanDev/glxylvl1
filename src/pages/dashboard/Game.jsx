@@ -104,6 +104,7 @@ const Dashboard = (prop) => {
     };
     const removeFrameLoad = () => {
         setGameLoader(false);
+        $('.step0-1').trigger('click');
         //prop.reportWindowSize();
     };
     const removeFrameLoad2 = () => {
@@ -123,9 +124,10 @@ const Dashboard = (prop) => {
     useEffect(() => {
         if (sessionKey == "") {
             setMainGame("poker");
-$('.step0-1').trigger('click');
+
             // setSessionKey("");
             if (loginToken?.accessToken && !loginToken?.logout && mainGame == "poker") {
+                $('.step0-1').trigger('click');
                 handleSession();
             }
         }
@@ -166,7 +168,7 @@ $('.step0-1').trigger('click');
                 if ((game != mainGame && i > 0 && (defGamesStatus[game] || typeof defGamesStatus[game] === "undefined")) || game == "wheel") {
                     _gameOptions.push({
                         key: game,
-                        text: gameDataMainName[i],
+                        text: gameDataMainName[i].replace("b","B"),
                         value: game,
                     });
                 }
@@ -420,7 +422,7 @@ $('.step0-1').trigger('click');
             ),
         },
     ];
-if(!getPropertyNoCase(sessionmyKey,secondaryGame) && secondaryGame != '777slot'){
+if(!getPropertyNoCase(sessionmyKey,secondaryGame) && secondaryGame != '777slot' && secondaryGame != 'poker'){
     return <div className="mainsection" style={{textAlign:'center',padding:'100px 0',color:'white',fontSize:40}}>Game is not available.</div>
 }
     return (
