@@ -1,9 +1,4 @@
-@font-face {
-    font-family: "BYekan";
-    src: url("../fonts/yekan/Sans.eot") format("eot"), url("../fonts/yekan/Sans.svg") format("svg"), url("../fonts/yekan/Sans.woff") format("woff"), url("../fonts/yekan/Sans.ttf") format("truetype");
-    font-weight: normal;
-    font-style: normal;
-}
+
 
 html,
 body {
@@ -559,6 +554,7 @@ body.fullscreen .fullopenpanel {
 .App {
     overflow: hidden;
 }
+
 .banner {
     width: calc(100%);
     height: calc(90vh - 74px);
@@ -2364,14 +2360,17 @@ table {
 .fadein {
     -webkit-mask-image: linear-gradient(to top, black 95%, transparent 100%);
     mask-image: linear-gradient(to top, black 95%, transparent 100%);
+   
 }
 .fadeout {
     -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
     mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+   
 }
 .fadeoutend {
     -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
     mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    
 }
 .color_tag {
     border: 1px solid black;
@@ -2472,7 +2471,7 @@ table {
         text-align: center !important;
     }
 }
-@media (max-width: 768px) {
+@media (max-width: 868px) {
     .top_navbar .right_content {
         background-color: #6c757d !important;
         width: 100px;

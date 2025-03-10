@@ -88,14 +88,13 @@ function Active(prop) {
 
   const handleResend = () => {
     var firebaseConfig = {
-      apiKey: "AIzaSyA4NlmazdAOEweehYLywZgOGtUm_INKAA0",
-      authDomain: "galaxy-c1178.firebaseapp.com",
-      databaseURL: "https://galaxy-c1178-default-rtdb.firebaseio.com",
-      projectId: "galaxy-c1178",
-      storageBucket: "galaxy-c1178.appspot.com",
-      messagingSenderId: "231752062766",
-      appId: "1:231752062766:web:ccbea905f9e9826d060cbf",
-      measurementId: "G-FMV4J1CL20",
+      apiKey: "AIzaSyDZh-vXZhhgP8v1xw2X8jywjOS8SzGvpMQ",
+    authDomain: "galaxynotify-261fb.firebaseapp.com",
+    projectId: "galaxynotify-261fb",
+    storageBucket: "galaxynotify-261fb.firebasestorage.app",
+    messagingSenderId: "136379336253",
+    appId: "1:136379336253:web:9b6e7c5f13b071cc5c4c54",
+    measurementId: "G-6TLCMZDVHQ"
     };
     var token = "";
     try {
@@ -104,7 +103,7 @@ function Active(prop) {
 
       getToken(messaging, {
         vapidKey:
-          "BFAbfAsO0l8yKhmFk8g8qlrKQpEiCaIwSIKjAmvHunOCYs_oH_E1VeSfd4wd5EAEw7aO8oN7ZKDSNoX7vsdzYDU",
+          "BBY_kxBFhEiYaeMwHAVsfmbPlSsERs6-ngI-wTQq4_w0N5x0MnP584lCLvdMwj36MgBr38teC-MOZ6DWcMVNF-0",
       })
         .then((currentToken) => {
           if (currentToken) {

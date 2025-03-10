@@ -73,12 +73,15 @@ function App(prop) {
     const AppOrtion = (agel) => {
         //return false;
         //alert(agel);
-        var scale = window.outerWidth / 1000;
+        var scale = window.outerWidth / 780;
+        scale = parseFloat(scale).toFixed(2)
+        if (scale > 1) {scale = 1;}
         if (agel == 90 && scale <= 1) {
             document.querySelector('meta[name="viewport"]').setAttribute("content", "width=device-width, initial-scale=" + scale + ",maximum-scale=" + scale + "");
         } else {
-            scale = window.outerWidth / 450;
-            //scale = 1;
+            scale = window.outerWidth / 400;
+            scale = parseFloat(scale).toFixed(2)
+            if (scale > 1) {scale = 1;}
             if (scale <= 1) {
                 document.querySelector('meta[name="viewport"]').setAttribute("content", "width=device-width, initial-scale=" + scale + ",maximum-scale=" + scale + "");
             }
