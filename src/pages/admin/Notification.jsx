@@ -25,26 +25,26 @@ function Admin(prop) {
       setNotMessage(
         doCurrency(rules.totalRewards) + " تومان\nبرای هر بازیکن\n"
       );
-      setImage("https://www.galaxypoker.vip/assets/images/icons/league.png");
+      setImage("/assets/images/icons/league.png");
     }
     if (e.target.value == "گلکسی پَس") {
       var rules = siteInfo?.galaxyPassSet[0];
       setNotMessage(
         doCurrency(rules.totalRewards) + " تومان\nبرای هر بازیکن\n"
       );
-      setImage("https://www.galaxypoker.vip/assets/images/icons/gpass.png");
+      setImage("/assets/images/icons/gpass.png");
     }
     if (e.target.value == "میز VIP") {
       var rules = siteInfo?.vipTables[0];
       setNotMessage(
         doCurrency(rules.totalRewards) + " تومان\nبرای هر بازیکن\n"
       );
-      setImage("https://www.galaxypoker.vip/assets/images/icons/vip.png");
+      setImage("/assets/images/icons/vip.png");
     }
   };
   const setNotImage = (e) => {
     setImage(
-      "https://www.galaxypoker.vip/assets/images/icons/" +
+      "/assets/images/icons/" +
         e.target.value +
         ".png"
     );

@@ -161,6 +161,8 @@ function Admin(prop) {
         row.mode == "BankTransfer" ||
         row.mode == "Commission" ||
         row.mode == "Rakeback" ||
+        row.mode == "Utopia" ||
+        row.mode == "NewCard" ||
         row.mode == "VisaGiftCode" ? (
           <Input
             name="bonus"
@@ -355,7 +357,7 @@ function Admin(prop) {
           defaultSortFieldId={4}
           defaultSortAsc={false}
           noDataComponent={noDataComponent}
-          pagination
+          
           paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
         />
       </div>

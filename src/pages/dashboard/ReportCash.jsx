@@ -34,6 +34,7 @@ const Report = (prop) => {
     const loginToken = prop.loginToken;
     const [data, setData] = useState([]);
     var gateway = prop.gateway ? prop.gateway.replace(/ /g, "").replace("BTC", "Bitcoin").replace("Toman", "IranShetab") : "";
+    console.log(gateway);
 
     const [loading, setLoading] = useState(true);
     const handleGetReports = async () => {
@@ -51,9 +52,15 @@ const Report = (prop) => {
 
                 setData(_res);
                 if (gateway == "IranShetab") {
-                     _res = _res.filter((item) => (item.gateway == "IranShetab" || item.gateway == "ManualCashout" || item.gateway == "VisaGiftCode"));
+                    _res = _res.filter((item) => item.gateway == "IranShetab" || item.gateway == "ManualCashout" || item.gateway == "VisaGiftCode");
 
-                setData(_res);
+                    setData(_res);
+                    //handleGetReports2(_res, gateway);
+                }
+                if (gateway == "Utopia") {
+                    _res = _res.filter((item) => item.gateway == "Utopia");
+
+                    setData(_res);
                     //handleGetReports2(_res, gateway);
                 }
             }
@@ -64,60 +71,60 @@ const Report = (prop) => {
         }
     };
     const handleGetReports2 = async (data, getGateways) => {
-      var gateway = getGateways.replace("IranShetab", "ManualCashout");
-      setLoading(true);
-      try {
-          const res = await getReportService(
-              loginToken.id,
-              prop.mode,
-              gateway,
+        var gateway = getGateways.replace("IranShetab", "ManualCashout");
+        setLoading(true);
+        try {
+            const res = await getReportService(
+                loginToken.id,
+                prop.mode,
+                gateway,
 
-              prop.menu?.usd
-          );
-          if (res.status === 200) {
-              var _res = res.data.filter((item) => (prop.menu?.usd ? item.endBalance2 != item.startBalance2 : item.endBalance != item.startBalance));
-              var newdata = data;
+                prop.menu?.usd
+            );
+            if (res.status === 200) {
+                var _res = res.data.filter((item) => (prop.menu?.usd ? item.endBalance2 != item.startBalance2 : item.endBalance != item.startBalance));
+                var newdata = data;
 
-              const children = newdata.concat(_res).sort((a, b) => (a.createDate < b.createDate ? 1 : -1));
+                const children = newdata.concat(_res).sort((a, b) => (a.createDate < b.createDate ? 1 : -1));
 
-              setData(children);
-              if (gateway == "ManualCashout") {
-                handleGetReports3(children, gateway);
+                setData(children);
+                if (gateway == "ManualCashout") {
+                    handleGetReports3(children, gateway);
+                }
+                //setData(_res);
             }
-              //setData(_res);
-          }
-      } catch (error) {
-          //console.log(error.message);
-      } finally {
-          //setLoading(false);
-      }
-  };
-  const handleGetReports3 = async (data, getGateways) => {
-    var gateway = getGateways.replace("ManualCashout", "VisaGiftCode");
-    setLoading(true);
-    try {
-        const res = await getReportService(
-            loginToken.id,
-            prop.mode,
-            gateway,
-
-            prop.menu?.usd
-        );
-        if (res.status === 200) {
-            var _res = res.data.filter((item) => (prop.menu?.usd ? item.endBalance2 != item.startBalance2 : item.endBalance != item.startBalance));
-            var newdata = data;
-
-            const children = newdata.concat(_res).sort((a, b) => (a.createDate < b.createDate ? 1 : -1));
-
-            setData(children);
-            //setData(_res);
+        } catch (error) {
+            //console.log(error.message);
+        } finally {
+            //setLoading(false);
         }
-    } catch (error) {
-        //console.log(error.message);
-    } finally {
-        setLoading(false);
-    }
-};
+    };
+    const handleGetReports3 = async (data, getGateways) => {
+        var gateway = getGateways.replace("ManualCashout", "VisaGiftCode");
+        setLoading(true);
+        try {
+            const res = await getReportService(
+                loginToken.id,
+                prop.mode,
+                gateway,
+
+                prop.menu?.usd
+            );
+            if (res.status === 200) {
+                var _res = res.data.filter((item) => (prop.menu?.usd ? item.endBalance2 != item.startBalance2 : item.endBalance != item.startBalance));
+                var newdata = data;
+
+                const children = newdata.concat(_res).sort((a, b) => (a.createDate < b.createDate ? 1 : -1));
+
+                setData(children);
+                //setData(_res);
+            }
+        } catch (error) {
+            //console.log(error.message);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
         handleGetReports();
@@ -151,7 +158,7 @@ const Report = (prop) => {
                             canShowPending = false;
                         }
                         try {
-                            if (prop.gateway == "PerfectMoney") {
+                            if (prop.gateway == "Utopia") {
                                 var desc = JSON.parse(item.description);
                                 desc.amount = desc.dollarAmount;
                             } else {
@@ -163,36 +170,92 @@ const Report = (prop) => {
                         }
                         if (desc?.address || prop.gateway != "USDT") {
                             return (
-                              <LazyLoad key={i} height={98} className="item">
-                                <List.Item key={i}>
-                                    {prop.menu?.usd ? (
-                                        <List.Content>
-                                            <List.Description className="float-end lh-lg">
-                                                {convertDateToJalali(item.createDate)}
+                                <LazyLoad key={i} height={98} className="item">
+                                    <List.Item key={i}>
+                                        {prop.menu?.usd ? (
+                                            <List.Content>
+                                                <List.Description className="float-end lh-lg">
+                                                    {convertDateToJalali(item.createDate)}
 
-                                                <div className="text-end lh-lg">
-                                                    <Status status={item.status} size="mini" />
-                                                </div>
-                                            </List.Description>
-                                            <List.Description className="lh-base">
-                                                <AmountColor amount={item.amount2} sign={item.endBalance2 - item.startBalance2} className="text-gold" />
-                                                {!prop.pending && (
-                                                    <div>
-                                                        {item.gateway && item.gateway} {item.gateway == "Transfer" && <div>{item.description.replace("Remove transfer chip from:", "").replace("Add transfer chip to", "").replace("Remove usd transfer chip from:", "").replace(/:/g, "")}</div>}
-                                                        {item.coin && " - " + item.coin}
+                                                    <div className="text-end lh-lg">
+                                                        <Status status={item.status} size="mini" />
                                                     </div>
-                                                )}
-                                                <div className="cashlist">
+                                                </List.Description>
+                                                <List.Description className="lh-base">
+                                                    <AmountColor amount={item.amount2} sign={item.endBalance2 - item.startBalance2} className="text-gold" />
+                                                    {!prop.pending && (
+                                                        <div>
+                                                            {item.gateway && item.gateway} {item.gateway == "Transfer" && <div>{item.description.replace("Remove transfer chip from:", "").replace("Add transfer chip to", "").replace("Remove usd transfer chip from:", "").replace(/:/g, "")}</div>}
+                                                            {item.coin && " - " + item.coin}
+                                                        </div>
+                                                    )}
                                                     <div className="cashlist">
-                                                        {(prop.gateway == "Bitcoin" || prop.gateway == "USDT" || prop.gateway == "PerfectMoney") && (
+                                                        <div className="cashlist">
+                                                            {(prop.gateway == "Bitcoin" || prop.gateway == "USDT" || prop.gateway == "Utopia") && (
+                                                                <>
+                                                                    <small>
+                                                                        Amount &nbsp;
+                                                                        <span className="text-golds">${doCurrency(desc.amount)}</span> - Fee &nbsp;
+                                                                        <span className="text-golds">${desc.fee}</span>
+                                                                    </small>
+                                                                    <br /> Final Amount &nbsp;
+                                                                    <span className="text-gold">${doCurrency(desc.VOUCHER_AMOUNT ? desc.VOUCHER_AMOUNT : parseFloat(desc.amount - desc.fee).toFixed(2))}</span>
+                                                                </>
+                                                            )}
+                                                        </div>
+                                                        {(prop.gateway == "Bitcoin" || prop.gateway == "USDT") && (
+                                                            <>
+                                                                <span className="text-gold">{desc.address}</span>
+                                                            </>
+                                                        )}
+                                                    </div>
+                                                </List.Description>
+                                            </List.Content>
+                                        ) : (
+                                            <List.Content>
+                                                <List.Description className="float-end lh-lg">
+                                                    {convertDateToJalali(item.createDate)}
+
+                                                    <div className="text-end lh-lg">
+                                                        <Status status={item.status} size="mini" />
+                                                    </div>
+                                                </List.Description>
+                                                <List.Description className="lh-base">
+                                                    <AmountColor amount={item.amount} sign={item.endBalance - item.startBalance} className="text-gold" />
+                                                    {!prop.pending && (
+                                                        <div>
+                                                            {item.gateway && item.gateway} {item.gateway == "Transfer" && <div>{item.description.replace("Remove transfer chip from:", "").replace("Add transfer chip to", "").replace("Remove usd transfer chip from:", "").replace(/:/g, "")}</div>}
+                                                            {item.coin && " - " + item.coin}
+                                                        </div>
+                                                    )}
+
+                                                    <div className="cashlist">
+                                                        {(prop.gateway == "Bitcoin" || prop.gateway == "USDT" || prop.gateway == "Utopia") && (
                                                             <>
                                                                 <small>
                                                                     Amount &nbsp;
-                                                                    <span className="text-golds">${doCurrency(desc.amount)}</span> - Fee &nbsp;
-                                                                    <span className="text-golds">${desc.fee}</span>
+                                                                    <span className="text-golds">${doCurrency(desc.amount)}</span>
+                                                                    {desc.fee && (
+                                                                        <>
+                                                                            {" "}
+                                                                            - Fee &nbsp;
+                                                                            <span className="text-golds">${desc.fee}</span>
+                                                                        </>
+                                                                    )}
+                                                                    <br />
+                                                                    Rate &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span className="text-gold">{doCurrency((item.amount / desc.amount) * -1)}</span>{" "}
                                                                 </small>
-                                                                <br /> Final Amount &nbsp;
-                                                                <span className="text-gold">${doCurrency(desc.VOUCHER_AMOUNT ? desc.VOUCHER_AMOUNT : parseFloat(desc.amount - desc.fee).toFixed(2))}</span>
+                                                                {desc.fee ? (
+                                                                    <>
+                                                                        <br /> Final Amount &nbsp;
+                                                                        <span className="text-gold">${doCurrency(desc.VOUCHER_AMOUNT ? desc.VOUCHER_AMOUNT : parseFloat(desc.amount - desc.fee).toFixed(2))}</span>
+                                                                    </>
+                                                                ) : (
+                                                                    <>
+                                                                        <br />Voucher Code &nbsp;
+                                                                        <span className="text-gold">{desc.voucher_id}</span>
+                                                                    </>
+                                                                )}
                                                             </>
                                                         )}
                                                     </div>
@@ -201,56 +264,15 @@ const Report = (prop) => {
                                                             <span className="text-gold">{desc.address}</span>
                                                         </>
                                                     )}
-                                                </div>
-                                            </List.Description>
-                                        </List.Content>
-                                    ) : (
-                                        <List.Content>
-                                            <List.Description className="float-end lh-lg">
-                                                {convertDateToJalali(item.createDate)}
+                                                </List.Description>
+                                                {item.status === "Pending" && item.gateway == "IranShetab" && <CanceleCash id={item.id} item={item.cashoutDescription} />}
+                                                {(item.status === "Done" || item.status === "Refund") && item.gateway == "IranShetab" && item.description.indexOf("V-G-C") == -1 && <CshList id={item.id} item={item.cashoutDescription} />}
+                                                {(item.status === "Done" || item.status === "Refund") && item.gateway == "ManualCashout" && item.description.indexOf("V-G-C") == -1 && <CshListManual id={item.id} item={item.cashoutDescription} />}
 
-                                                <div className="text-end lh-lg">
-                                                    <Status status={item.status} size="mini" />
-                                                </div>
-                                            </List.Description>
-                                            <List.Description className="lh-base">
-                                                <AmountColor amount={item.amount} sign={item.endBalance - item.startBalance} className="text-gold" />
-                                                {!prop.pending && (
-                                                    <div>
-                                                        {item.gateway && item.gateway} {item.gateway == "Transfer" && <div>{item.description.replace("Remove transfer chip from:", "").replace("Add transfer chip to", "").replace("Remove usd transfer chip from:", "").replace(/:/g, "")}</div>}
-                                                        {item.coin && " - " + item.coin}
-                                                    </div>
-                                                )}
-
-                                                <div className="cashlist">
-                                                    {(prop.gateway == "Bitcoin" || prop.gateway == "USDT" || prop.gateway == "PerfectMoney") && (
-                                                        <>
-                                                            <small>
-                                                                Amount &nbsp;
-                                                                <span className="text-golds">${doCurrency(desc.amount)}</span> - Fee &nbsp;
-                                                                <span className="text-golds">${desc.fee}</span>
-                                                                <br />
-                                                                Rate &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span className="text-gold">{doCurrency((item.amount / desc.amount) * -1)}</span>{" "}
-                                                            </small>
-                                                            <br /> Final Amount &nbsp;
-                                                            <span className="text-gold">${doCurrency(desc.VOUCHER_AMOUNT ? desc.VOUCHER_AMOUNT : parseFloat(desc.amount - desc.fee).toFixed(2))}</span>
-                                                        </>
-                                                    )}
-                                                </div>
-                                                {(prop.gateway == "Bitcoin" || prop.gateway == "USDT") && (
-                                                    <>
-                                                        <span className="text-gold">{desc.address}</span>
-                                                    </>
-                                                )}
-                                            </List.Description>
-                                            {item.status === "Pending" && item.gateway == "IranShetab" && <CanceleCash id={item.id} item={item.cashoutDescription} />}
-                                            {(item.status === "Done"||item.status === "Refund") && item.gateway == "IranShetab" && item.description.indexOf("V-G-C") == -1 && <CshList id={item.id} item={item.cashoutDescription} />}
-                                            {(item.status === "Done"||item.status === "Refund") && item.gateway == "ManualCashout" && item.description.indexOf("V-G-C") == -1 && <CshListManual id={item.id} item={item.cashoutDescription} />}
-                                            
-                                            {item.status === "Done" && item.gateway == "VisaGiftCode" && item.description.indexOf("V-G-C") > -1 && <CshListVgc id={item.id} item={item.description} />}
-                                        </List.Content>
-                                    )}{" "}
-                                </List.Item>
+                                                {item.status === "Done" && item.gateway == "VisaGiftCode" && item.description.indexOf("V-G-C") > -1 && <CshListVgc id={item.id} item={item.description} />}
+                                            </List.Content>
+                                        )}{" "}
+                                    </List.Item>
                                 </LazyLoad>
                             );
                         }

@@ -230,7 +230,7 @@ const Report = (prop) => {
                         <div className="cashlist">
                           {(gateway == "Bitcoin" ||
                             gateway == "USDT" ||
-                            gateway == "PerfectMoney") && (
+                            gateway == "Utopia") && (
                             <>
                               Amount &nbsp;
                               <span className="text-gold">
@@ -244,7 +244,7 @@ const Report = (prop) => {
                               </span>
                             </>
                           )}
-                          {gateway == "PerfectMoney" && (
+                          {gateway == "Utopia" && (
                             <>
                               <br />
                             </>

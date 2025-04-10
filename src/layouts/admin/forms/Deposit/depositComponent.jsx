@@ -126,7 +126,7 @@ const depositArea = (prop) => {
           )}
           {depMode == "VisaGiftCode" && <VisaGiftCode {...prop} />}
 
-          {depMode == "PerfectMoney" && (
+          {depMode == "Utopia" && (
             <>
               {prop.menu?.usd ? (
                 <PerfectMoney2 {...prop} />

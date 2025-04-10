@@ -226,10 +226,10 @@ export const cashoutData = [
     },
 
     {
-        key: "PerfectMoney",
-        getwaykey: "PerfectMoney",
-        text: "پرفکت مانی",
-        value: "PerfectMoney",
+        key: "Utopia",
+        getwaykey: "Utopia",
+        text: "Utopia",
+        value: "Utopia",
         icon: "dollar",
         limit: "$100 - $10K",
         bonus: "- 2%",
@@ -259,10 +259,10 @@ export const cashoutDataDollar = [
     },
 
     {
-        key: "PerfectMoney",
-        getwaykey: "PerfectMoney",
+        key: "Utopia",
+        getwaykey: "Utopia",
         text: "پرفکت مانی",
-        value: "PerfectMoney",
+        value: "Utopia",
         icon: "dollar",
         limit: "$100 - $10K",
         bonus: "- 2%",
@@ -311,10 +311,10 @@ export const depositData = [
         usd: false,
     },
     {
-        key: "PerfectMoney",
-        getwaykey: "PerfectMoney",
-        text: "پرفکت مانی",
-        value: "PerfectMoney",
+        key: "Utopia",
+        getwaykey: "Utopia",
+        text: "Utopia",
+        value: "Utopia",
         icon: "dollar",
         limit: "Unlimited",
         usd: false,

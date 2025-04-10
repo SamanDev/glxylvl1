@@ -86,7 +86,7 @@ function Admin(prop) {
   });
   function genLinkurl(link, image) {
     var rules = link.split("login/");
-
+    return image.replace("https://www.galaxypoker.vip/","");
     return image.replace("https://www.galaxypoker.vip/", rules[0]);
   }
   const setUsers = (data) => {
@@ -115,7 +115,7 @@ function Admin(prop) {
             "@@@" +
             genLinkurl(
               player.link,
-              "https://www.galaxypoker.vip/assets/images/icons/gifts.png"
+              "/assets/images/icons/gifts.png"
             ) +
             "@@@هدیه ی " +
             doCurrency(_amount) +

@@ -12,7 +12,7 @@ import { doCurrency } from "../../../../const";
 
 const onSubmit = async (values, submitMethods, navigate, prop, setRefresh) => {
   try {
-    const res = await cashierService(values, "createCashoutPM", "");
+    const res = await cashierService(values, "createCashoutUtopia", "");
     if (res.status == 200) {
       setRefresh(true);
       Alert("Done", "انجام شد.", "success");

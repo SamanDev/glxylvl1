@@ -127,7 +127,7 @@ const depositArea = (prop) => {
               )}
             </>
           )}
-          {depMode == "PerfectMoney" && (
+          {depMode == "Utopia" && (
             <>
               {prop.menu?.usd ? (
                 <PerfectMoney2 {...prop} blnBlock={blnBlock} />
