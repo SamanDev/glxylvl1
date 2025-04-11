@@ -5,7 +5,7 @@ class RadioExampleRadioGroup extends Component {
   state = { value: this.props.formik.values.mode };
 
   handleChange = (e, { value }) => {
-    console.log(this.props);
+   // console.log(this.props);
     this.setState({ value });
     this.props.formik.setFieldValue("mode", value);
   };

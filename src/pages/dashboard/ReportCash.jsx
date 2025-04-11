@@ -34,7 +34,7 @@ const Report = (prop) => {
     const loginToken = prop.loginToken;
     const [data, setData] = useState([]);
     var gateway = prop.gateway ? prop.gateway.replace(/ /g, "").replace("BTC", "Bitcoin").replace("Toman", "IranShetab") : "";
-    console.log(gateway);
+    //console.log(gateway);
 
     const [loading, setLoading] = useState(true);
     const handleGetReports = async () => {
@@ -252,8 +252,17 @@ const Report = (prop) => {
                                                                     </>
                                                                 ) : (
                                                                     <>
-                                                                        <br />Voucher Code &nbsp;
-                                                                        <span className="text-gold">{desc.voucher_id}</span>
+                                                                        {item.status == 'Done' ? (
+                                                                            <>
+                                                                                <br />
+                                                                                <span className="text-gold">Check your mail.</span>
+                                                                            </>
+                                                                        ) : (
+                                                                            <>
+                                                                                <br />
+                                                                                Wait for coonfirm...
+                                                                            </>
+                                                                        )}
                                                                     </>
                                                                 )}
                                                             </>

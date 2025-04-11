@@ -122,7 +122,7 @@ const depositArea = (prop) => {
     if (!user) {
         return <>loadings</>;
     } else {
-        if (prop.item.gateway == "PerfectMoney") {
+        if (prop.item.gateway == "Utopia") {
             try {
                 var desc = JSON.parse(prop.item.description);
             } catch (error) {}
@@ -161,9 +161,7 @@ const depositArea = (prop) => {
                                                     {" "}
                                                     <Segment secondary>
                                                         Amount &nbsp;
-                                                        <span className="text-golds">${doCurrency(desc?.dollarAmount)}</span> - Fee &nbsp;
-                                                        <span className="text-golds">${doCurrency(desc?.fee)}</span>- Rate &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span className="text-gold3">{doCurrency(desc?.dollarPrice)}</span> - Final Amount &nbsp;
-                                                        <span className="text-gol33d">${doCurrency(desc?.VOUCHER_AMOUNT ? desc?.VOUCHER_AMOUNT : parseFloat(desc?.amount).toFixed(2))}</span>
+                                                        <span className="text-golds">${doCurrency(desc?.dollarAmount)}</span> - Rate &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span className="text-gold3">{doCurrency(desc?.dollarPrice)}</span>
                                                     </Segment>
                                                 </>
                                             )}

@@ -228,11 +228,11 @@ export const cashoutData = [
     {
         key: "Utopia",
         getwaykey: "Utopia",
-        text: "Utopia",
+        text: "Utopia (UUSD)",
         value: "Utopia",
         icon: "dollar",
         limit: "$100 - $10K",
-        bonus: "- 2%",
+        bonus: "",
         usd: false,
     },
 ];
@@ -313,7 +313,7 @@ export const depositData = [
     {
         key: "Utopia",
         getwaykey: "Utopia",
-        text: "Utopia",
+        text: "Utopia (UUSD)",
         value: "Utopia",
         icon: "dollar",
         limit: "Unlimited",
