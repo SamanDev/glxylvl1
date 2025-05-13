@@ -61,6 +61,23 @@ const Actios = (prop) => {
           />
         </>
       );
+    }if (
+      prop.row.gateway === "Utopia" &&
+      prop.row.mode === "Cashout"
+    ) {
+      return (
+        <>
+          <Button
+          size="mini"
+          color="green"
+          content="Resend"
+          icon="refresh"
+          loading={loading}
+          disabled={loading}
+          onClick={() => prop.updateStatus(prop.row, "Done", setLoading)}
+        />{" "}
+        </>
+      );
     }
   }
 };

@@ -1,0 +1,7 @@
+@import url("/auth/fonts/font-awesome-4.7.0/css/font-awesome.min.css");@import url("https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.compat.css");@import url("/assets/fontawesome/css/all.css?v=1");@import url("/assets/mmenu-js-master/dist/mmenu.css");html{touch-action:manipulation;}
+@font-face {
+    font-family: "BYekan";
+    src: url("/assets/fonts/yekan/Sans.eot") format("eot"), url("/assets/fonts/yekan/Sans.svg") format("svg"), url("/assets/fonts/yekan/Sans.woff") format("woff"), url("/assets/fonts/yekan/Sans.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}

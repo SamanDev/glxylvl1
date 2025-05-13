@@ -2,14 +2,13 @@ importScripts("https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js");
 importScripts("https://www.gstatic.com/firebasejs/8.2.0/firebase-messaging.js");
 // Initialize the Firebase app in the service worker by passing the generated config
 var firebaseConfig = {
-  apiKey: "AIzaSyA4NlmazdAOEweehYLywZgOGtUm_INKAA0",
-  authDomain: "galaxy-c1178.firebaseapp.com",
-  databaseURL: "https://galaxy-c1178-default-rtdb.firebaseio.com",
-  projectId: "galaxy-c1178",
-  storageBucket: "galaxy-c1178.appspot.com",
-  messagingSenderId: "231752062766",
-  appId: "1:231752062766:web:ccbea905f9e9826d060cbf",
-  measurementId: "G-FMV4J1CL20",
+  apiKey: "AIzaSyDZh-vXZhhgP8v1xw2X8jywjOS8SzGvpMQ",
+    authDomain: "galaxynotify-261fb.firebaseapp.com",
+    projectId: "galaxynotify-261fb",
+    storageBucket: "galaxynotify-261fb.firebasestorage.app",
+    messagingSenderId: "136379336253",
+    appId: "1:136379336253:web:9b6e7c5f13b071cc5c4c54",
+    measurementId: "G-6TLCMZDVHQ"
 };
 
 try {
@@ -22,9 +21,11 @@ try {
     console.log("Received background message ", payload);
 
     const notificationTitle = payload.notification.title;
+//ssconsole.log(payload.notification);
+
     const notificationOptions = {
       body: payload.notification.body,
-      icon: "/favicon.png",
+      icon: payload.notification?.image?payload.notification?.image:"/favicon.png",
 
       dir: "rtl",
       actions: [{ action: "archive", title: "Archive" }],

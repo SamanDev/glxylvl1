@@ -39,7 +39,18 @@ const onSubmit = async (values, submitMethods, prop) => {
                 prop.setFirstDone(false);
                 prop.setFirstStatus("reload");
             }
-        } else if (values.mode == "ManualCashout") {
+        } else if (values.mode == "Utopia") {
+            var newValues = {
+                orderId: values.id,
+            };
+
+            const res = await adminPutService(newValues, "utopia/done", "");
+            if (res.status == 200) {
+                submitMethods.resetForm();
+                prop.setFirstDone(false);
+                prop.setFirstStatus("reload");
+            }
+        }  else if (values.mode == "ManualCashout") {
             var newValues = {
                 id: values.id,
             };
