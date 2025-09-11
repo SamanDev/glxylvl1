@@ -8,7 +8,7 @@ import RewardStat from "./rewardStat";
 import LazyLoad from "react-lazyload";
 import axios from "axios";
 const getWins = () => {
-    const SERVICE_URL_SAVE = "https://gwheelserver.onrender.com";
+    const SERVICE_URL_SAVE = "https://server.wheelofpersia.com";
     //const SERVICE_URL_SAVE = "http://localhost:2525";
     
 
