@@ -26,7 +26,7 @@ var __bnus = [
   },
 ];
 var _deflevels = [30, 25, 20, 15, 10, 5];
-var _deflevelsAmount = [4.0, 0.5, 0.5, 0.5, 0.5, 0.2, 0.2];
+var _deflevelsAmount = [4.0, 0.5, 0.8, 0.7, 0.6, 0.5, 0.4];
 function generateRandomInteger(min, max) {
   return Math.floor(min + Math.random() * (max - min + 1));
 }

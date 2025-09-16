@@ -34,9 +34,14 @@ const ActiveTable = (prop) => {
     };
 
   useEffect(() => {
-    handleGetLastReward()
+    handleGetLastReward();
+    var timer = setInterval(() => {
+      handleGetLastReward();
+    }, 10000);
     
-    
+    return () => {
+clearInterval(timer);
+    }
   }, []);
   
   return (

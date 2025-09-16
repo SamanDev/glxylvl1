@@ -55,7 +55,12 @@ _lvl = _lvl2
             <small className="farsi">{prop.item.win ? "تومان" : "دلار"}</small>
           </div>
           {prop.item.game == "BlackjackMulti" && <small>BlackJack - <small>{JSON.parse(prop.item.userdata).mode.replace("PerfectPer","Perfect Pairs")}</small></small>}
-          {prop.item.game == "Baccarat" && <small>Baccarat - <small>{JSON.parse(prop.item.userdata).seat== 1?JSON.parse(prop.item.userdata).mode.replace("Pair","Perfect Pair").replace("3card","Either Pair"):JSON.parse(prop.item.userdata).mode.replace("3card","3 Card")}</small></small>}
+          {prop.item.game == "Baccarat" && <small>Baccarat - 
+            {JSON.parse(prop.item.userdata).mode ? <>
+            <small>{JSON.parse(prop.item.userdata).seat== 1?JSON.parse(prop.item.userdata)?.mode.replace("Pair","Perfect Pair").replace("3card","Either Pair"):JSON.parse(prop.item.userdata)?.mode.replace("3card","3 Card")}</small>
+            </>:<></>}
+            </small>
+          }
           {prop.item.game == "Roulette" && <>{prop.item.x == 36 ? <small>Roulette - <small>Bet on #{JSON.parse(prop.item.userdata).betId.payload}</small></small>:<small>Roulette - <small>Bet on {JSON.parse(prop.item.userdata).betId.id}</small></small>}</>}
           {prop.item.game == "Wheel" && <small>Wheel - <small>Bet on x{JSON.parse(prop.item.userdata).x}</small></small>}
           {convertDateToJalali(prop.item.date)}
