@@ -5,6 +5,7 @@ import UserList from "./utils/UserList";
 import RunnerList from "./utils/runnerList";
 import WinnerList from "./utils/winnerList";
 import ChartIncome from "./utils/ChartPieIncome";
+import Stats from "./report/DashStat";
 const GridExampleTextAlignmentCenter = (prop) => {
   const [data, setData] = useState([1, 0]);
   const [load, setLoad] = useState(false);
@@ -15,11 +16,7 @@ const GridExampleTextAlignmentCenter = (prop) => {
 
   return (
     <Segment inverted>
-      <ButtonGroup style={{ display: 'none' }}>
-        <Button onClick={() => { handlePerRowsChange([1, 0]) }} >One</Button>
-        <Button onClick={() => { handlePerRowsChange([2, 1]) }}>Two</Button>
-        <Button onClick={() => { setLoad(!load) }}>Three</Button>
-      </ButtonGroup>
+       <Stats {...prop} />
       <Grid textAlign='center' columns={3}>
         <GridRow>
           <GridColumn>

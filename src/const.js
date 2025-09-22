@@ -13,16 +13,16 @@ export const pokerUrl = process.env.NODE_ENV === "production" ? "https://trpkr.c
 function getAPI() {
     //let host = document.location.host;
     var host = {
-        onlinePath: "https://api.glxypkr.com",
-        offlinePath: "https://api.glxypkr.com",
+        onlinePath: "https://api.galaxy24.org",
+        offlinePath: "https://api.galaxy24.org",
     };
     //let host = "loole.gg:443";
     let protocol2 = document.location.protocol;
 
     if (protocol2 == "https:") {
         host = {
-            onlinePath: "https://api.glxypkr.com",
-            offlinePath: "https://api.glxypkr.com",
+            onlinePath: "https://api.galaxy24.org",
+            offlinePath: "https://api.galaxy24.org",
         };
     }
 
@@ -47,17 +47,17 @@ function getPort() {
     return loc;
 }
 function getPortPablic() {
-    //let host = "glxypkr.com";
+    //let host = "galaxy24.org";
     let host = process.env.NODE_ENV === "production" ? document.location.host : "";
     let protocol2 = document.location.protocol;
     let protocol = "";
     if (protocol2 == "https:") {
         protocol = "wss://";
-        host = "api.glxypkr.com";
+        host = "api.galaxy24.org";
         // host = "";
     } else {
         protocol = "wss://";
-        host = "api.glxypkr.com";
+        host = "api.galaxy24.org";
     }
     //protocol = "wss://";
     let loc = protocol + host + "";
@@ -1276,7 +1276,7 @@ export const siteInfoDef = {
     startTimeRakeBack: 1,
     telegramChanel: "GlxyChannel",
     gamesUrl: "https://www.wheelofpersia.com/",
-    "casinoGamesUrl": "https://casino.glxypkr.com/secured/games/",
+    "casinoGamesUrl": "https://casino.galaxy24.org/secured/games/",
     "casinoGamesList": "baccarat,backgammonslobby,blackjack3,blackjacks,caribbeanstud,crash,deuceswild,highlow,jacksorbetter,roulette,roulette3D,slotarabian,slotfruits,slotluckychristmas,slotramses,slotsoccer,slotspace,sportbet,wheeloffortune",
     userSiteUrl: "/",
     telegramSupport: "GlxySupport",

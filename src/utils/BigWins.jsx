@@ -7,12 +7,12 @@ import CshList from "./commitiondetail";
 import $ from "jquery";
 const Reward = (prop) => {
   const loginToken = prop.loginToken;
-  
-var _lvl = prop.item.userdata;
-var _lvl1 = _lvl.split('avatar":"lvl')[1]
-var _lvl2 = _lvl1.split('"')[0]
-_lvl = _lvl2
-//console.log(_lvl2);
+
+  var _lvl = prop.item.userdata;
+  var _lvl1 = _lvl.split('avatar":"lvl')[1]
+  var _lvl2 = _lvl1.split('"')[0]
+  _lvl = _lvl2
+  //console.log(_lvl2);
 
   return (
     <Grid
@@ -39,10 +39,10 @@ _lvl = _lvl2
               width="36px"
             />
             <div
-                      className={ " xwin"}
-                    >
-                      x{prop.item.x}
-                    </div>
+              className={" xwin"}
+            >
+              x{prop.item.x}
+            </div>
           </div>
         </Grid.Column>
         <Grid.Column width={10} textAlign="right" style={{ paddingRight: 20 }}>
@@ -54,18 +54,22 @@ _lvl = _lvl2
             </span>{" "}
             <small className="farsi">{prop.item.win ? "تومان" : "دلار"}</small>
           </div>
-          {prop.item.game == "BlackjackMulti" && <small>BlackJack - <small>{JSON.parse(prop.item.userdata).mode.replace("PerfectPer","Perfect Pairs")}</small></small>}
-          {prop.item.game == "Baccarat" && <small>Baccarat - 
-            {JSON.parse(prop.item.userdata).mode ? <>
-            <small>{JSON.parse(prop.item.userdata).seat== 1?JSON.parse(prop.item.userdata)?.mode.replace("Pair","Perfect Pair").replace("3card","Either Pair"):JSON.parse(prop.item.userdata)?.mode.replace("3card","3 Card")}</small>
-            </>:<></>}
-            </small>
-          }
-          {prop.item.game == "Roulette" && <>{prop.item.x == 36 ? <small>Roulette - <small>Bet on #{JSON.parse(prop.item.userdata).betId.payload}</small></small>:<small>Roulette - <small>Bet on {JSON.parse(prop.item.userdata).betId.id}</small></small>}</>}
+          {prop.item.game == "BlackjackMulti" && <small>BlackJack - <small>{JSON.parse(prop.item.userdata).mode.replace("PerfectPer", "Perfect Pairs")}</small></small>}
+          {prop.item.game == "Baccarat" && prop.item.x > 10 && (
+                        <small>
+                            Baccarat - <small>{JSON.parse(prop.item.userdata).seat == 1 ? JSON.parse(prop.item.userdata).mode.replace("Pair", "Perfect Pair").replace("3card", "Either Pair") : JSON.parse(prop.item.userdata).mode.replace("3card", "3 Card")}</small>
+                        </small>
+                    )}
+                    {prop.item.game == "Baccarat" && prop.item.x <= 10 && (
+                        <small>
+                            Baccarat - <small>Tie</small>
+                        </small>
+                    )}
+          {prop.item.game == "Roulette" && <>{prop.item.x == 36 ? <small>Roulette - <small>Bet on #{JSON.parse(prop.item.userdata).betId.payload}</small></small> : <small>Roulette - <small>Bet on {JSON.parse(prop.item.userdata).betId.id}</small></small>}</>}
           {prop.item.game == "Wheel" && <small>Wheel - <small>Bet on x{JSON.parse(prop.item.userdata).x}</small></small>}
           {convertDateToJalali(prop.item.date)}
         </Grid.Column>
-        
+
       </Grid.Row>
     </Grid>
   );

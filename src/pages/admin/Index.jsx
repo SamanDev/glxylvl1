@@ -52,26 +52,69 @@ function Admin(prop) {
     }
   };
   useEffect(() => {
-    panes = [
-      
+    if (haveAdmin(loginToken.roles)) {
+      panes = [
+        {
+          menuItem: "Dashboard",
+          pane: (
+            <Tab.Pane key="Dashboard" inverted>
+              <Dashboard
+                addTabData={addTabData}
+                addMainTabData={addMainTabData}
+                handleGetGeteways={handleGetGeteways}
+                addGatewayTabData={addGatewayTabData}
+                removeTabData={removeTabData}
+                getwaysList={getwaysData}
+                search="username"
+                searchValue=""
+                {...prop}
+              />
+            </Tab.Pane>
+          ),
+        }]
+        panes.push(
       {
-        menuItem: "Users",
-        pane: (
-          <Tab.Pane key="Users">
-            <Users
-              addTabData={addTabData}
-              addMainTabData={addMainTabData}
-              handleGetGeteways={handleGetGeteways}
-              addGatewayTabData={addGatewayTabData}
-              removeTabData={removeTabData}
-              getwaysList={getwaysData}
-              search="username"
-              searchValue=""
-              {...prop}
-            />
-          </Tab.Pane>
-        ),
-      },
+          menuItem: "Users",
+          pane: (
+            <Tab.Pane key="Users">
+              <Users
+                addTabData={addTabData}
+                addMainTabData={addMainTabData}
+                handleGetGeteways={handleGetGeteways}
+                addGatewayTabData={addGatewayTabData}
+                removeTabData={removeTabData}
+                getwaysList={getwaysData}
+                search="username"
+                searchValue=""
+                {...prop}
+              />
+            </Tab.Pane>
+          )
+        })
+    } else {
+      panes = [
+        {
+          menuItem: "Users",
+          pane: (
+            <Tab.Pane key="Users">
+              <Users
+                addTabData={addTabData}
+                addMainTabData={addMainTabData}
+                handleGetGeteways={handleGetGeteways}
+                addGatewayTabData={addGatewayTabData}
+                removeTabData={removeTabData}
+                getwaysList={getwaysData}
+                search="username"
+                searchValue=""
+                {...prop}
+              />
+            </Tab.Pane>
+          )
+        }
+      ]
+    }
+
+    panes.push(
       {
         menuItem: "VGC Bank",
         pane: (
@@ -89,103 +132,34 @@ function Admin(prop) {
             />
           </Tab.Pane>
         ),
-      },
+      })
+    panes.push(
       {
-        menuItem: "Requests",
-        pane: (
-          <Tab.Pane key="Requests">
-            <Requests
-              addTabData={addTabData}
-              addMainTabData={addMainTabData}
-              setGetwaysData={setGetwaysData}
-              addGatewayTabData={addGatewayTabData}
-              removeTabData={removeTabData}
-              tickets={tickets}
-              loadingtickets={loadingtickets}
-              {...prop}
-            />
-          </Tab.Pane>
-        ),
-      },
-    ];
-    if (haveModerator(loginToken.roles)) {
-      panes.push({
-        menuItem: "Income",
-        pane: (
-          <Tab.Pane key="Income">
-            <Income
-              addTabData={addTabData}
-              addMainTabData={addBankrollTabData}
-              handleGetGeteways={handleGetGeteways}
-              addGatewayTabData={addGatewayTabData}
-              removeTabData={removeTabData}
-              getwaysList={getwaysData}
-              search="username"
-              searchValue=""
-              {...prop}
-            />
-          </Tab.Pane>
-        ),
-      });
-    }
-    if (haveRoot(loginToken.roles)) {
-      panes.push(
-        {
-          menuItem: "AddNewBot",
-          pane: (
-            <Tab.Pane key="AddNewBot">
-              <AddNewBot
-                addTabData={addTabData}
-                addMainTabData={addMainTabData}
-                setGetwaysData={setGetwaysData}
-                addGatewayTabData={addGatewayTabData}
-                removeTabData={removeTabData}
-                {...prop}
-              />
-            </Tab.Pane>
-          ),
-        },
-        {
-          menuItem: "Invitation",
-          pane: (
-            <Tab.Pane key="Invitation">
-              <Invitation
-                addTabData={addTabData}
-                addMainTabData={addMainTabData}
-                setGetwaysData={setGetwaysData}
-                addGatewayTabData={addGatewayTabData}
-                removeTabData={removeTabData}
-                {...prop}
-              />
-            </Tab.Pane>
-          ),
-        },
-
-        {
-          menuItem: "Settings",
-          pane: (
-            <Tab.Pane key="Setting">
-              <Setting
-                addTabData={addTabData}
-                addMainTabData={addMainTabData}
-                setGetwaysData={setGetwaysData}
-                addGatewayTabData={addGatewayTabData}
-                removeTabData={removeTabData}
-                {...prop}
-              />
-            </Tab.Pane>
-          ),
-        }
-      );
-    }
-    if (haveAdmin(loginToken.roles)) {
-      panes.push({
-      menuItem: "Dashboard",
+      menuItem: "Requests",
       pane: (
-        <Tab.Pane key="Dashboard" inverted>
-          <Dashboard
+        <Tab.Pane key="Requests">
+          <Requests
             addTabData={addTabData}
             addMainTabData={addMainTabData}
+            setGetwaysData={setGetwaysData}
+            addGatewayTabData={addGatewayTabData}
+            removeTabData={removeTabData}
+            tickets={tickets}
+            loadingtickets={loadingtickets}
+            {...prop}
+          />
+        </Tab.Pane>
+      ),
+    })
+  
+  if (haveModerator(loginToken.roles)) {
+    panes.push({
+      menuItem: "Income",
+      pane: (
+        <Tab.Pane key="Income">
+          <Income
+            addTabData={addTabData}
+            addMainTabData={addBankrollTabData}
             handleGetGeteways={handleGetGeteways}
             addGatewayTabData={addGatewayTabData}
             removeTabData={removeTabData}
@@ -196,198 +170,249 @@ function Admin(prop) {
           />
         </Tab.Pane>
       ),
-    })
+    });
   }
-  }, [loadingtickets]);
-  useEffect(() => {
-    if (activeIndex == 0) setTabData(panes);
-    if (activeIndex == -1) {
-      setActiveIndex(0);
-    }
-  }, [activeIndex, loadingtickets]);
-  const addTabData = (username, getwaysList) => {
-    var newPanes1 = panes;
-    const result1 = newPanes1.filter(checkAdult1);
-
-    function checkAdult1(item) {
-      return item.pane.key != username + "profile";
-    }
-
-    var newPanes2 = result1;
-
-    newPanes2.push({
-      menuItem: username,
-      pane: (
-        <Tab.Pane
-          key={username + "profile"}
-          className="ui inverted segment"
-          style={{ height: "calc(100vh - 150px)", overflow: "auto" }}
-        >
-          <User
-            username={username}
-            removeTabData={removeTabData}
-            getwaysList={getwaysList}
-            addTabData={addTabData}
-            handleGetGeteways={handleGetGeteways}
-            {...prop}
-          />
-        </Tab.Pane>
-      ),
-    });
-
-    panes = newPanes2;
-    setTabData(newPanes2);
-    setActiveIndex(newPanes2.length - 1);
-  };
-  const addMainTabData = (mode) => {
-    var newPanes1 = panes;
-    const result1 = newPanes1.filter(checkAdult1);
-
-    function checkAdult1(item) {
-      return item.pane.key != mode;
-    }
-
-    var newPanes2 = result1;
-
-    newPanes2.push({
-      menuItem: mode,
-      pane: (
-        <Tab.Pane
-          key={mode}
-          className="ui inverted segment"
-          style={{ height: "calc(100vh - 150px)", overflow: "auto" }}
-        >
-          {mode == "Winners" ? (
-            <Winners
+  if (haveRoot(loginToken.roles)) {
+    panes.push(
+      {
+        menuItem: "AddNewBot",
+        pane: (
+          <Tab.Pane key="AddNewBot">
+            <AddNewBot
               addTabData={addTabData}
+              addMainTabData={addMainTabData}
               setGetwaysData={setGetwaysData}
+              addGatewayTabData={addGatewayTabData}
               removeTabData={removeTabData}
-              search="refer"
-              searchValue={mode}
+              {...prop}
             />
-          ) : mode == "Runner" ? (
-            <Runner
+          </Tab.Pane>
+        ),
+      },
+      {
+        menuItem: "Invitation",
+        pane: (
+          <Tab.Pane key="Invitation">
+            <Invitation
               addTabData={addTabData}
+              addMainTabData={addMainTabData}
               setGetwaysData={setGetwaysData}
+              addGatewayTabData={addGatewayTabData}
               removeTabData={removeTabData}
-              search="refer"
-              searchValue={mode}
+              {...prop}
             />
-          ) : (
-            <>
-              <Botlist
-                addTabData={addTabData}
-                setGetwaysData={setGetwaysData}
-                removeTabData={removeTabData}
-                search="refer"
-                searchValue={"bots"}
-              />
-              <Bots
-                addTabData={addTabData}
-                setGetwaysData={setGetwaysData}
-                removeTabData={removeTabData}
-                search="refer"
-                searchValue={mode}
-              />
-            </>
-          )}
-        </Tab.Pane>
-      ),
-    });
+          </Tab.Pane>
+        ),
+      },
 
-    panes = newPanes2;
-    setTabData(newPanes2);
-    setActiveIndex(newPanes2.length - 1);
-  };
-  const addBankrollTabData = (mode) => {
-    var newPanes1 = panes;
-    const result1 = newPanes1.filter(checkAdult1);
+      {
+        menuItem: "Settings",
+        pane: (
+          <Tab.Pane key="Setting">
+            <Setting
+              addTabData={addTabData}
+              addMainTabData={addMainTabData}
+              setGetwaysData={setGetwaysData}
+              addGatewayTabData={addGatewayTabData}
+              removeTabData={removeTabData}
+              {...prop}
+            />
+          </Tab.Pane>
+        ),
+      }
+    );
+  }
 
-    function checkAdult1(item) {
-      return item.pane.key != mode;
-    }
+}, [loadingtickets]);
+useEffect(() => {
+  if (activeIndex == 0) setTabData(panes);
+  if (activeIndex == -1) {
+    setActiveIndex(0);
+  }
+}, [activeIndex, loadingtickets]);
+const addTabData = (username, getwaysList) => {
+  var newPanes1 = panes;
+  const result1 = newPanes1.filter(checkAdult1);
 
-    var newPanes2 = result1;
+  function checkAdult1(item) {
+    return item.pane.key != username + "profile";
+  }
 
-    newPanes2.push({
-      menuItem: mode,
-      pane: (
-        <Tab.Pane
-          key={mode}
-          className="ui inverted segment"
-          style={{ height: "calc(100vh - 150px)", overflow: "auto" }}
-        >
-          <Bankroll
+  var newPanes2 = result1;
+
+  newPanes2.push({
+    menuItem: username,
+    pane: (
+      <Tab.Pane
+        key={username + "profile"}
+        className="ui inverted segment"
+        style={{ height: "calc(100vh - 150px)", overflow: "auto" }}
+      >
+        <User
+          username={username}
+          removeTabData={removeTabData}
+          getwaysList={getwaysList}
+          addTabData={addTabData}
+          handleGetGeteways={handleGetGeteways}
+          {...prop}
+        />
+      </Tab.Pane>
+    ),
+  });
+
+  panes = newPanes2;
+  setTabData(newPanes2);
+  setActiveIndex(newPanes2.length - 1);
+};
+const addMainTabData = (mode) => {
+  var newPanes1 = panes;
+  const result1 = newPanes1.filter(checkAdult1);
+
+  function checkAdult1(item) {
+    return item.pane.key != mode;
+  }
+
+  var newPanes2 = result1;
+
+  newPanes2.push({
+    menuItem: mode,
+    pane: (
+      <Tab.Pane
+        key={mode}
+        className="ui inverted segment"
+        style={{ height: "calc(100vh - 150px)", overflow: "auto" }}
+      >
+        {mode == "Winners" ? (
+          <Winners
             addTabData={addTabData}
             setGetwaysData={setGetwaysData}
             removeTabData={removeTabData}
             search="refer"
             searchValue={mode}
           />
-        </Tab.Pane>
-      ),
-    });
+        ) : mode == "Runner" ? (
+          <Runner
+            addTabData={addTabData}
+            setGetwaysData={setGetwaysData}
+            removeTabData={removeTabData}
+            search="refer"
+            searchValue={mode}
+          />
+        ) : (
+          <>
+            <Botlist
+              addTabData={addTabData}
+              setGetwaysData={setGetwaysData}
+              removeTabData={removeTabData}
+              search="refer"
+              searchValue={"bots"}
+            />
+            <Bots
+              addTabData={addTabData}
+              setGetwaysData={setGetwaysData}
+              removeTabData={removeTabData}
+              search="refer"
+              searchValue={mode}
+            />
+          </>
+        )}
+      </Tab.Pane>
+    ),
+  });
 
-    panes = newPanes2;
-    setTabData(newPanes2);
-    setActiveIndex(newPanes2.length - 1);
-  };
-  const addGatewayTabData = (mode) => {
-    var newPanes1 = panes;
-    const result1 = newPanes1.filter(checkAdult1);
+  panes = newPanes2;
+  setTabData(newPanes2);
+  setActiveIndex(newPanes2.length - 1);
+};
+const addBankrollTabData = (mode) => {
+  var newPanes1 = panes;
+  const result1 = newPanes1.filter(checkAdult1);
 
-    function checkAdult1(item) {
-      return item.pane.key != mode;
-    }
-
-    var newPanes2 = result1;
-
-    newPanes2.push({
-      menuItem: mode,
-      pane: (
-        <Tab.Pane
-          key={mode}
-          className="ui inverted segment"
-          style={{ height: "calc(100vh - 150px)", overflow: "auto" }}
-        >
-          {mode == "Gateways" ? (
-            <GetwaysList removeTabData={removeTabData} />
-          ) : (
-            <SiteCartsList removeTabData={removeTabData} />
-          )}
-        </Tab.Pane>
-      ),
-    });
-
-    panes = newPanes2;
-    setTabData(newPanes2);
-    setActiveIndex(newPanes2.length - 1);
-  };
-  const removeTabData = (id) => {
-    var newPanes = panes;
-    const result = newPanes.filter(checkAdult);
-
-    function checkAdult(item) {
-      return item.pane.key != id;
-    }
-    panes = result;
-    setActiveIndex(-1);
-  };
-  if (!haveAdmin(loginToken?.roles) && !haveOperator(loginToken?.roles)) {
-    return <Navigate to="/" />;
+  function checkAdult1(item) {
+    return item.pane.key != mode;
   }
 
-  return (
-    <Segment inverted>
-      <Tab
-        menu={{ color: "black", inverted: true, pointing: true }}
-        panes={tabData}
-        activeIndex={activeIndex}
-        renderActiveOnly={false}
-        onTabChange={handleTabChange}
-      />
-    </Segment>
-  );
+  var newPanes2 = result1;
+
+  newPanes2.push({
+    menuItem: mode,
+    pane: (
+      <Tab.Pane
+        key={mode}
+        className="ui inverted segment"
+        style={{ height: "calc(100vh - 150px)", overflow: "auto" }}
+      >
+        <Bankroll
+          addTabData={addTabData}
+          setGetwaysData={setGetwaysData}
+          removeTabData={removeTabData}
+          search="refer"
+          searchValue={mode}
+        />
+      </Tab.Pane>
+    ),
+  });
+
+  panes = newPanes2;
+  setTabData(newPanes2);
+  setActiveIndex(newPanes2.length - 1);
+};
+const addGatewayTabData = (mode) => {
+  var newPanes1 = panes;
+  const result1 = newPanes1.filter(checkAdult1);
+
+  function checkAdult1(item) {
+    return item.pane.key != mode;
+  }
+
+  var newPanes2 = result1;
+
+  newPanes2.push({
+    menuItem: mode,
+    pane: (
+      <Tab.Pane
+        key={mode}
+        className="ui inverted segment"
+        style={{ height: "calc(100vh - 150px)", overflow: "auto" }}
+      >
+        {mode == "Gateways" ? (
+          <GetwaysList removeTabData={removeTabData} />
+        ) : (
+          <SiteCartsList removeTabData={removeTabData} />
+        )}
+      </Tab.Pane>
+    ),
+  });
+
+  panes = newPanes2;
+  setTabData(newPanes2);
+  setActiveIndex(newPanes2.length - 1);
+};
+const removeTabData = (id) => {
+  var newPanes = panes;
+  const result = newPanes.filter(checkAdult);
+
+  function checkAdult(item) {
+    return item.pane.key != id;
+  }
+  panes = result;
+  setActiveIndex(-1);
+};
+if (!haveAdmin(loginToken?.roles) && !haveOperator(loginToken?.roles)) {
+  return <Navigate to="/" />;
+}
+
+return (
+  <Segment inverted>
+    <Tab
+      menu={{ color: "black", inverted: true, pointing: true }}
+      panes={tabData}
+      activeIndex={activeIndex}
+      renderActiveOnly={false}
+      onTabChange={handleTabChange}
+    />
+  </Segment>
+);
 }
 
 export default Admin;
