@@ -1,5 +1,5 @@
 import React from "react";
-import AddToCalendarHOC from "react-add-to-calendar-hoc";
+//import AddToCalendarHOC from "react-add-to-calendar-hoc";
 import $ from "jquery";
 import { Button, Icon } from "semantic-ui-react";
 import Moment from "react-moment";
@@ -189,7 +189,8 @@ class Example extends React.Component {
         )}
       </>
     );
-    const AddToCalendarDropdown = AddToCalendarHOC(ATCWrapper, ATCDropdown);
+    return <></>
+   // const AddToCalendarDropdown = AddToCalendarHOC(ATCWrapper, ATCDropdown);
 
     return (
       <AddToCalendarDropdown

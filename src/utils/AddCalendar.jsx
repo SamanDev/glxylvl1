@@ -1,5 +1,5 @@
 import React from "react";
-import AddToCalendarHOC from "react-add-to-calendar-hoc";
+//import AddToCalendarHOC from "react-add-to-calendar-hoc";
 import $ from "jquery";
 import { Button, Icon } from "semantic-ui-react";
 import Moment from "react-moment";
@@ -198,7 +198,12 @@ class Example extends React.Component {
           </>
         )}
 
-        {((_next && a < b) || (_start && startTime < now)) && !_finish ? (
+       
+      </>
+    );
+    return <>
+    <br/>
+    {((_next && a < b) || (_start && startTime < now)) && !_finish ? (
           <>
             <Moment
               className="farsi-inline ui label green fluid"
@@ -208,18 +213,8 @@ class Example extends React.Component {
             >
               {now}
             </Moment>
-            <Button
-              onClick={args.onClick}
-              color="red"
-              icon
-              labelPosition="left"
-              fluid
-              className="farsi-inline calbtn hiddenmen2u"
-              style={{ margin: "10px 0" }}
-            >
-              <Icon size="large" name="calendar plus outline" />
-              به تقویم من اضافه کن
-            </Button>
+ 
+ 
           </>
         ) : (
           <>
@@ -233,23 +228,10 @@ class Example extends React.Component {
               {startTime}
             </Moment>
 
-            <Button
-              onClick={args.onClick}
-              color="red"
-              icon
-              labelPosition="left"
-              fluid
-              className="farsi-inline calbtn hiddenmen2u"
-              style={{ margin: "10px 0" }}
-            >
-              <Icon size="large" name="calendar plus outline" />
-              به تقویم من اضافه کن
-            </Button>
+      
           </>
-        )}
-      </>
-    );
-    const AddToCalendarDropdown = AddToCalendarHOC(ATCWrapper, ATCDropdown);
+        )}</>
+    //const AddToCalendarDropdown = AddToCalendarHOC(ATCWrapper, ATCDropdown);
 
     return (
       <AddToCalendarDropdown

@@ -4,7 +4,7 @@ import { adminPutServiceList, adminPostService } from "../../services/admin";
 import { Alert } from "../../utils/alerts";
 import { MyConfirm } from "../../utils/myAlert";
 import { isJson } from "../../const";
-import { JsonEditor } from "react-jsondata-editor";
+//import { JsonEditor } from "react-jsondata-editor";
 import { publicGetRules } from "../../services/admin";
 import {
   Input,
@@ -781,12 +781,12 @@ function Admin(prop) {
         >
           {siteInfo.shutdown ? "Start Server" : "ShutDown Server"}
         </Button>
-        <JsonEditor
+        {/* <JsonEditor
           jsonObject={input}
           onChange={(output) => {
             saveObj(output);
           }}
-        />
+        /> */}
       </div>
     </>
   );
