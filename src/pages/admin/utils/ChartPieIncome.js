@@ -1,4 +1,4 @@
-import React,{ useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import $ from "jquery";
 import Chart from "chart.js/auto";
 import { doCurrencyMil } from "../../../const";
@@ -17,7 +17,7 @@ const sumOf = (array) => {
         ? currentValue.amount
         : currentValue.amount2 * desc.dollarPrice;
     if (_am < 0) {
-      _am = _am*-1;
+      _am = _am * -1;
     }
     return sum + _am;
   }, 0);
@@ -35,18 +35,18 @@ const groupBy = (array, key) => {
 };
 
 function RisingPitch(prop) {
-    const [data, setData] = useState([]);
-    const [startDate, setStartDate] = useState(addDays(new Date(), prop.day-1));
-  const [endDate, setEndDate] = useState(addDays(new Date(), prop.day-1));
+  const [data, setData] = useState([]);
+  const [startDate, setStartDate] = useState(addDays(new Date(), prop.day - 1));
+  const [endDate, setEndDate] = useState(addDays(new Date(), prop.day - 1));
   const filteredItems = data
   data.sort((a, b) => (a.date < b.date ? 1 : -1));
-    const fetchUsers = async (mode) => {
-    
-        var _s = moment(startDate).format("YYYY-MM-DD");
-        var _e = moment(endDate).format("YYYY-MM-DD");
-        try {
-       
-            var res;
+  const fetchUsers = async (mode) => {
+
+    var _s = moment(startDate).format("YYYY-MM-DD");
+    var _e = moment(endDate).format("YYYY-MM-DD");
+    try {
+
+      var res;
       if (prop.day == 1) {
         res = await adminGetService(`getIncome?page=1&number=10&startDate=${_s}&endDate=${_e}`);
       } else {
@@ -54,96 +54,98 @@ function RisingPitch(prop) {
           `getIncome?page=1&number=10&startDate=${_s}&endDate=${_e}`
         );
       }
-          
-    
-          if (res.status === 200) {
-            setData(res.data);
-       
-    
-          }
-        } catch (error) {
-          
-        } finally {
-          
-        }
-      };
-      useEffect(() => {
-   if(filteredItems.length>0){
 
-        
-        $("#chart"+prop.mode+prop.day).html("");
-        $("#chart"+prop.mode+prop.day).append('<canvas id="acquisitions'+prop.mode+prop.day+'"></canvas>');
-     
-        var modedata = [];
-        var valdata = [];
-        modedata.push("botsRake");
-      valdata.push((filteredItems[0].botsRake) )
-      modedata.push("runnersRake");
-      valdata.push((filteredItems[0].runnersRake) )
-        modedata.push("pokerRake");
-      valdata.push((filteredItems[0].pokerRake-filteredItems[0].botsRake-filteredItems[0].runnersRake) )
+
+      if (res.status === 200) {
+        setData(res.data);
+
+
+      }
+    } catch (error) {
+
+    } finally {
+
+    }
+  };
+  useEffect(() => {
+    if (filteredItems.length > 0) {
+
+
+      $("#chart" + prop.mode + prop.day).html("");
+      $("#chart" + prop.mode + prop.day).append('<canvas id="acquisitions' + prop.mode + prop.day + '"></canvas>');
+
+      var modedata = [];
+      var valdata = [];
+      modedata.push("Bots");
+      valdata.push((filteredItems[0].botsTotal + filteredItems[0].runnersTotal))
+    
+      modedata.push("Casino");
+      valdata.push((filteredItems[0].casinoTomanFinal))
+      modedata.push("Rake");
+      valdata.push((filteredItems[0].pokerRake - filteredItems[0].botsRake - filteredItems[0].runnersRake))
       
 
- 
-        var chartdata = {
-          labels: modedata,
-          datasets: [{
-           
-            data: valdata,
-            borderWidth: 2,
-            backgroundColor: ['#CB4335', '#F1C40F', '#27AE60', '#884EA0', '#D35400'],
-          }]
-        };
-       // console.log(chartdata)
-        new Chart(document.getElementById("acquisitions"+prop.mode+prop.day), {
-            type: 'doughnut',
-            data: chartdata,
-            options: {
-              plugins: {
-                title: {
-                  display: true,
-                  text: doCurrencyMil(filteredItems[0].pokerRake-filteredItems[0].botsRake-filteredItems[0].runnersRake),
-                  font: {
-                    size: 17,
-              
-                
-                  },
-                },
-                subtitle: {
-                  display: true,
-                  text: moment(startDate).format("YYYY-MM-DD"),
-                  color: 'blue',
-                  font: {
-                    size: 12,
-                    family: 'tahoma',
-                    weight: 'normal',
-                
-                  },
-                  padding: {
-                    bottom: 10
-                  }
-                },
-                legend: {
-                  display: false,
-                 
+
+
+      var chartdata = {
+        labels: modedata,
+        datasets: [{
+
+          data: valdata,
+          borderWidth: 2,
+          backgroundColor: ['#CB4335', '#F1C40F', '#27AE60', '#884EA0', '#D35400'],
+        }]
+      };
+      // console.log(chartdata)
+      new Chart(document.getElementById("acquisitions" + prop.mode + prop.day), {
+        type: 'doughnut',
+        data: chartdata,
+        options: {
+          plugins: {
+            title: {
+              display: true,
+              text: doCurrencyMil(filteredItems[0].finalTotal),
+              font: {
+                size: 17,
+
+
+              },
+            },
+            subtitle: {
+              display: true,
+              text: moment(startDate).format("YYYY-MM-DD"),
+              color: 'blue',
+              font: {
+                size: 12,
+                family: 'tahoma',
+                weight: 'normal',
+
+              },
+              padding: {
+                bottom: 10
               }
-              }
+            },
+            legend: {
+              display: true,
+
             }
-        });
+          }
+        }
+      });
     }
-      }, [filteredItems]);
-      useEffect(() => {
-        fetchUsers(prop.mode);
-      }, []);
-     
+  }, [filteredItems]);
+  useEffect(() => {
+    fetchUsers(prop.mode);
+  }, []);
+
   return (
     <div
       style={{
         width: "50%",
         margin: "auto",
-        display:"inline-block"
+        display: "inline-block"
       }}
-      id={"chart"+prop.mode+prop.day}
+      id={"chart" + prop.mode + prop.day}
     ></div>
   );
 }

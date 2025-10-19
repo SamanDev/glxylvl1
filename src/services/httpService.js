@@ -123,6 +123,7 @@ export const httpService = (url, method, data = null) => {
   var tokenInfo = JSON.parse(localStorage.getItem(loginKey + "Token"));
   const source = axios.CancelToken.source();
   source.cancel();
+  
   return axios({
     url: apiPath + "/api" + url,
     method,

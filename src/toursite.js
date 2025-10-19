@@ -5,7 +5,7 @@ import $ from "jquery";
 import { Button } from "semantic-ui-react";
 var step0count = 5;
 var step1count = 4;
-function RightPanel() {
+function TourSitePanel() {
   const steps = [
     {
       selector: ".step2",
@@ -484,4 +484,4 @@ function RightPanel() {
     </TourProvider>
   );
 }
-export default RightPanel;
+export default TourSitePanel;

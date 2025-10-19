@@ -75,7 +75,7 @@ const Reward = (prop) => {
             : ""
         }
         onClick={() => {
-          $(".user" + prop.item.id).removeClass("hiddenmenu");
+          $(".user" + prop.item.id).toggleClass("hiddenmenu");
         }}
       >
         <Grid.Column width={6}>

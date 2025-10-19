@@ -26,7 +26,7 @@ var __bnus = [
   },
 ];
 var _deflevels = [30, 25, 20, 15, 10, 5];
-var _deflevelsAmount = [4.0, 0.5, 0.8, 0.7, 0.6, 0.5, 0.4];
+var _deflevelsAmount = [4.0, 2.5, 1.8, 1, 0.6, 0.5, 0.4];
 function generateRandomInteger(min, max) {
   return Math.floor(min + Math.random() * (max - min + 1));
 }
@@ -315,7 +315,7 @@ function Admin(prop) {
                   <label>{_deflevels[i]}</label>
                   <Input type="text" disabled={!findStateId(myState, "defbol")}>
                     <CurrencyInput
-                      value={_deflevelsAmount[i] * 1000000}
+                      value={_deflevelsAmount[i] * 1500000}
                       name="min"
                       allowDecimals={false}
                       onValueChange={(value, name) => {

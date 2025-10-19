@@ -377,7 +377,8 @@ function Admin(prop) {
     );
   }, [filterText, resetPaginationToggle, data, selectedList]);
   const ontable  = gettotal3(filteredItems, "Done", "total")
-  const botTotalLive  = dataStat?.botTotalLive
+  const botTotalLive  = dataStat?.botTotalLive + dataStat?.botTotalRakeLive
+  const runnerTotalLive  = dataStat?.runnerTotalLive + dataStat?.runnerTotalRakeLive
   const tot = botTotalLive +dataStat?.runnerTotalLive +ontable
   if (loading) {
     return (
@@ -420,8 +421,8 @@ function Admin(prop) {
             <StatisticLabel>bots</StatisticLabel>
           </Statistic>
      
-          <Statistic  color={dataStat?.runnerTotalLive>0?"green":"red"}>
-            <StatisticValue>{dataStat?.runnerTotalLive>0?"+":""}{doCurrencyMil(dataStat?.runnerTotalLive)}</StatisticValue>
+          <Statistic  color={runnerTotalLive>0?"green":"red"}>
+            <StatisticValue>{runnerTotalLive>0?"+":""}{doCurrencyMil(runnerTotalLive)}</StatisticValue>
             <StatisticLabel>runners</StatisticLabel>
           </Statistic>
      

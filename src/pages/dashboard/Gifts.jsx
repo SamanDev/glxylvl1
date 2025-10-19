@@ -12,6 +12,17 @@ import LevelBar from "../../utils/GiftLevelBar";
 const LevelList = (prop) => {
   const loginToken = prop.loginToken;
   const siteInfo = prop.siteInfo;
+  var lvlPercent = siteInfo.secondForGift/60;
+  var _bonuses = loginToken?.userGifts?.filter(function (a, b) {
+    return a.mode == "Gift" && a.status=="Pending";
+  })[0];
+
+if(_bonuses){
+  if (siteInfo.noPlayGiftAmount >= _bonuses.amount) {
+    lvlPercent = siteInfo.secondForLowGift/60
+ }
+}
+  
   return (
     <span className="myaccount popupmenu">
       <span className="lazyarea">
@@ -39,7 +50,7 @@ const LevelList = (prop) => {
                   iconamin="swing inline animated"
                 />
                 <Segment inverted basic >
-                  <p className="farsi mywrap lh-lg">برای دریافت هدیه باید <span className="text-gold">{siteInfo.secondForGift/60} دقیقه</span> روی میزهای گلکسی بازی نمایید.</p>
+                  <p className="farsi mywrap lh-lg">برای دریافت هدیه باید <span className="text-gold">{lvlPercent} دقیقه</span> روی میزهای گلکسی بازی نمایید.</p>
                 <div className="giftlevelbar"><LevelBar progress {...prop} /></div></Segment>
                 
               </div>

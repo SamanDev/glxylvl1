@@ -9,17 +9,19 @@ import $ from "jquery";
 import { Tab } from "semantic-ui-react";
 
 function RightPanel(prop) {
-  const [lastReward] = useLastReward();
+
   const [activeIndex, setActiveIndex] = useState(0);
+  const [lastReward] = useLastReward();
   //if (!prop.activePanel) return null;
   const handleTabChange = (activeIndex) => {
     setActiveIndex(activeIndex);
     prop.reportWindowSize();
   };
+
   const panes = [
     {
       menuItem: {
-        key: "tabels",
+        key: "acttabels",
         className: "farsi w-50",
         content: <>میز های فعال</>,
       },
@@ -27,6 +29,7 @@ function RightPanel(prop) {
       render: () => (
         <Tab.Pane
           attached={false}
+          
           inverted
           style={{
             height: "100%",
@@ -111,9 +114,11 @@ function RightPanel(prop) {
       ),
     },
   ];
+
   return (
     <div className=" ">
       <Tab
+      
         menu={{
           inverted: true,
           color: "black",

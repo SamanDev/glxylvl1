@@ -2,7 +2,7 @@ import jMoment from "jalali-moment";
 const moment = require("moment");
 export const convertDateToJalali = (d, f) => {
   try {
-    var date = d.replace("-08:00", "");
+    var date = d.replace("+03:30", "");
   } catch (error) {
     var date = d;
   }

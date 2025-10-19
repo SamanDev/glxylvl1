@@ -29,7 +29,7 @@ const sumOf = (array) => {
                 ? currentValue.amount
                 : currentValue.amount2 * desc.dollarPrice;
         if (_am < 0) {
-            _am = _am * -1;
+            //_am = _am * -1;
         }
         return sum + _am;
     }, 0);
@@ -83,7 +83,7 @@ const getChartColor = (name) => {
     }
     if (name.indexOf("Cashout ") > -1) {
         text = "rgba(255,0,0,0.3)";
-          if (name.indexOf("IranShetab") > -1) {
+        if (name.indexOf("IranShetab") > -1) {
             text = "rgba(255, 136, 0, 0.3)";
         }
         if (name.indexOf("Utopia") > -1) {
@@ -135,30 +135,36 @@ function Admin(prop) {
 
             labels.push(_day);
         }
-const convertDateTimeToBrowserTime = (dateTimeWithTimeZone,mode) => {
-    var newdate = moment(dateTimeWithTimeZone, 'YYYY-MM-DDTHH:mm:ssZ').local().format('YYYY-MM-DD HH:mm:ss')
-    
-    
-    if(mode=="day"){
-        var date = new Date(newdate);
-        console.log(newdate,date,date.toString());
-return moment(newdate).date();
-    }else{
-return moment(newdate).month()
+        function convertTZ(date, tzString) {
+            var retu = new Date((typeof date === "string" ? new Date(date) : date).toLocaleString("en-US", { timeZone: tzString }));
+            //console.log(retu, new Date(date));
 
-    }
-     
-}
+            return retu.getDate()
+        }
+        const convertDateTimeToBrowserTime = (dateTimeWithTimeZone, mode) => {
+            var newdate = dateTimeWithTimeZone
+
+
+            if (mode == "day") {
+                var date = convertTZ(newdate, "Asia/Tehran")
+               // console.log(newdate, date, date.toString());
+                return date;
+            } else {
+                return moment(newdate).month()
+
+            }
+
+        }
 
         const getdays = (data) => {
             var _data = data;
             var newdata = [];
- 
+
             for (let index = 0; index < _d; index++) {
                 var i = moment(_s).add(index, "days").format("YYYY-MM-DD");
                 var ffdata = _data.filter(
-                    (d) => 
-                        convertDateTimeToBrowserTime(d.createDate,"day") ===
+                    (d) =>
+                        convertDateTimeToBrowserTime(d.createDate, "day") ===
                         parseInt(moment(i).date()) &&
                         convertDateTimeToBrowserTime(d.createDate) ===
                         parseInt(moment(i).month()) &&
@@ -214,7 +220,7 @@ return moment(newdate).month()
     }, [data]);
     useEffect(() => {
         $("#chart").html("");
-        $("#chart").append('<canvas style="height:300px" id="acquisitions"></canvas>');
+        $("#chart").append('<canvas style="height:300px;min-width:600px;" id="acquisitions"></canvas></div>');
 
         new Chart(document.getElementById("acquisitions"), {
             type: "line",

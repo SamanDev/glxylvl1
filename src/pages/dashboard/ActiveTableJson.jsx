@@ -32,6 +32,7 @@ const ActiveTable = (prop) => {
     if (_sortDataOld == null) {
         _sortDataOld = [];
     }
+    
     const loginToken = prop.loginToken;
     const siteInfo = prop.siteInfo;
     var _event = getEvent(siteInfo);
@@ -184,6 +185,7 @@ const ActiveTable = (prop) => {
         <>
             <div
                 className="step1-2"
+               
                 style={{
                     padding: 10,
                     borderBottom: "1px solid gray",
@@ -195,10 +197,12 @@ const ActiveTable = (prop) => {
                         onClick={() => {
                             setFil("");
                         }}
+
                         active={fil == "" ? true : false}
                         color={fil == "" ? "red" : "grey"}
                         basic
                         inverted
+                       key={'all'}
                     >
                         All
                     </Button>
@@ -210,6 +214,7 @@ const ActiveTable = (prop) => {
                         color={fil == "HO" ? "yellow" : "grey"}
                         inverted
                         basic
+                        key={'ho'}
                     >
                         Holdem
                     </Button>
@@ -221,45 +226,12 @@ const ActiveTable = (prop) => {
                         onClick={() => {
                             setFil("OM");
                         }}
+                        key={'om'}
                     >
                         Omaha
                     </Button>
                 </Button.Group>
-                {/* <Button.Group widths="3" size="mini">
-          <Button
-            onClick={() => {
-              setFil("");
-            }}
-            active={fil == "" ? true : false}
-            color={fil == "" ? "red" : "grey"}
-            basic
-            inverted
-          >
-            All
-          </Button>
-          <Button
-            onClick={() => {
-              setFil("HO");
-            }}
-            active={fil == "HO" ? true : false}
-            color={fil == "HO" ? "yellow" : "grey"}
-            inverted
-            basic
-          >
-            Holdem
-          </Button>
-          <Button
-            active={fil == "OM" ? true : false}
-            color={fil == "OM" ? "yellow" : "grey"}
-            inverted
-            basic
-            onClick={() => {
-              setFil("OM");
-            }}
-          >
-            Omaha
-          </Button>
-        </Button.Group> */}
+               
             </div>
             <List divided inverted relaxed verticalAlign="middle" className="activetable step1-1">
                 {_filterData.length == 0 ? (

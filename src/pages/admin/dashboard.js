@@ -16,6 +16,8 @@ const GridExampleTextAlignmentCenter = (prop) => {
 
   return (
     <Segment inverted>
+      <div style={{overflow:'auto',minHeight:300,width:'100%'}}>
+        <div style={{minWidth:'1400px'}}>
        <Stats {...prop} />
       <Grid textAlign='center' columns={3}>
         <GridRow>
@@ -88,7 +90,10 @@ const GridExampleTextAlignmentCenter = (prop) => {
           </GridColumn>
         </GridRow>
       </Grid>
+      </div>
+      </div>
       </Segment>
+      
   )
 }
 

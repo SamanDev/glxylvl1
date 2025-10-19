@@ -153,7 +153,7 @@ function Admin(prop) {
     setLoading(true);
     try {
       const res = await adminGetService(
-        `getUsersByAdmin?name=chip&value=&page=1&number=250&login=&contain=false`
+        `getUsersByAdmin?name=chip&value=&page=1&number=500&login=&contain=false`
       );
       if (res.status === 200) {
         setData(res.data.users);
@@ -175,6 +175,8 @@ function Admin(prop) {
  
   var filteredItems = data.filter((item) => item.refer !='runner' &&item.refer !='bots' &&item.balance >=1000000 );
 
+        filteredItems = filteredItems.filter((item) => item?.refer != "Runner" && item?.refer != "bots");
+    
 
   if (loading) {
     return (
