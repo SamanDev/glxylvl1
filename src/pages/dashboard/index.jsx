@@ -34,7 +34,7 @@ function SegmentExamplePlaceholderInline(prop) {
                                 alt="گلکسی کازینو"
                                 style={{
                                     width: "30vw",
-                                    maxWidth: "200px",
+                                    maxWidth: "143px",
                                     marginTop: 80,
 
                                     filter: " drop-shadow(1px 1px 30px #ffffff) drop-shadow(1px 1px 2px rgb(0 0 0 / 1)) drop-shadow(1px 1px 3px rgb(0 0 0 / 1)) drop-shadow(1px 1px 10px rgb(0 0 0 / 6))",
@@ -46,7 +46,7 @@ function SegmentExamplePlaceholderInline(prop) {
                                 className="farsi fw-bold fs-5"
                                 style={{
                                     position: "relative",
-                                    top: -50,
+                                    top: -30,
                                     color: "rgba(255,255,255,1)",
                                     filter: "drop-shadow(1px 1px 2px rgb(0 0 0 / 1)) drop-shadow(1px 1px 5px rgb(0 0 0 / 1))",
                                 }}

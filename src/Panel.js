@@ -23,6 +23,7 @@ function RightPanel(prop) {
       menuItem: {
         key: "acttabels",
         className: "farsi w-50",
+        as:"div",
         content: <>میز های فعال</>,
       },
 
@@ -47,6 +48,7 @@ function RightPanel(prop) {
       menuItem: {
         key: "rewards",
         className: "farsi w-50",
+        as:"div",
         content: (
           <>
            
@@ -70,6 +72,7 @@ function RightPanel(prop) {
       menuItem: {
         key: "wins",
         className: "farsi w-50",
+        as:"div",
         content: (
           <>
             <Segment
