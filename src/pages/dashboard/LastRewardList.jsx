@@ -83,10 +83,12 @@ const LevelList = (prop) => {
                         })
                         .sort((a, b) => (a.date < b.date ? 1 : -1));
                 }
-                setData(_data);
-                setLoading(false);
+               
                 if (_data.length == 500) {
                     handleGetRewards2(_data,2);
+                }else{
+                    setData(_data);
+                    setLoading(false);
                 }
             }
         } catch (error) {
@@ -94,7 +96,7 @@ const LevelList = (prop) => {
         }
     };
     const handleGetRewards2 = async (data,page) => {
-        setLoading(true);
+        //setLoading(true);
         try {
             const res = await getRewardsService("", prop.mode, "", prop.mode == "levels" ? 500 : 500, page);
             if (res.status === 200) {
@@ -132,10 +134,12 @@ const LevelList = (prop) => {
                         .sort((a, b) => (a.date < b.date ? 1 : -1));
                 }
                 _data = data.concat(_data);
-                setData(_data);
-                setLoading(false);
+                
                 if (_data.length == page*500 && _data.length < 4000) {
                     handleGetRewards2(_data,(page+1));
+                }else{
+                    setData(_data);
+                setLoading(false);
                 }
             }
         } catch (error) {
@@ -202,7 +206,7 @@ const LevelList = (prop) => {
             setstatData(stat);
         } else {
             var stat = [];
-            console.log(data);
+            //console.log(data);
 
             if (data.length > 0) {
                 {
@@ -249,7 +253,7 @@ const LevelList = (prop) => {
                         glist.pushArrayMembers(_data);
                     });
                 }
-                console.log(glist);
+                //console.log(glist);
                 setGlist(glist);
                 stat.sort((a, b) => (a.sum < b.sum ? 1 : -1));
                 setstatData(stat);

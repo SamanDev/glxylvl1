@@ -1,9 +1,10 @@
 import React, { Suspense, lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 
-const Dashboard = lazy(() => import("./dashboard/Dashboard"));
+//const Dashboard = lazy(() => import("./dashboard/Dashboard"));
 const Game = lazy(() => import("./dashboard/Game"));
 const Admin = lazy(() => import("./admin/Index"));
+import Dashboard from "./dashboard/Dashboard";
 import UpdatePage from "./dashboard/update";
 import MenuLoader from "../utils/menuLoader";
 const Content = (prop) => {
@@ -55,24 +56,7 @@ const Content = (prop) => {
                         <Route
                             path="*"
                             element={
-                                <Suspense fallback={<MenuLoader />}>
-                                    {/* <div className="fullscreen-bg">
-                    <video
-                      loop
-                      muted
-                      autoPlay
-                      className="fullscreen-bg__video"
-                      disablePictureInPicture={true}
-                      playsInline
-                    >
-                      <source
-                        src={"/assets/images/bg" + dayOfWeekDigit + ".mp4"}
-                        type="video/mp4"
-                      />
-                    </video>
-                  </div> */}
-                                    <Dashboard {...prop} />
-                                </Suspense>
+                                <Dashboard {...prop} />
                             }
                         />
                         <Route

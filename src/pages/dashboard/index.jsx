@@ -27,14 +27,14 @@ function SegmentExamplePlaceholderInline(prop) {
                 </div>
                 <div className="text-center" style={{ overflow: "hidden" }}>
                     <Header icon>
-                        <Icon>
+                        <Icon  style={{ minHeight: 95 }}>
                             <Image
                                 src="/assets/images/logo.png"
                                 centered
                                 alt="گلکسی کازینو"
                                 style={{
-                                    width: "30vw",
-                                    maxWidth: "143px",
+                                   
+                                    width: "143px",
                                     marginTop: 80,
 
                                     filter: " drop-shadow(1px 1px 30px #ffffff) drop-shadow(1px 1px 2px rgb(0 0 0 / 1)) drop-shadow(1px 1px 3px rgb(0 0 0 / 1)) drop-shadow(1px 1px 10px rgb(0 0 0 / 6))",
