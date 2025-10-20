@@ -314,7 +314,7 @@ const LevelList = (prop) => {
                                                     </div>
                                                 </div>
                                             </List.Content>
-                                            <LevelIcon mode={prop.mode=="gift"?prop.mode+"1":prop.mode} level={x.count} text={x.count + " Record"} classinside="iconinside0" number="" width="38px" />
+                                            <LevelIcon mode={prop.mode=="gift"?prop.mode+"3":prop.mode} level={x.count} text={x.count + " Record"} classinside="iconinside0" number="" width="38px" />
 
                                             <span className={"rewardname animated fadeInLeft"} style={{ marginLeft: 10 }}>
                                                 <LevelIcon mode="levels" level={x.level} text={x.username} classinside="iconinside0" number="" width="36px" iconamin="swing" />
