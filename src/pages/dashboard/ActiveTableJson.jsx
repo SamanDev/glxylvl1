@@ -251,8 +251,8 @@ const ActiveTable = (prop) => {
                             if (x.minstack < minstack || x.status.indexOf("0/") == -1) {
                                 return (
                                     <List.Item
-                                        key={i}
-                                        id={"lvl" + (i + 1)}
+                                        key={i+x.name.split(" ")[0]}
+                                        id={"lvl" + (i + 1)+x.name.split(" ")[0]}
                                         as="div"
                                         className={x.minstack > loginToken?.balance ? "tablename  " + x?.class : "tablename " + x?.class}
                                         onClick={() => {
