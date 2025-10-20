@@ -37,7 +37,10 @@ class UserWebsocket {
                 clearInterval(timerId);
                 timerId = setInterval(() => {
                     try {
-                        ws.send("ping");
+                        if(ws != null){
+                            ws.send("ping");
+                        }
+                        
                     } catch (error) {
                         clearInterval(timerId);
                     }

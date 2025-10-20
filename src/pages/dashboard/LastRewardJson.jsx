@@ -83,9 +83,9 @@ const ActiveTable = (prop) => {
             overflow: "hidden",
           }}
         >
-          <div className={"animated fadeIn"}>
+        {/*   <div className={"animated fadeIn"}>
             <RewardStat lastReward={_sortData} title="no" />
-          </div>
+          </div> */}
 
           {_sortData
             .filter((d) => d.mode != "Bonus")

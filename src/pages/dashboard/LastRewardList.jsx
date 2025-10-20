@@ -46,105 +46,103 @@ const LevelList = (prop) => {
     const [statData, setstatData] = useState([]);
 
     const handleGetRewards = async () => {
-      setLoading(true);
-      try {
-          const res = await getRewardsService("", prop.mode, "", prop.mode == "levels" ? 500 : 500, 1);
-          if (res.status === 200) {
-              const start = new Date();
-              start.setDate(1);
-              start.setHours(0, 0, 0, 0);
+        setLoading(true);
+        try {
+            const res = await getRewardsService("", prop.mode, "", prop.mode == "levels" ? 500 : 500, 1);
+            if (res.status === 200) {
+                const start = new Date();
+                start.setDate(1);
+                start.setHours(0, 0, 0, 0);
 
-              const end = new Date();
-              end.setDate(31);
-              end.setHours(23, 59, 59, 999);
-              end.getTime();
-              start.getTime();
-              
-
-              if (prop.mode == "gpass" || prop.mode == "vip" || prop.mode == "league") {
-                  var _data = res.data
-                      .filter((item) => {
-                          let date = new Date(item.date).getTime();
-                          return date >= start && date <= end;
-                      })
-                      .sort((a, b) => (a.date < b.date ? 1 : -1));
-                      
-              } else {
-                  var _data = res.data.sort((a, b) => (a.date < b.date ? 1 : -1));
-              }
-
-              if (_data.length == 0) {
-                  start.setMonth(end.getMonth() - 1);
-                  end.getTime();
-                  start.getTime();
-
-                  _data = res.data
-                      .filter((item) => {
-                          let date = new Date(item.date).getTime();
-                          return date >= start && date <= end;
-                      })
-                      .sort((a, b) => (a.date < b.date ? 1 : -1));
-              }
-              setData(_data);
-              setLoading(false);
-              if (_data.length == 500) {
-                
-                  handleGetRewards2(_data);
-         
-                
-              }
-          }
-      } catch (error) {
-          ////console.log(error.message);
-      }
-  };
-  const handleGetRewards2 = async (data) => {
-    setLoading(true);
-    try {
-        const res = await getRewardsService("", prop.mode, "", prop.mode == "levels" ? 500 : 500, 2);
-        if (res.status === 200) {
-            const start = new Date();
-            start.setDate(1);
-            start.setHours(0, 0, 0, 0);
-
-            const end = new Date();
-            end.setDate(31);
-            end.setHours(23, 59, 59, 999);
-            end.getTime();
-            start.getTime();
-        
-
-            if (prop.mode == "gpass" || prop.mode == "vip" || prop.mode == "league") {
-                var _data = res.data
-                    .filter((item) => {
-                        let date = new Date(item.date).getTime();
-                        return date >= start && date <= end;
-                    })
-                    .sort((a, b) => (a.date < b.date ? 1 : -1));
-            } else {
-                var _data = res.data.sort((a, b) => (a.date < b.date ? 1 : -1));
-            }
-
-            if (_data.length == 0) {
-                start.setMonth(end.getMonth() - 2);
+                const end = new Date();
+                end.setDate(31);
+                end.setHours(23, 59, 59, 999);
                 end.getTime();
                 start.getTime();
 
-                _data = res.data
-                    .filter((item) => {
-                        let date = new Date(item.date).getTime();
-                        return date >= start && date <= end;
-                    })
-                    .sort((a, b) => (a.date < b.date ? 1 : -1));
+                if (prop.mode == "gpass" || prop.mode == "vip" || prop.mode == "league") {
+                    var _data = res.data
+                        .filter((item) => {
+                            let date = new Date(item.date).getTime();
+                            return date >= start && date <= end;
+                        })
+                        .sort((a, b) => (a.date < b.date ? 1 : -1));
+                } else {
+                    var _data = res.data.sort((a, b) => (a.date < b.date ? 1 : -1));
+                }
+
+                if (_data.length == 0) {
+                    start.setMonth(end.getMonth() - 1);
+                    end.getTime();
+                    start.getTime();
+
+                    _data = res.data
+                        .filter((item) => {
+                            let date = new Date(item.date).getTime();
+                            return date >= start && date <= end;
+                        })
+                        .sort((a, b) => (a.date < b.date ? 1 : -1));
+                }
+                setData(_data);
+                setLoading(false);
+                if (_data.length == 500) {
+                    handleGetRewards2(_data,2);
+                }
             }
-            _data = data.concat(_data)
-            setData(_data);
-            setLoading(false);
+        } catch (error) {
+            ////console.log(error.message);
         }
-    } catch (error) {
-        ////console.log(error.message);
-    }
-};
+    };
+    const handleGetRewards2 = async (data,page) => {
+        setLoading(true);
+        try {
+            const res = await getRewardsService("", prop.mode, "", prop.mode == "levels" ? 500 : 500, page);
+            if (res.status === 200) {
+                const start = new Date();
+                start.setDate(1);
+                start.setHours(0, 0, 0, 0);
+
+                const end = new Date();
+                end.setDate(31);
+                end.setHours(23, 59, 59, 999);
+                end.getTime();
+                start.getTime();
+
+                if (prop.mode == "gpass" || prop.mode == "vip" || prop.mode == "league") {
+                    var _data = res.data
+                        .filter((item) => {
+                            let date = new Date(item.date).getTime();
+                            return date >= start && date <= end;
+                        })
+                        .sort((a, b) => (a.date < b.date ? 1 : -1));
+                } else {
+                    var _data = res.data.sort((a, b) => (a.date < b.date ? 1 : -1));
+                }
+
+                if (_data.length == 0) {
+                    start.setMonth(end.getMonth() - 2);
+                    end.getTime();
+                    start.getTime();
+
+                    _data = res.data
+                        .filter((item) => {
+                            let date = new Date(item.date).getTime();
+                            return date >= start && date <= end;
+                        })
+                        .sort((a, b) => (a.date < b.date ? 1 : -1));
+                }
+                _data = data.concat(_data);
+                setData(_data);
+                setLoading(false);
+                if (_data.length == page*500 && _data.length < 4000) {
+                    handleGetRewards2(_data,(page+1));
+                }
+            }
+        } catch (error) {
+            ////console.log(error.message);
+        }
+    };
+
 
     const handleGetRewardspass = async () => {
         setLoading(true);
@@ -198,7 +196,7 @@ const LevelList = (prop) => {
                     });
                 }
             }
-     
+
             setGlist(data);
             stat.sort((a, b) => (a.sum < b.sum ? 1 : -1));
             setstatData(stat);
@@ -316,7 +314,7 @@ const LevelList = (prop) => {
                                                     </div>
                                                 </div>
                                             </List.Content>
-                                            <LevelIcon mode={prop.mode} level={x.count} text={x.count + " Record"} classinside="iconinside0" number="" width="38px" />
+                                            <LevelIcon mode={prop.mode=="gift"?prop.mode+"1":prop.mode} level={x.count} text={x.count + " Record"} classinside="iconinside0" number="" width="38px" />
 
                                             <span className={"rewardname animated fadeInLeft"} style={{ marginLeft: 10 }}>
                                                 <LevelIcon mode="levels" level={x.level} text={x.username} classinside="iconinside0" number="" width="36px" iconamin="swing" />
