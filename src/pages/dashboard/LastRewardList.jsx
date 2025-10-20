@@ -282,9 +282,9 @@ const LevelList = (prop) => {
                                 <span className="mm-listitem__text">آخرین جوایز</span>
                             </li>
                         </ul>
-                        <div className={"animated fadeIn"}>
+                        <ul className={"animated fadeIn mm-listview"}>
                             <RewardStat lastReward={glis} />
-                        </div>
+                        </ul>
                         <List divided inverted verticalAlign="middle" className="myaccount" style={{ padding: "0 20px" }}>
                             {statData.map((x, i) => {
                                 var _lvl = x?.level;

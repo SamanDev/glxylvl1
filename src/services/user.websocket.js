@@ -34,17 +34,7 @@ class UserWebsocket {
                     tkn = false;
                 }
                 eventBus.dispatch("eventsConnect", "");
-                clearInterval(timerId);
-                timerId = setInterval(() => {
-                    try {
-                        if(ws != null){
-                            ws.send("ping");
-                        }
-                        
-                    } catch (error) {
-                        clearInterval(timerId);
-                    }
-                }, 10000);
+                ws.send("ping");
                 // console.log("Socket is connected.");
             };
             ws.onmessage = function (data) {
@@ -66,8 +56,9 @@ class UserWebsocket {
                     }
                 } else {
                     if (message === "closeConnection") {
+                        clearInterval(timerId);
                         if (tkn) {
-                            clearInterval(timerId);
+                            
                             try {
                                 ws?.close();
                             } catch (error) {}
@@ -80,12 +71,14 @@ class UserWebsocket {
                         eventBus.dispatch("eventsDataActive", "Your account has been activated.");
                         //eventBus.dispatch("eventsDC", '');
                     } else if (message == "Pong") {
+                        
                         res = true;
                     }
                 }
+                ws.send("ping");
             };
             ws.onerror = function (e) {
-                clearInterval(timerId);
+                //clearInterval(timerId);
                 try {
                     ws?.close();
                 } catch (error) {}
@@ -95,6 +88,7 @@ class UserWebsocket {
                 }
             };
         } else {
+           // clearInterval(timerId);
             //console.log(tkn);
             //token = null;
             //tkn = false;
@@ -102,7 +96,7 @@ class UserWebsocket {
     }
 
     disconnect() {
-        clearInterval(timerId);
+        //clearInterval(timerId);
         try {
             ws?.close();
         } catch (error) {}

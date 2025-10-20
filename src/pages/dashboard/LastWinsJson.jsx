@@ -64,7 +64,7 @@ clearInterval(timer);
               return (
                   <div
                     className={bonus?.game + " rewardname"}
-                    
+                    key={i}
                   >
                     <Reward item={bonus} color={false} {...prop} />
                   </div>
