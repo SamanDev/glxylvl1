@@ -46,7 +46,7 @@ function SegmentExamplePlaceholderInline(prop) {
                                 className="farsi fw-bold fs-5"
                                 style={{
                                     position: "relative",
-                                    top: -30,
+                                    top: -50,
                                     color: "rgba(255,255,255,1)",
                                     filter: "drop-shadow(1px 1px 2px rgb(0 0 0 / 1)) drop-shadow(1px 1px 5px rgb(0 0 0 / 1))",
                                 }}
