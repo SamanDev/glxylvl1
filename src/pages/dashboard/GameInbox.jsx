@@ -50,35 +50,35 @@ const GameInbox = (prop) => {
                 <Grid.Row columns={2}>
                 <Grid.Column mobile={16} tablet={8} computer={8} >
                         
-                        <Link  name={"play " + gameDataMain[0]+" game"}  to={"/games/" + gameDataMain[0]} id={"open" + gameDataMain[0]}><Image src={"/assets/images/games/" + gameDataMain[0]+"-min.jpg"}  fluid    alt={"open " + gameDataMain[0]+" game"} /></Link>
+                        <Link  name={"play " + gameDataMain[0]+" game"}  to={"/games/" + gameDataMain[0]} id={"open" + gameDataMain[0]}><Image src={"/assets/images/games/" + gameDataMain[0]+"-min.webp"}  fluid    alt={"open " + gameDataMain[0]+" game"} /></Link>
                     </Grid.Column>
                     <Grid.Column mobile={16} tablet={8} computer={8} >
                         
-                        <Link name={"play " + gameDataMain[1]+" game"} to={getPropertyNoCase(sessionmyKey,gameDataMain[1])?"/games/" + gameDataMain[1]:"#/games/" + gameDataMain[1]} id={"open" + gameDataMain[1]}><Image src={"/assets/images/games/" + gameDataMain[1]+"-min.jpg"}  fluid   alt={"open " + gameDataMain[1]+" game"}  /></Link>
+                        <Link name={"play " + gameDataMain[1]+" game"} to={getPropertyNoCase(sessionmyKey,gameDataMain[1])?"/games/" + gameDataMain[1]:"#/games/" + gameDataMain[1]} id={"open" + gameDataMain[1]}><Image src={"/assets/images/games/" + gameDataMain[1]+"-min.webp"}  fluid   alt={"open " + gameDataMain[1]+" game"}  /></Link>
                     </Grid.Column>
                     <Grid.Column mobile={16} tablet={8} computer={8} >
                         
-                        <Link name={"play " + gameDataMain[2]+" game"} to={getPropertyNoCase(sessionmyKey,gameDataMain[2])?"/games/" + gameDataMain[2]:"#/games/" + gameDataMain[2]} id={"open" + gameDataMain[2]}><Image src={"/assets/images/games/" + gameDataMain[2]+"-min.jpg"}  fluid  alt={"open " + gameDataMain[2]+" game"}  /></Link>
+                        <Link name={"play " + gameDataMain[2]+" game"} to={getPropertyNoCase(sessionmyKey,gameDataMain[2])?"/games/" + gameDataMain[2]:"#/games/" + gameDataMain[2]} id={"open" + gameDataMain[2]}><Image src={"/assets/images/games/" + gameDataMain[2]+"-min.webp"}  fluid  alt={"open " + gameDataMain[2]+" game"}  /></Link>
                     </Grid.Column>
                     <Grid.Column mobile={16} tablet={8} computer={8} >
                         
-                        <Link name={"play " + gameDataMain[3]+" game"} to={getPropertyNoCase(sessionmyKey,gameDataMain[3])?"/games/" + gameDataMain[3]:"#/games/" + gameDataMain[3]} id={"open" + gameDataMain[3]}><Image src={"/assets/images/games/" + gameDataMain[3]+"-min.jpg"}  fluid    alt={"open " + gameDataMain[3]+" game"} /></Link>
+                        <Link name={"play " + gameDataMain[3]+" game"} to={getPropertyNoCase(sessionmyKey,gameDataMain[3])?"/games/" + gameDataMain[3]:"#/games/" + gameDataMain[3]} id={"open" + gameDataMain[3]}><Image src={"/assets/images/games/" + gameDataMain[3]+"-min.webp"}  fluid    alt={"open " + gameDataMain[3]+" game"} /></Link>
                     </Grid.Column>
                     <Grid.Column mobile={16} tablet={8} computer={8} >
                         
-                        <Link name={"play " + gameDataMain[4]+" game"} to={getPropertyNoCase(sessionmyKey,gameDataMain[4])?"/games/" + gameDataMain[4]:"#/games/" + gameDataMain[4]} id={"open" + gameDataMain[4]}><Image src={"/assets/images/games/" + gameDataMain[4]+"-min.jpg"}  fluid   alt={"open " + gameDataMain[4]+" game"}  /></Link>
+                        <Link name={"play " + gameDataMain[4]+" game"} to={getPropertyNoCase(sessionmyKey,gameDataMain[4])?"/games/" + gameDataMain[4]:"#/games/" + gameDataMain[4]} id={"open" + gameDataMain[4]}><Image src={"/assets/images/games/" + gameDataMain[4]+"-min.webp"}  fluid   alt={"open " + gameDataMain[4]+" game"}  /></Link>
                     </Grid.Column>
                     <Grid.Column mobile={16} tablet={8} computer={8} >
                         
-                        <Link name={"play " + gameDataMain[5]+" game"} to={getPropertyNoCase(sessionmyKey,gameDataMain[5])?"/games/" + gameDataMain[5]:"#/games/" + gameDataMain[5]} id={"open" + gameDataMain[5]}><Image src={"/assets/images/games/" + gameDataMain[5]+"-min.jpg"}  fluid   alt={"open " + gameDataMain[5]+" game"}  /></Link>
+                        <Link name={"play " + gameDataMain[5]+" game"} to={getPropertyNoCase(sessionmyKey,gameDataMain[5])?"/games/" + gameDataMain[5]:"#/games/" + gameDataMain[5]} id={"open" + gameDataMain[5]}><Image src={"/assets/images/games/" + gameDataMain[5]+"-min.webp"}  fluid   alt={"open " + gameDataMain[5]+" game"}  /></Link>
                     </Grid.Column>
                     <Grid.Column mobile={16} tablet={8} computer={8} >
                         
-                        <Link name={"play " + gameDataMain[6]+" game"} to={getPropertyNoCase(sessionmyKey,gameDataMain[6])?"/games/" + gameDataMain[4]:"/games/" + gameDataMain[6]} id={"open" + gameDataMain[6]}><Image src={"/assets/images/games/" + gameDataMain[6]+"-min.jpg"}  fluid   alt={"open " + gameDataMain[6]+" game"}  /></Link>
+                        <Link name={"play " + gameDataMain[6]+" game"} to={getPropertyNoCase(sessionmyKey,gameDataMain[6])?"/games/" + gameDataMain[4]:"/games/" + gameDataMain[6]} id={"open" + gameDataMain[6]}><Image src={"/assets/images/games/" + gameDataMain[6]+"-min.webp"}  fluid   alt={"open " + gameDataMain[6]+" game"}  /></Link>
                     </Grid.Column>
                     <Grid.Column mobile={16} tablet={8} computer={8} >
                         
-                        <Link name={"play " + gameDataMain[7]+" game"} to={getPropertyNoCase(sessionmyKey,gameDataMain[5])?"/games/" + gameDataMain[7]:"#/games/" + gameDataMain[7]} id={"open" + gameDataMain[7]}><Image src={"/assets/images/games/" + gameDataMain[7]+"-min.jpg"}  fluid   alt={"open " + gameDataMain[7]+" game"}  /></Link>
+                        <Link name={"play " + gameDataMain[7]+" game"} to={getPropertyNoCase(sessionmyKey,gameDataMain[5])?"/games/" + gameDataMain[7]:"#/games/" + gameDataMain[7]} id={"open" + gameDataMain[7]}><Image src={"/assets/images/games/" + gameDataMain[7]+"-min.webp"}  fluid   alt={"open " + gameDataMain[7]+" game"}  /></Link>
                     </Grid.Column>
                     
 
@@ -91,7 +91,7 @@ const GameInbox = (prop) => {
                        
                         return (
                             <Grid.Column mobile={4} tablet={4} computer={4}  key={i}>
-                                <Link name={"play " + submenu+" game"} id={"open" + submenu} to={sessionmyKey[game]?"/games/" + submenu:"#/games/" + submenu} className="mini"><Image src={"/assets/images/games/" +submenu.toLowerCase()+".jpg"}  fluid  alt={"open " + submenu+" game"} /></Link>
+                                <Link name={"play " + submenu+" game"} id={"open" + submenu} to={sessionmyKey[game]?"/games/" + submenu:"#/games/" + submenu} className="mini"><Image src={"/assets/images/games/" +submenu.toLowerCase()+".webp"}  fluid  alt={"open " + submenu+" game"} /></Link>
                                
                             </Grid.Column>
                         );
