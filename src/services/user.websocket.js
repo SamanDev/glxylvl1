@@ -40,7 +40,7 @@ class UserWebsocket {
             ws.onmessage = function (data) {
                 var message = data.data;
                 //  new UserWebsocket().serverMessage(data.data);
-
+                ws.send("ping");
                 if (isJson(message)) {
                     var msg = JSON.parse(message);
 
@@ -56,7 +56,7 @@ class UserWebsocket {
                     }
                 } else {
                     if (message === "closeConnection") {
-                        clearInterval(timerId);
+                      //  clearInterval(timerId);
                         if (tkn) {
                             
                             try {
@@ -75,7 +75,7 @@ class UserWebsocket {
                         res = true;
                     }
                 }
-                ws.send("ping");
+               
             };
             ws.onerror = function (e) {
                 //clearInterval(timerId);
