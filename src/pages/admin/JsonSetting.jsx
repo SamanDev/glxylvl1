@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-
+import {  useRef, lazy, Suspense } from 'react'
 import { adminPutServiceList, adminPostService } from "../../services/admin";
 import { Alert } from "../../utils/alerts";
 import { MyConfirm } from "../../utils/myAlert";
 import { isJson } from "../../const";
-//import { JsonEditor } from "react-jsondata-editor";
+import { JsonEditor } from "json-edit-react";
+//const JsonEditor = lazy(() => import('@json-edit-react').then((m) => ({ default: m.JsonEditor })))
 import { publicGetRules } from "../../services/admin";
 import {
   Input,
@@ -733,11 +734,11 @@ function Admin(prop) {
     }
 ] */
   let input = '{"Settings":' + JSON.stringify(sordData(siteInfoNew)) + "}";
-
+  input = JSON.parse(input)
   const saveObj = async (info) => {
-    var _data = JSON.parse(info);
-    var data = _data.Settings;
-
+    var _data = info;
+    var data = _data.newData;
+   
     try {
       const res = await adminPutServiceList(data, "editGalaxyRewardRules");
       if (res.status == 200) {
@@ -747,7 +748,7 @@ function Admin(prop) {
       }
     } catch (error) {
       Alert("متاسفم...!", "متاسفانه مشکلی از سمت سرور رخ داده", "error");
-    }
+    } 
   };
   const confirmshutdown = async (data) => {
     MyConfirm("تایید تغییر  ", "", shutdown, data);
@@ -781,6 +782,23 @@ function Admin(prop) {
         >
           {siteInfo.shutdown ? "Start Server" : "ShutDown Server"}
         </Button>
+        <JsonEditor
+                data={siteInfoNew}
+               
+              
+       
+                minWidth={'min(800px, 95vw)'}
+                maxWidth="min(1670px, 90vw)"
+                className="block-shadow"
+                restrictDelete={true}
+                restrictAdd={true}
+                enableClipboard={false}
+                onUpdate={ (nodeData) => {
+                   
+                    saveObj(nodeData);
+                  }}
+      
+              />
         {/* <JsonEditor
           jsonObject={input}
           onChange={(output) => {
