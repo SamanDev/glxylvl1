@@ -144,12 +144,22 @@ const BonusArea = (prop) => {
         //s_txt = "هدیه قرمز";
         _lvl = _lvl - 1;
     }
+    var lvlTime = siteInfo.secondForGift;
     var lvlPercent = parseFloat((loginToken.giftPlaySecond * 100) / siteInfo.secondForGift).toFixed(2);
-    if (siteInfo.noPlayGiftAmount <= _amount) {
+    if (siteInfo.noPlayGiftAmount > _amount && siteInfo.secondForLowGift > 0) {
         lvlPercent = parseFloat((loginToken.giftPlaySecond * 100) / siteInfo.secondForLowGift).toFixed(2);
+        lvlTime = siteInfo.secondForLowGift;
     } else {
         if (siteInfo.secondForLowGift == 0) {
-          lvlPercent = 100;
+            lvlPercent = 100;
+        }
+    }
+    if (bonus.mode == "Bonus" && siteInfo.secondForBonus > 0) {
+        lvlPercent = parseFloat((loginToken.giftPlaySecond * 100) / siteInfo.secondForBonus).toFixed(2);
+        lvlTime = siteInfo.secondForBonus;
+    } else {
+        if (bonus.mode == "Bonus" && siteInfo.secondForBonus == 0) {
+            lvlPercent = 100;
         }
     }
     if (lvlPercent > 100) {
@@ -195,6 +205,13 @@ const BonusArea = (prop) => {
                             تا فعالسازی
                         </>
                     )}
+                    {lvlPercent < 100 && bonus.status == "Pending" && (bonus.mode == "Gift" || bonus.mode == "Bonus") && (
+                        <>
+                            <p className="farsi" id={bonus.id} style={{ width: 155 }}>
+                                برای دریافت هدیه باید <span className="text-gold">{lvlTime / 60} دقیقه</span> روی میزهای گلکسی بازی نمایید.
+                            </p>
+                        </>
+                    )}
                 </small>
                 {bonus.status == "Done" && (
                     <>
@@ -205,7 +222,7 @@ const BonusArea = (prop) => {
                 )}
                 {bonus.status == "Pending" && start.isBefore(end) && end.isBefore(expire) && (
                     <>
-                        {lvlPercent >= 100 || bonus.mode != "Gift" ? (
+                        {lvlPercent >= 100 || (bonus.mode != "Gift" && bonus.mode != "Bonus") ? (
                             <Button
                                 size="mini"
                                 color="orange"
@@ -222,21 +239,27 @@ const BonusArea = (prop) => {
                                 {doCurrency(_amount)} <small className="farsi">{_cur}</small>
                             </Button>
                         ) : (
-                            <Button
-                                size="mini"
-                                color="grey"
-                                floated="right"
-                                className="rtl"
-                                style={{ opacity: 1, width: 140, marginRight: 10 }}
-                                compact
-                                onClick={() => {
-                                    prop.openPanel(".giftarea", "");
-                                }}
-                            >
-                                {doCurrency(_amount)} <small className="farsi">{_cur}</small>
-                                <br />
-                                {lvlPercent}%
-                            </Button>
+                            <>
+                                <Button
+                                    size="mini"
+                                    color="grey"
+                                    floated="right"
+                                    className="rtl"
+                                    style={{ opacity: 1, width: 140, marginRight: 10 }}
+                                    compact
+                                    onClick={() => {
+                                        $('#'+bonus.id).addClass('animated flash');
+                                        setTimeout(() => {
+                                            $('#'+bonus.id).removeClass('animated flash');
+                                          }, 1000)
+                                       //s prop.openPanel(".giftarea", "");
+                                    }}
+                                >
+                                    {doCurrency(_amount)} <small className="farsi">{_cur}</small>
+                                    <br />
+                                    {lvlPercent}%
+                                </Button>
+                            </>
                         )}
                     </>
                 )}

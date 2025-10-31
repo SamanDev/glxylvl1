@@ -211,12 +211,12 @@ const LevelList = (prop) => {
             if (data.length > 0) {
                 {
                     data.map((x, i) => {
-                        var psum = getpassreward(x?.glevel);
+                        
 
                         const start = new Date();
                         start.setDate(1);
                         start.setHours(0, 0, 0, 0);
-
+                        //start.setMonth(start.getMonth() - 1);
                         const end = new Date();
                         end.setDate(31);
                         end.setHours(23, 59, 59, 999);
@@ -242,7 +242,7 @@ const LevelList = (prop) => {
                                 .sort((a, b) => (a.date < b.date ? 1 : -1));
                         }
                         //console.log(_data);
-
+                        var psum = getpassreward(_data.length+1);
                         stat.push({
                             sum: psum,
                             username: x.username,
