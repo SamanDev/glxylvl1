@@ -72,7 +72,7 @@ const LevelList = (prop) => {
                 }
 
                 if (_data.length == 0) {
-                    start.setMonth(end.getMonth() - 1);
+                    start.setMonth(end.getMonth() - 2);
                     end.getTime();
                     start.getTime();
 
