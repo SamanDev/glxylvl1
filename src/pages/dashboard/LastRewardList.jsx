@@ -177,13 +177,13 @@ const LevelList = (prop) => {
         if (prop.mode != "gpass") {
             handleGetRewards();
         } else {
-            handleGetRewardspass();
+            handleGetRewards(); 
         }
     }, []);
 
     useEffect(() => {
         var glist = [];
-        if (prop.mode != "gpass") {
+        if (prop.mode != "gpass2") {
             var stat = [];
             if (data.length > 0) {
                 var _gmode = groupBy(data, "username");
@@ -275,7 +275,7 @@ const LevelList = (prop) => {
             </>
         );
     } else {
-        if (prop.mode != "gpass") {
+        if (prop.mode != "gpass2") {
             if (statData.length > 0) {
                 return (
                     <>
