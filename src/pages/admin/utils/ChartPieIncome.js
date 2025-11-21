@@ -82,7 +82,7 @@ function RisingPitch(prop) {
       modedata.push("Casino");
       valdata.push((filteredItems[0].casinoTomanFinal))
       modedata.push("Rake");
-      valdata.push((filteredItems[0].pokerRake - filteredItems[0].botsRake - filteredItems[0].runnersRake))
+      valdata.push((filteredItems[0].pokerRake+filteredItems[0].tourneyEntryFee+filteredItems[0].tourneyReward - filteredItems[0].botsRake - filteredItems[0].runnersRake))
       
 
 

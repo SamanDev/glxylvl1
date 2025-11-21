@@ -326,7 +326,7 @@ function Admin(prop) {
               <Header>
                 Poker
                 <br />
-                {doCurrency(row.playersRake)}
+                {doCurrency(row.playersRake+row.tourneyEntryFee + row.tourneyReward)}
                 <span className="float-end">
                   {doCurrency(row.pokerTotal2)}$
                 </span>
@@ -352,7 +352,7 @@ function Admin(prop) {
                 <br />
                 {listpercent(
                   row.adminIncomeSet,
-                  row.playersRake,
+                  row.playersRake+row.tourneyEntryFee + row.tourneyReward,
                   row.pokerTotal2
                 )}
               </Segment>
@@ -407,7 +407,7 @@ function Admin(prop) {
                 Total
                 <br />
                 {doCurrency(
-                  row.playersRake +
+                  row.playersRake+row.tourneyEntryFee + row.tourneyReward +
                     row?.botsTotal +
                     row?.runnersTotal +
                     (row.totalRewards - row.pokerCost) * -1
