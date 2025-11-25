@@ -1,15 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { List } from "semantic-ui-react";
+import { useEffect, useState } from "react";
 import Reward from "../../utils/BigWins";
 import MenuLoader from "../../utils/menuLoader";
-
-import eventBus from "../../services/eventBus";
-import RewardStat from "./rewardStat";
-import LazyLoad from "react-lazyload";
+import $ from "jquery";
 import axios from "axios";
 const getWins = () => {
-    const SERVICE_URL_SAVE = "https://server.wheelofpersia.com";
-    //const SERVICE_URL_SAVE = "http://localhost:2525";
+    const SERVICE_URL_SAVE = "https://server.wheelofpersia.com/server";
+    //const SERVICE_URL_SAVE = "http://localhost:8100/server";
     
 
     return axios({
@@ -25,7 +21,8 @@ const ActiveTable = (prop) => {
         try {
             const res = await getWins();
             setLastReward(res.data);
-            
+     
+           
         } catch (error) {
             ////console.log(error.message);
             // setLastReward(_bonuses);
@@ -50,6 +47,7 @@ clearInterval(timer);
         <MenuLoader />
       ) : (
         <div
+        className="lastwinsarea"
           style={{
             paddingLeft: 17,
             marginBottom: 150,
@@ -63,7 +61,8 @@ clearInterval(timer);
             .map(function (bonus, i) {
               return (
                   <div
-                    className={bonus?.game + " rewardname"}
+                    className={bonus?.game.replace("777","") + " rewardname"}
+                   
                     key={i}
                   >
                     <Reward item={bonus} color={false} {...prop} />
