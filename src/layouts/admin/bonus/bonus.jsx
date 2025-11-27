@@ -208,7 +208,7 @@ const BonusArea = (prop) => {
                     {lvlPercent < 100 && bonus.status == "Pending" && (bonus.mode == "Gift" || bonus.mode == "Bonus") && (
                         <>
                             <p className="farsi" id={bonus.id} style={{ width: 155 }}>
-                                برای دریافت هدیه باید <span className="text-gold">{lvlTime / 60} دقیقه</span> روی میزهای گلکسی بازی نمایید.
+                                برای دریافت هدیه باید <span className="text-gold">{parseInt(lvlTime / 60)} دقیقه</span> روی میزهای گلکسی بازی نمایید.
                             </p>
                         </>
                     )}
