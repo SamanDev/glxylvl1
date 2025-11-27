@@ -36,7 +36,7 @@ const LevelList = (prop) => {
                                 <GalaxyIcon mode="gifts" level="1" text="Galaxy Gifts" classinside="iconinside0" number="1" width="60px" amin="inline animated swing fast" iconamin="swing inline animated" />
                                 <Segment inverted basic>
                                     <p className="farsi mywrap lh-lg">
-                                        برای دریافت هدیه باید <span className="text-gold">{lvlPercent} دقیقه</span> روی میزهای گلکسی بازی نمایید.
+                                        برای دریافت هدیه باید <span className="text-gold">{parseInt(lvlPercent)} دقیقه</span> روی میزهای گلکسی بازی نمایید.
                                     </p>
                                     <div className="giftlevelbar">
                                         <LevelBar progress {...prop} />
