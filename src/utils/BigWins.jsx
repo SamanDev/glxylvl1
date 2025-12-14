@@ -54,7 +54,7 @@ const Reward = (prop) => {
             </span>{" "}
             <small className="farsi">{prop.item.win ? "تومان" : "دلار"}</small>
           </div>
-          {prop.item.game == "777Slot" && <small>Slot</small>}
+          {prop.item.game == "777Slot" && <small>777Slot</small>}
           {prop.item.game == "BlackjackMulti" && <small>BlackJack - <small>{JSON.parse(prop.item.userdata).mode.replace("PerfectPer", "Perfect Pairs")}</small></small>}
           {prop.item.game == "Baccarat" && prop.item.x > 10 && (
                         <small>

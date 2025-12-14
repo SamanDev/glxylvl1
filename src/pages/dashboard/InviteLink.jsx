@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Label, Input, Button, Icon, Divider } from "semantic-ui-react";
+import { Label, Input, Button, Icon, Divider, Segment,Image ,Header,Dimmer,Loader} from "semantic-ui-react";
 import AnimIcon from "../../utils/inviteIcon";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import MyMsg from "../../utils/MsgDesc";
@@ -44,6 +44,8 @@ const depositArea = (prop) => {
           </>
         }
       />
+      <Segment padded><Image src={"https://api.dub.co/qr?url="+link}    fluid/><Header as='h2' textAlign='center'>Scan Me</Header></Segment>
+      
       <Input
         size="mini"
         readOnly
