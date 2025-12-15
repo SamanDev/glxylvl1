@@ -188,9 +188,13 @@ const children = newdata.concat(res.data.topWinners);
     var newSelect = [];
     {
       selectedRows.map((user, i) => {
+        if(user.amount<0){
         var newUser = user;
-
+newUser.amount = newUser.amount;
+//newUser.amount=newUser.amount*-1
+newUser.level = parseInt(newUser.amount / -1000000)
         newSelect.push(newUser);
+      }
       });
     }
     setSelected(newSelect);
@@ -445,7 +449,7 @@ const children = newdata.concat(res.data.topWinners);
         size="large"
         style={{ height: "auto" }}
       >
-        <AddGift selectedList={selectedList} />
+        <AddGift selectedList={selectedList} defbol={true} />
       </Modal>
       <Modal
         onClose={() => {

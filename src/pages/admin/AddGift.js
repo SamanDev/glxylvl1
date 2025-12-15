@@ -76,7 +76,7 @@ function Admin(prop) {
       { id: "expired", val: expdate },
       { id: "min", val: 100000 },
       { id: "usd", val: false },
-      { id: "defbol", val: false },
+      { id: "defbol", val: prop.defbol?true:false },
       { id: "max", val: 3000000 },
       { id: "mode", val: __bnus[0].value },
       { id: "text", val: __bnus[0].text },
