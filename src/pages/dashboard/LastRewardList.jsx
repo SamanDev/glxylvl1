@@ -73,6 +73,9 @@ const LevelList = (prop) => {
 
                 if (_data.length == 0) {
                     start.setMonth(end.getMonth() - 2);
+                    if (prop.mode == "league") {
+                        start.setDate(30);
+                    }
                     end.getTime();
                     start.getTime();
 
@@ -83,10 +86,10 @@ const LevelList = (prop) => {
                         })
                         .sort((a, b) => (a.date < b.date ? 1 : -1));
                 }
-               
+
                 if (_data.length == 500) {
-                    handleGetRewards2(_data,2);
-                }else{
+                    handleGetRewards2(_data, 2);
+                } else {
                     setData(_data);
                     setLoading(false);
                 }
@@ -95,7 +98,7 @@ const LevelList = (prop) => {
             ////console.log(error.message);
         }
     };
-    const handleGetRewards2 = async (data,page) => {
+    const handleGetRewards2 = async (data, page) => {
         //setLoading(true);
         try {
             const res = await getRewardsService("", prop.mode, "", prop.mode == "levels" ? 500 : 500, page);
@@ -123,6 +126,9 @@ const LevelList = (prop) => {
 
                 if (_data.length == 0) {
                     start.setMonth(end.getMonth() - 2);
+                    if (prop.mode == "league") {
+                        start.setDate(30);
+                    }
                     end.getTime();
                     start.getTime();
 
@@ -134,12 +140,12 @@ const LevelList = (prop) => {
                         .sort((a, b) => (a.date < b.date ? 1 : -1));
                 }
                 _data = data.concat(_data);
-                
-                if (_data.length == page*500 && _data.length < 4000) {
-                    handleGetRewards2(_data,(page+1));
-                }else{
+
+                if (_data.length == page * 500 && _data.length < 4000) {
+                    handleGetRewards2(_data, (page + 1));
+                } else {
                     setData(_data);
-                setLoading(false);
+                    setLoading(false);
                 }
             }
         } catch (error) {
@@ -177,7 +183,7 @@ const LevelList = (prop) => {
         if (prop.mode != "gpass") {
             handleGetRewards();
         } else {
-            handleGetRewards(); 
+            handleGetRewards();
         }
     }, []);
 
@@ -211,7 +217,7 @@ const LevelList = (prop) => {
             if (data.length > 0) {
                 {
                     data.map((x, i) => {
-                        
+
 
                         const start = new Date();
                         start.setDate(1);
@@ -231,6 +237,9 @@ const LevelList = (prop) => {
                             .sort((a, b) => (a.date < b.date ? 1 : -1));
                         if (_data.length == 0) {
                             start.setMonth(end.getMonth() - 2);
+                            if (prop.mode == "league") {
+                                start.setDate(30);
+                            }
                             end.getTime();
                             start.getTime();
 
@@ -242,7 +251,7 @@ const LevelList = (prop) => {
                                 .sort((a, b) => (a.date < b.date ? 1 : -1));
                         }
                         //console.log(_data);
-                        var psum = getpassreward(_data.length+1);
+                        var psum = getpassreward(_data.length + 1);
                         stat.push({
                             sum: psum,
                             username: x.username,
@@ -318,7 +327,7 @@ const LevelList = (prop) => {
                                                     </div>
                                                 </div>
                                             </List.Content>
-                                            <LevelIcon mode={prop.mode=="gift"?prop.mode+"3":prop.mode} level={x.count} text={x.count + " Record"} classinside="iconinside0" number="" width="38px" />
+                                            <LevelIcon mode={prop.mode == "gift" ? prop.mode + "3" : prop.mode} level={x.count} text={x.count + " Record"} classinside="iconinside0" number="" width="38px" />
 
                                             <span className={"rewardname animated fadeInLeft"} style={{ marginLeft: 10 }}>
                                                 <LevelIcon mode="levels" level={x.level} text={x.username} classinside="iconinside0" number="" width="36px" iconamin="swing" />

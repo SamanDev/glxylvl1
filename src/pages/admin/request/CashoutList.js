@@ -107,10 +107,10 @@ function Admin(prop) {
     filteredItems = filteredItems.filter((item) => {
       return (
         dataMode == item.status ||
-        item.cashoutDescription.remainedAmount >= 100000 ||
+        item?.cashoutDescription?.remainedAmount >= 100000 ||
         (
           item.gateway == "IranShetab" &&
-          item.cashoutDescription.remainedAmount > 0 &&
+          item?.cashoutDescription?.remainedAmount > 0 &&
           item.status != "Canceled" &&
           item.description.indexOf("V-G-C") == -1)
       );

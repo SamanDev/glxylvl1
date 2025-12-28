@@ -408,6 +408,9 @@ if(!siteInfo?.secondForGift){
         if (_name == "") {
             _name = "username";
         }
+        if (_name == "refer") {
+            _contain = false;
+        }
         if (filterText) {
             _name = "username";
             _val = filterText;

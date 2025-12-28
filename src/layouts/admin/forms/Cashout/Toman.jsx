@@ -7,6 +7,7 @@ import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import { Alert } from "../../../../utils/alerts";
 import { getCashAmount, doCurrency } from "../../../../const";
+import Carts from "../../../../components/form/Carts";
 import { cashierService } from "../../../../services/cashier";
 import { Button, Progress, Label,Icon } from "semantic-ui-react";
 var amounts = [
@@ -60,6 +61,15 @@ const depositArea = (prop) => {
       .max(loginToken.balance, "موجودی ناکافی است.")
       .integer(),
   });
+  const updateCartInfoTo = (cartOptions, id, formik) => {
+    var selectedCart = cartOptions.filter((d) => d.cardNumber == id)[0];
+    formik.setFieldValue("tobank", id);
+
+    formik.setFieldValue("toobj", selectedCart);
+    if (selectedCart?.id) {
+        formik.setFieldValue("userBankId", selectedCart?.id);
+    }
+};
   var defamount = getCashAmount(loginToken.balance);
   return (
     <Formik
@@ -76,6 +86,8 @@ const depositArea = (prop) => {
       {(formik) => {
         return (
           <Form>
+            {/* <Carts formik={formik} name="tobank" label="واریز به" labelcolor={prop.labelcolor} size={prop.size} namemix updateCartInfo={updateCartInfoTo} gateway={prop.gateway} loginToken={loginToken} carts={""} />
+ */}
              {formik.errors["amount"]  &&formik.touched["amount"] && (
                   <Label
                     className="farsi"

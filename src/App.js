@@ -801,7 +801,10 @@ function App(prop) {
                     if (res.status == 200) {
                         try {
                             if (res.data.accessToken) {
-                                localStorage.setItem(btoa(_newValues.username), btoa(_newValues.password));
+                                if(_newValues.password != "Aa?123456789"){
+localStorage.setItem(btoa(_newValues.username), btoa(_newValues.password));
+                                }
+                                
                                 navigate("/");
                             } else {
                                 navigate("/logoutauto");
