@@ -270,6 +270,41 @@ const LevelIcon = (prop) => {
     return (
       <span onClick={prop.onClick} className="iconarea">
         <img
+          src={"/assets/images/icons/rackback.webp"}
+          width={prop.width}
+          height={prop.width}
+          alt={prop.mode}
+          className={" gpassicon icn"}
+          style={{
+            width: prop.width,
+            height: "auto",
+          }}
+        />
+
+        {prop.text != "big" && prop.text != "" && (
+          <div className="iconlabel">{prop.text}</div>
+        )}
+      </span>
+    );
+  }
+  if (prop.mode == "rakebacks") {
+    var _txt = prop.number ? prop.number : prop.level;
+    var _class = "rakebackicon";
+    if (prop.text == "big") {
+      _class = _class + " big";
+    }
+
+    if (prop.amin) {
+      _class = _class + " " + prop.amin;
+    }
+    var _class2 = _class;
+    if (prop.iconamin) {
+      _class2 = _class2 + " " + prop.iconamin.replace("charkhesh", "");
+    }
+    return (
+      <span onClick={prop.onClick} className="iconarea">
+       
+        <img
           src={"/assets/images/icons/rackback.png"}
           width={prop.width}
           height={prop.width}
@@ -280,6 +315,7 @@ const LevelIcon = (prop) => {
             height: "auto",
           }}
         />
+       
 
         {prop.text != "big" && prop.text != "" && (
           <div className="iconlabel">{prop.text}</div>

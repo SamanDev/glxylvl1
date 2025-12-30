@@ -171,19 +171,34 @@ const Dashboard = (prop) => {
     }
     return _pen;
   };
+  const haveBoost = () => {
+    var have = false;
+    if (siteInfo?.levelUpBooster > 1) {
+      have = true;
+    }
+    return have;
+  };
 
   const [activeSlide, setActiveSlide] = useState(defslide);
   const goPrev = () => {
+    var m = 1;
+    if (haveGift().length > 0 || haveBoost()) {
+      m=0
+    }
     var _ddef = activeSlide - 1;
-    if (_ddef < 0) {
+    if (_ddef < m) {
       _ddef = 4;
     }
     setActiveSlide(_ddef);
   };
   const goNext = () => {
+    var m = 1;
+    if (haveGift().length > 0 || haveBoost()) {
+      m=0
+    }
     var _ddef = activeSlide + 1;
     if (_ddef > 4) {
-      _ddef = 0;
+      _ddef = m;
     }
     setActiveSlide(_ddef);
   };
@@ -200,7 +215,7 @@ const Dashboard = (prop) => {
     if (dayOfTournament == nowDay) {
       defslide = 0;
     }
-    if (haveGift().length > 0) {
+    if (haveGift().length > 0 || haveBoost()) {
       defslide = 0;
     }
 
@@ -223,82 +238,79 @@ const Dashboard = (prop) => {
               }
               data-bs-interval="1000"
             >
-              {haveGift().length > 0 ? (
+              {haveBoost() ? (
+
                 <>
-                  <Banner
-                    title="هدیه گلکسی"
-                    text={
-                      "ساعت " +
-                      getHour(
-                        haveGift()[0].startDate.replace("-08:00", ""),
-                        true
-                      )
-                    }
-                    icon="gifts"
-                    amin="inline animated swing "
-                    iconamin="swing"
-                    link=".giftarea"
-                    showtime={
-                      <ShowTimeLeft
-                        startDay={moment(
-                          haveGift()[0].startDate.replace("-08:00", "")
-                        ).format("D")}
-                        startHour={getHour(
-                          haveGift()[0].startDate.replace("-08:00", ""),
-                          false
-                        )}
-                        endDay={moment(
-                          haveGift()[0].expireDate.replace("-08:00", "")
-                        ).format("D")}
-                        endHour={getHour(
-                          haveGift()[0].expireDate.replace("-08:00", ""),
-                          false
-                        )}
+                 <div className="confettimain">
+                      <ConfettiClick
+                        active={
+                          
+                          activeSlide == 0
+                            ? true
+                            : false
+                        }
+                        config={mainnconfig}
                       />
-                    }
+                    </div>
+                  <Banner
+                    title={"ریک بک " + siteInfo?.levelUpBooster + " برابری"}
+                    text={"برای همه به مدت محدود"}
+                    link=".rakeback"
+                    icon="rakebacks"
+                    amin="animated delay-2s"
+                    iconamin="heartBeat"
+                    number="90"
                     {...prop}
                   />
-
-                  <ConfettiArea recycle={false} numberOfPieces="50" />
-                </>
-              ) : (
-                <>
-                  <div className="confettimain">
-                    <ConfettiClick
-                      active={
-                        dayOfTournament == nowDay && activeSlide == 0
-                          ? true
-                          : false
-                      }
-                      config={mainnconfig}
-                    />
-                  </div>
-
-                  <Banner
-                    title="تورنومنت ۲۵+۲۵ "
-                    text="هر جمعه ساعت ۲۲"
-                    icon="tournament"
-                    amin="inline animated swing "
-                    iconamin="swing"
-                    link=".tournament"
-                    showtime2={
-                      <ShowTimeLeft
-                        startDay={tourDay}
-                        startHour="2000"
-                        endDay={tourDay}
-                        endHour="2200"
-                        className="hiddenmenu"
-                      />
-                    }
-                    {...prop}
-                  />
-                  {dayOfTournament == nowDay && (
-                    <ConfettiArea recycle={false} numberOfPieces="50" />
-                  )}
-                </>
+                  {activeSlide == 0 && (
+                <ConfettiArea recycle={false} numberOfPieces="50" />
               )}
-            </div>
+                </>
 
+              ) : <>
+                {haveGift().length > 0 && (
+                  <>
+                    <Banner
+                      title="هدیه گلکسی"
+                      text={
+                        "ساعت " +
+                        getHour(
+                          haveGift()[0].startDate.replace("-08:00", ""),
+                          true
+                        )
+                      }
+                      icon="gifts"
+                      amin="inline animated swing "
+                      iconamin="swing"
+                      link=".giftarea"
+                      showtime={
+                        <ShowTimeLeft
+                          startDay={moment(
+                            haveGift()[0].startDate.replace("-08:00", "")
+                          ).format("D")}
+                          startHour={getHour(
+                            haveGift()[0].startDate.replace("-08:00", ""),
+                            false
+                          )}
+                          endDay={moment(
+                            haveGift()[0].expireDate.replace("-08:00", "")
+                          ).format("D")}
+                          endHour={getHour(
+                            haveGift()[0].expireDate.replace("-08:00", ""),
+                            false
+                          )}
+                        />
+                      }
+                      {...prop}
+                    />
+
+                    <ConfettiArea recycle={false} numberOfPieces="50" />
+                  </>
+                )}
+              </>}
+
+
+            </div>
             <div
               className={
                 activeSlide == 1 ? "carousel-item active" : "carousel-item"
@@ -414,6 +426,8 @@ const Dashboard = (prop) => {
                 />
               </>
             </div>
+
+
             {_width > 500 && 1 == 2 && (
               <div className="carousel-item " data-bs-interval="1000">
                 <Banner

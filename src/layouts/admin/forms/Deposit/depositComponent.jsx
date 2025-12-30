@@ -30,7 +30,7 @@ const depositArea = (prop) => {
         </>
       ) : (
         <>
-          <Segment inverted className="blnc" size="mini">
+          <Segment inverted className="blnc" >
             <Statistic inverted size="mini">
               <Statistic.Value>
                 {prop.menu?.usd ? (
@@ -62,7 +62,7 @@ const depositArea = (prop) => {
           )}
           {depMode == "Online Cart to Cart" && (
             <>
-              {loginToken?.bankInfos.length > -10 ? (
+              {loginToken?.bankInfos.length > 0 ? (
                 <>
                   <CartToCartOnline {...prop} />
                 </>
@@ -112,7 +112,17 @@ const depositArea = (prop) => {
                     <TomantoUsd {...prop} />
                   </>
                 ) : (
-                  <CartToCart {...prop} />
+                  <>
+                    {loginToken?.bankInfos.length > 0 ? (
+                      <>
+                        <CartToCart {...prop} />
+                      </>
+                    ) : (
+                      <>
+                        <AddCartMsg {...prop} />
+                      </>
+                    )}
+                  </>
                 )}
               </>
             </>
