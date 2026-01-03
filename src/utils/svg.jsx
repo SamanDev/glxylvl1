@@ -461,7 +461,7 @@ const LevelIcon = (prop) => {
             stroke="20"
             scale="65"
             colors="primary:#c79816,secondary:#b4b4b4"
-            trigger="loop"
+            trigger="loop-on-hover"
             width={90}
             height={90}
           />
@@ -495,7 +495,7 @@ const LevelIcon = (prop) => {
             stroke="20"
             scale="65"
             colors="primary:#b4b4b4,secondary:#c79816"
-            trigger="loop"
+            trigger="loop-on-hover"
             width={90}
             height={90}
           />
@@ -529,7 +529,7 @@ const LevelIcon = (prop) => {
             stroke="20"
             scale="65"
             colors="primary:#b4b4b4,secondary:#c79816"
-            trigger="loop"
+            trigger="loop-on-hover"
             width={90}
             height={90}
           />
@@ -563,7 +563,7 @@ const LevelIcon = (prop) => {
             stroke="20"
             scale="65"
             colors="primary:#b4b4b4,secondary:#c79816"
-            trigger="loop"
+            trigger="loop-on-hover"
             width={90}
             height={90}
           />
@@ -597,7 +597,7 @@ const LevelIcon = (prop) => {
             stroke="20"
             scale="65"
             colors="primary:#b4b4b4,secondary:#c79816"
-            trigger="loop"
+            trigger="loop-on-hover"
             width={90}
             height={90}
           />

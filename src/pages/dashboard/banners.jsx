@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { Grid, Button } from "semantic-ui-react";
+import { Grid, Button ,Label} from "semantic-ui-react";
 import { getEvent, dayOfTournament } from "../../const";
 import GalaxyIcon from "../../utils/svganim";
 import ConfettiArea from "../../utils/party";
@@ -49,6 +49,7 @@ const Banner = (prop) => {
                   number={prop.number}
                   amin={"inline animated " + prop.amin}
                   width="10vw"
+                  levelUpBooster={prop.levelUpBooster}
                   iconamin={"inline animated delay-2s " + prop.iconamin}
                 />
               </div>
@@ -171,9 +172,32 @@ const Dashboard = (prop) => {
     }
     return _pen;
   };
+  const haveBoostGateways = () => {
+    var user = loginToken;
+    if (user?.accessToken && !user?.logout) {
+      var _bonuses = user?.cashierGateways.filter((gate) => gate.active && gate.bonus > 0).sort((a, b) =>
+        a.bonus < b.bonus ? 1 : -1
+      );
+
+
+      var _pen = _bonuses
+
+    } else {
+      var _pen = [];
+    }
+    return _pen;
+  };
+
   const haveBoost = () => {
     var have = false;
     if (siteInfo?.levelUpBooster > 1) {
+      have = true;
+    }
+    return have;
+  };
+  const haveBoostRake = () => {
+    var have = false;
+    if (siteInfo?.extraRakeBackPercent > 0 && siteInfo?.extraRakeBack) {
       have = true;
     }
     return have;
@@ -182,8 +206,8 @@ const Dashboard = (prop) => {
   const [activeSlide, setActiveSlide] = useState(defslide);
   const goPrev = () => {
     var m = 1;
-    if (haveGift().length > 0 || haveBoost()) {
-      m=0
+    if (haveBoostGateways().length > 0 || haveGift().length > 0 || haveBoost() || haveBoostRake()) {
+      m = 0
     }
     var _ddef = activeSlide - 1;
     if (_ddef < m) {
@@ -193,8 +217,8 @@ const Dashboard = (prop) => {
   };
   const goNext = () => {
     var m = 1;
-    if (haveGift().length > 0 || haveBoost()) {
-      m=0
+    if (haveBoostGateways().length > 0 || haveGift().length > 0 || haveBoost() || haveBoostRake()) {
+      m = 0
     }
     var _ddef = activeSlide + 1;
     if (_ddef > 4) {
@@ -215,7 +239,7 @@ const Dashboard = (prop) => {
     if (dayOfTournament == nowDay) {
       defslide = 0;
     }
-    if (haveGift().length > 0 || haveBoost()) {
+    if (haveBoostGateways().length > 0 || haveGift().length > 0 || haveBoost() || haveBoostRake()) {
       defslide = 0;
     }
 
@@ -241,19 +265,32 @@ const Dashboard = (prop) => {
               {haveBoost() ? (
 
                 <>
-                 <div className="confettimain">
-                      <ConfettiClick
-                        active={
-                          
-                          activeSlide == 0
-                            ? true
-                            : false
-                        }
-                        config={mainnconfig}
-                      />
-                    </div>
+                
                   <Banner
-                    title={"ریک بک " + siteInfo?.levelUpBooster + " برابری"}
+
+                    title={<>LevelUp Booster</>}
+                    text={"برای همه به مدت محدود"}
+
+                    icon="levelBooster"
+                    levelUpBooster={siteInfo?.levelUpBooster}
+                    link=".levels"
+
+                    amin="animated delay-2s charkhesh"
+                    iconamin="swing"
+                    number="90"
+                    level="30"
+                    {...prop}
+                  />
+              
+                </>
+
+              ) : <>
+                {haveBoostRake() ? <>
+               
+                  <Banner
+                   
+                    title={<><Label color="green" style={{fontSize:"inherit !important"}}>{siteInfo?.extraRakeBackPercent}%</Label> ریک بک بیشتر</>}
+                       
                     text={"برای همه به مدت محدود"}
                     link=".rakeback"
                     icon="rakebacks"
@@ -262,51 +299,68 @@ const Dashboard = (prop) => {
                     number="90"
                     {...prop}
                   />
-                  {activeSlide == 0 && (
-                <ConfettiArea recycle={false} numberOfPieces="50" />
-              )}
-                </>
+            
+                </> :
+                  <> {haveBoostGateways().length > 0 ? (
 
-              ) : <>
-                {haveGift().length > 0 && (
-                  <>
-                    <Banner
-                      title="هدیه گلکسی"
-                      text={
-                        "ساعت " +
-                        getHour(
-                          haveGift()[0].startDate.replace("-08:00", ""),
-                          true
-                        )
-                      }
-                      icon="gifts"
-                      amin="inline animated swing "
-                      iconamin="swing"
-                      link=".giftarea"
-                      showtime={
-                        <ShowTimeLeft
-                          startDay={moment(
-                            haveGift()[0].startDate.replace("-08:00", "")
-                          ).format("D")}
-                          startHour={getHour(
-                            haveGift()[0].startDate.replace("-08:00", ""),
-                            false
-                          )}
-                          endDay={moment(
-                            haveGift()[0].expireDate.replace("-08:00", "")
-                          ).format("D")}
-                          endHour={getHour(
-                            haveGift()[0].expireDate.replace("-08:00", ""),
-                            false
-                          )}
+                    <>
+                    
+                      <Banner
+                        title={<><Label color="green" style={{fontSize:"inherit !important"}}>{haveBoostGateways()[0].bonus}%</Label> بوناس خرید</>}
+                       
+                        text={"برای همه به مدت محدود"}
+                        link=".deposit"
+                        icon="bonus"
+                        amin="inline animated swing "
+                        iconamin="swing"
+                        number="90"
+                        {...prop}
+                      />
+               
+                    </>
+
+                  ) : <>
+                    {haveGift().length > 0 && (
+                      <>
+                        <Banner
+                          title="هدیه گلکسی"
+                          text={
+                            "ساعت " +
+                            getHour(
+                              haveGift()[0].startDate.replace("-08:00", ""),
+                              true
+                            )
+                          }
+                          icon="gifts"
+                          amin="inline animated swing "
+                          iconamin="swing"
+                          link=".giftarea"
+                          showtime={
+                            <ShowTimeLeft
+                              startDay={moment(
+                                haveGift()[0].startDate.replace("-08:00", "")
+                              ).format("D")}
+                              startHour={getHour(
+                                haveGift()[0].startDate.replace("-08:00", ""),
+                                false
+                              )}
+                              endDay={moment(
+                                haveGift()[0].expireDate.replace("-08:00", "")
+                              ).format("D")}
+                              endHour={getHour(
+                                haveGift()[0].expireDate.replace("-08:00", ""),
+                                false
+                              )}
+                            />
+                          }
+                          {...prop}
                         />
-                      }
-                      {...prop}
-                    />
 
-                    <ConfettiArea recycle={false} numberOfPieces="50" />
-                  </>
-                )}
+                        <ConfettiArea recycle={false} numberOfPieces="50" />
+                      </>
+                    )}
+                  </>}</>}
+
               </>}
 
 

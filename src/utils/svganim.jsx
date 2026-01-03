@@ -1,5 +1,6 @@
 import React from "react";
 import { levelClass, levelClassInside } from "../const";
+import AnimIcon from "./inviteIcon";
 const LevelIcon = (prop) => {
   if (prop.mode == "gpass") {
     var _txt = prop.number ? prop.number : prop.level;
@@ -213,6 +214,137 @@ const LevelIcon = (prop) => {
       </span>
     );
   }
+  if (prop.mode == "levelBooster") {
+var _txt2 = "X" + prop.levelUpBooster
+    var _txt = prop.number ? prop.number : prop.level;
+    var _class = levelClass(prop.level - 1);
+    if (prop.text == "big") {
+      _class = _class + " big";
+    }
+    if (prop.iconamin) {
+      // _class = _class + " " + prop.iconamin;
+    }
+
+    var _class2 = "";
+    if (prop.amin) {
+      _class2 = prop.amin;
+    }
+    var _id = _txt + _class.replace(/ /g, "")+"boost";
+    return (
+      <div onClick={prop.onClick} className="iconarea booster">
+        <div className="iconareanum">
+          <svg
+            viewBox="0 0 37.286 37.287"
+            style={{
+              width: prop.width,
+            }}
+          >
+            <text
+              x="18"
+              y="25"
+              className={"levelicontext text" + _txt.toString().length + ""}
+            >
+              {_txt2}
+            </text>
+          </svg>
+        </div>
+
+        <div
+          style={{
+            transform: "scale(.8)",
+            position: "absolute",
+            zIndex: 100,
+
+            width: prop.width,
+            height: "auto",
+          }}
+          className={levelClassInside(_txt - 1)}
+        >
+          <svg
+            style={{
+              width: prop.width,
+              height: "auto",
+            }}
+            className={_class2}
+            viewBox="0 0 100 100"
+          >
+            <defs>
+              <mask
+                id={"fillMask" + _id + "2"}
+                x="0"
+                y="0"
+                width="100"
+                height="100"
+              >
+                <image
+                  xlinkHref="/assets/images/svg/level/icon.svg"
+                  x="0"
+                  y="0"
+                  width="100"
+                  height="100"
+                  src="ppngfallback.png"
+                />
+              </mask>
+            </defs>
+            <rect
+              x="0"
+              y="0"
+              width="100"
+              height="100"
+              style={{ stroke: "none" }}
+              mask={'url("#fillMask' + _id + '2")'}
+            />
+          </svg>
+        </div>
+        <div
+          style={{
+            width: prop.width,
+            height: "auto",
+          }}
+        >
+          <svg
+            style={{
+              width: prop.width,
+              height: "auto",
+            }}
+            viewBox="0 0 100 100"
+            className={"levelicon " + _class}
+          >
+            <defs>
+              <mask
+                id={"fillMask" + _id + ""}
+                x="0"
+                y="0"
+                width="100"
+                height="100"
+              >
+                <image
+                  xlinkHref="/assets/images/svg/level/icon.svg"
+                  x="0"
+                  y="0"
+                  width="100"
+                  height="100"
+                  src="ppngfallback.png"
+                />
+              </mask>
+            </defs>
+            <rect
+              x="0"
+              y="0"
+              width="100"
+              height="100"
+              style={{ stroke: "none", fill: "currentColor" }}
+              mask={'url("#fillMask' + _id + '")'}
+            />
+          </svg>
+        </div>
+        {prop.text != "big" && prop.text != "" && (
+          <div className="iconlabel">{prop.text}</div>
+        )}
+      </div>
+    );
+  }
+
   if (prop.mode == "commission") {
     var _txt = prop.number ? prop.number : prop.level;
     var _class = "rakebackicon";
@@ -303,7 +435,7 @@ const LevelIcon = (prop) => {
     }
     return (
       <span onClick={prop.onClick} className="iconarea">
-       
+
         <img
           src={"/assets/images/icons/rackback.png"}
           width={prop.width}
@@ -315,7 +447,7 @@ const LevelIcon = (prop) => {
             height: "auto",
           }}
         />
-       
+
 
         {prop.text != "big" && prop.text != "" && (
           <div className="iconlabel">{prop.text}</div>
@@ -965,16 +1097,16 @@ const LevelIcon = (prop) => {
         " tada";
     }
     return (
-      <div onClick={prop.onClick} className="iconarea">
-        <img
-          src={"/assets/images/svg/topplayer/deposit.svg"}
-          width={prop.width}
-          height={prop.width}
-          alt={prop.mode}
-          style={{
-            width: prop.width,
-            height: "auto",
-          }}
+      <div onClick={prop.onClick} className="iconarea" >
+
+        <AnimIcon
+          icon="qhviklyi"
+          stroke="20"
+          scale="65"
+          colors="primary:#b4b4b4,secondary:#c79816"
+          trigger="loop"
+          width={86}
+          height={86}
         />
         {prop.text != "big" && prop.text != "" && (
           <div className="iconlabel">{prop.text}</div>
