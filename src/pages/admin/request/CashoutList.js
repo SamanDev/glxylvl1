@@ -408,9 +408,9 @@ function Admin(prop) {
         type="text"
         aria-label="Search Input"
         className="float-end"
-        value={filterText}
-        onChange={onFilter}
-        onBlur={onFilterOk}
+        
+        onBlur={onFilter}
+       
       />
     </>
   );
@@ -462,7 +462,7 @@ function Admin(prop) {
         </Grid>
       </>
     );
-  }, [filterText, resetPaginationToggle, data, startDate, endDate]);
+  }, [resetPaginationToggle, data, startDate, endDate]);
 
   return (
     <>

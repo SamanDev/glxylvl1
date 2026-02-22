@@ -210,6 +210,7 @@ const LevelList = (prop) => {
             setGlist(data);
             stat.sort((a, b) => (a.sum < b.sum ? 1 : -1));
             setstatData(stat);
+           // console.log(stat);
         } else {
             var stat = [];
             //console.log(data);

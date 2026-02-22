@@ -719,7 +719,7 @@ useEffect(() => {
     return (
         <>
             <Modal onClose={() => setCashierOpen(false)} onOpen={() => setCashierOpen(true)} open={cashierOpen} size="large" style={{ height: "auto" }}>
-                <AddCashier selectedList={selectedList} setCashierOpen={setCashierOpen} />
+                <AddCashier loginToken={loginToken} selectedList={selectedList} setCashierOpen={setCashierOpen} />
             </Modal>
             <Modal onClose={() => setOverCashierOpen(false)} onOpen={() => setOverCashierOpen(true)} open={overCashierOpen} size="tiny" style={{ height: "auto" }}>
                 <AddOverCashier />

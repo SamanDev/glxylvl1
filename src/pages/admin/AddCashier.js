@@ -15,6 +15,7 @@ import {
   Modal,
   Select,
   Radio,
+  Icon
 } from "semantic-ui-react";
 
 const validationSchema = Yup.object({
@@ -143,6 +144,7 @@ const depositArea = (prop) => {
                     autoComplete="off"
                   />
                 )}
+                <Icon color="grey" style={{position: "absolute",zIndex:200,marginTop:5,marginLeft:5}} size='large' onClick={()=>{formik.setFieldValue("username", prop.loginToken.username)}} inverted name='user' />
                 <FormikControl
                   formik={formik}
                   control="input"

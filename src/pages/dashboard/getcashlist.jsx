@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Divider, Segment, Button } from "semantic-ui-react";
 import ConvertCart from "../../utils/convertCart";
 import { cashierService } from "../../services/cashier";
-import { doCurrency } from "../../const";
+import { doCurrency, doCurrencyMil } from "../../const";
 const moment = require("moment");
 
 const depositArea = (prop) => {
@@ -80,7 +80,7 @@ const depositArea = (prop) => {
                 </span>
                 <br />
                 <div className="farsi text-secondary rightfloat">
-                  مجموع: <span className="text-gold">{doCurrency(_tot)}</span>
+                  مجموع: <span className="text-gold">{doCurrencyMil(_tot)}</span>
                 </div>
 
                 <ConvertCart
