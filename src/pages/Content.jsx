@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 //const Dashboard = lazy(() => import("./dashboard/Dashboard"));
 const Game = lazy(() => import("./dashboard/Game"));
 const Admin = lazy(() => import("./admin/Index"));
+import Updsate from "./update";
 import Dashboard from "./dashboard/Dashboard";
 import UpdatePage from "./dashboard/update";
 import MenuLoader from "../utils/menuLoader";
@@ -12,6 +13,8 @@ const Content = (prop) => {
     const siteInfo = prop.siteInfo;
     return (
         <section id="content_section" className={`py-2 px-3`}>
+            <Updsate/>
+           
             {siteInfo?.shutdown ? (
                 <>
                     <Routes>
