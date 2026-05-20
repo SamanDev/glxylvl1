@@ -26,7 +26,7 @@ const depositArea = () => {
   const [copy, setCopy] = useState(false);
   const [open, setOpen] = useState(false);
   //let dd = window.location.protocol + "//" + window.location.host;
-  let dd = "https://www.croyale2026.com";
+  let dd = "https://www.royale2026.uk";
   const [link, setLink] = useState(dd);
   var arrUser = [
     "HangOver2",
